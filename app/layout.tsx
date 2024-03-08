@@ -1,5 +1,12 @@
+//next imports
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+//react imports
+//installed components imports
+import 'bootstrap/dist/css/bootstrap.css';
+import { Col } from "react-bootstrap";
+//custom components imports
+import { ClientNavWrapper } from "./components/ClientNavWrapper";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,7 +23,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className = {inter.className}>
+        <div>
+          <ClientNavWrapper/>
+          <Col className="px-3" md = {{  offset: 3 }}  >
+            {children}
+          </Col>
+        </div>
+      </body>
     </html>
   );
 }
