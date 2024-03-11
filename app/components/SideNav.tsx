@@ -17,12 +17,12 @@ export function SideNav({show, handleClose}: {show: true | false, handleClose: F
       show = { show }
       onHide = { handleClose }
       responsive = "md"
-      className = "col-3 min-vh-100 overflow-auto bg-body-tertiary position-fixed"
+      className = "col-3 min-vh-100 px-3 overflow-auto  bg-body-tertiary position-fixed"
     >
-      <Offcanvas.Body className = "flex-column px-0 py-0">
+      <Offcanvas.Body className = "flex-column  px-0 py-0">
         <Profile />
         <DashboardPageLinks handleClose = {handleClose} />
-        <div className='d-flex my-4 px-3'>
+        <div className='d-flex my-4'>
           <button className="btn fw-bold text-white bg-dark px-5 py-2"> Log Out </button>
         </div>
       </Offcanvas.Body>
