@@ -47,8 +47,8 @@ export async function getDepositsByPage({year, month, depositor_name, page} : an
     pipeline.push({ $sort: { deposit_date: -1 } });
 
     // Skip and Limit stages for pagination
-    pipeline.push({ $skip: (page - 1) * 6 });
-    pipeline.push({ $limit: 6 });
+    pipeline.push({ $skip: (page - 1) * 50 });
+    pipeline.push({ $limit: 50 });
 
     const deposits = await Deposit.aggregate(pipeline);
     return deposits;

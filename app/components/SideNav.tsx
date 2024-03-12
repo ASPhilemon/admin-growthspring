@@ -16,7 +16,7 @@ export function SideNav({show, handleClose}: {show: true | false, handleClose: F
     <Offcanvas 
       show = { show }
       onHide = { handleClose }
-      responsive = "md"
+      responsive = "lg"
       className = "col-3 min-vh-100 px-3 overflow-auto  bg-body-tertiary position-fixed"
     >
       <Offcanvas.Body className = "flex-column  px-0 py-0">
