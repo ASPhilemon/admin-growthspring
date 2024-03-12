@@ -3,6 +3,7 @@ import {usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Row, Col,FormSelect, FormGroup, FormLabel } from 'react-bootstrap';
 import { Arrow90degDown, Arrow90degUp } from 'react-bootstrap-icons';
 import styles from './search.module.css'
+import { Accordion, AccordionBody } from 'react-bootstrap';
 
 export function Search() {
 
@@ -81,85 +82,86 @@ export function Search() {
   // }
 
   return (
-    <Row className = 'bg-dark-subtle py-1'>
-       {/* Filter */}
-      <Col className = "d-lg-flex align-items-center mb-lg-1" xs={6} lg ={12} >
-        <h5 className='me-lg-3 mb-0' >Filter</h5>
-        <FormGroup className ='d-flex align-items-center me-lg-2 mb-1 mb-lg-0' controlId='year-filter' >
-          <FormLabel className={`me-2 ${styles.formLabel}`} >Year</FormLabel>
-          <FormSelect  size = 'sm'>
-            <option value = "" >All</option>
-            <option selected value="2024">2024</option>
-            <option value="2023">2023</option>
-            <option value="2022">2022</option>
-          </FormSelect>
-        </FormGroup>
-        <div className="vr me-2 d-none d-lg-block text-white"></div>
-
-        <FormGroup className = 'd-flex align-items-center me-lg-2 mb-1 mb-lg-0' controlId='month-filter' >
-          <FormLabel className={`me-2 ${styles.formLabel}`} >Month</FormLabel>
-          <FormSelect  size = 'sm'>
-            <option value = "" >All</option>
-            {months.map((month, index) => {
-              return (
-                <option selected = {month.value == currentMonth} key = {index} value = {month.value} >{month.month}</option>
-              )
-            })}
-          </FormSelect>
-        </FormGroup>
-        <div className="vr text-white me-2 d-none d-lg-block"></div>
-        <FormGroup className='d-flex align-items-center me-lg-2' controlId='member-filter'>
-          <FormLabel className={`me-2 ${styles.formLabel}`} >Member</FormLabel>
-          <FormSelect  size = 'sm'>
-            <option value = "" >All</option>
-            {users.map((user, index) => {
-              return (
-                <option key = {index} value = {user} >{user}</option>
-              )
-            })}
-          </FormSelect> 
-        </FormGroup>
-      </Col>
-
-      {/* Sort */}
-      <Col xs={6} lg={12} className = "d-lg-flex align-items-center" >
-      <h5 className='me-lg-3 mb-0' >Sort</h5>
-        <FormGroup className ='d-flex align-items-center me-lg-2 mb-1 mb-lg-0' controlId='sortby' >
-          <FormLabel className={`me-2 ${styles.formLabel}`} >Sort By</FormLabel>
-          <FormSelect size = 'sm' >
-            <option selected value = "date" >Date</option>
-            <option value="amount">Amount</option>
-          </FormSelect>
-        </FormGroup>
-        <div className="vr me-2 d-none d-lg-block text-white"></div>
-        <FormGroup className ='d-flex align-items-center me-lg-2 mb-1 mb-lg-0' controlId='order' >
-          <FormLabel className={`me-2 ${styles.formLabel}`} >Order</FormLabel>
-          <FormSelect  size = 'sm' >
-            <option selected value = "-1" >
-              DESC 
-              {/* <Arrow90degDown/> */}
-            </option>
-            <option value="1">
-              ASC 
-              {/* <Arrow90degUp/> */}
-            </option>
-          </FormSelect>
-        </FormGroup>
-        <div className="vr me-2 d-none d-lg-block text-white"></div>
-        <FormGroup className ='d-flex align-items-center me-lg-2 mb-1 mb-lg-0' controlId='order' >
-          <FormLabel className={`me-2 ${styles.formLabel}`} >Per page</FormLabel>
-          <FormSelect  size = 'sm' >
-            <option selected  value = "1" > 2 </option>
-            <option  value = "5" > 5 </option>
-            <option  value = "10" > 10 </option>
-            <option  value = "50" >  50 </option>
-           
-           
-           
-          </FormSelect>
-        </FormGroup>
-        <div className="vr me-2 d-none d-lg-block text-white"></div>
-      </Col>
-    </Row>
+      <Accordion className='position-relative' >
+        <Accordion.Item className='position-absolute w-100'  eventKey="0">
+          <Accordion.Header >Filter & Sort Deposits</Accordion.Header>
+          <Accordion.Body >
+            <Row className = ' py-1 '>
+              {/* Filter */}
+              <Col className = " align-items-center" >
+                <FormGroup className ='d-md-flex align-items-center  mb-3' controlId='year-filter' >
+                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Year</FormLabel>
+                  <FormSelect  >
+                    <option value = "" >All</option>
+                    <option selected value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                  </FormSelect>
+                </FormGroup>
+     
+                <FormGroup className = 'd-md-flex align-items-center mb-3' controlId='month-filter' >
+                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Month</FormLabel>
+                  <FormSelect  >
+                    <option value = "" >All</option>
+                    {months.map((month, index) => {
+                      return (
+                        <option selected = {month.value == currentMonth} key = {index} value = {month.value} >{month.month}</option>
+                      )
+                    })}
+                  </FormSelect>
+                </FormGroup>
+               
+                <FormGroup className='d-md-flex align-items-center' controlId='member-filter'>
+                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Member</FormLabel>
+                  <FormSelect  >
+                    <option value = "" >All</option>
+                    {users.map((user, index) => {
+                      return (
+                        <option key = {index} value = {user} >{user}</option>
+                      )
+                    })}
+                  </FormSelect> 
+                </FormGroup>
+              </Col>
+        
+              {/* Sort */}
+              <Col  className = " align-items-center" >
+                <FormGroup className ='d-md-flex align-items-center mb-3' controlId='sortby' >
+                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Sort By</FormLabel>
+                  <FormSelect  >
+                    <option selected value = "date" >Date</option>
+                    <option value="amount">Amount</option>
+                  </FormSelect>
+                </FormGroup>
+                <FormGroup className ='d-md-flex align-items-center mb-3' controlId='order' >
+                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Order</FormLabel>
+                  <FormSelect   >
+                    <option selected value = "-1" >
+                      DESC 
+                      {/* <Arrow90degDown/> */}
+                    </option>
+                    <option value="1">
+                      ASC 
+                      {/* <Arrow90degUp/> */}
+                    </option>
+                  </FormSelect>
+                </FormGroup>
+                <FormGroup className ='d-md-flex align-items-center' controlId='perpage' >
+                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Per page</FormLabel>
+                  <FormSelect  >
+                    <option selected  value = "1" > 2 </option>
+                    <option  value = "5" > 5 </option>
+                    <option  value = "10" > 10 </option>
+                    <option  value = "50" >  50 </option>
+                  </FormSelect>
+                </FormGroup>
+                <div className="vr me-2 d-none d-lg-block text-white"></div>
+              </Col>
+            </Row>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>    
   );
 }
+
+
