@@ -1,12 +1,54 @@
 import { Button } from "react-bootstrap"
 import { getTotalDepositsCount, getDepositsByPage } from "../data/dbQueries"
 import { Search } from "../components/search"
+import { searchFilterDeposit } from "../data/dbQueries";
 
 
-export default async function Deposits (){
-  const searchFilter = {}
+export default async function DepositsPage ({
+  searchParams
+}:  {
+  searchParams?: {
+    currentPage?: string;
+    prevPage?: string;
+    year?: string;
+    month?: string;
+    member?: string;
+    sortBy?: 'deposit_amount' | 'deposit_date';
+    order?: string;
+    perPage?: string;
+  };
+})
+
+{
+
+  const prevPage = Number(searchParams?.prevPage) || -1;
+  const currentPage = Number(searchParams?.currentPage) || 1;
+  const year = Number(searchParams?.year) || 'all';
+  const month = Number(searchParams?.month) || 'all';
+  const member = searchParams?.member || 'all';
+  const sortBy = searchParams?.sortBy || 'deposit_date';
+  const order = Number(searchParams?.order) || -1;
+  const perPage = Number(searchParams?.perPage) || 5;
+ 
+
+  const searchFilter : searchFilterDeposit = {
+    page: currentPage,
+    year,
+    month,
+    member,
+    sortBy,
+    order,
+    perPage
+  }
   const depositsCount = await getTotalDepositsCount(searchFilter)
-  const deposits = await getDepositsByPage({...searchFilter, page: 1})
+  const deposits = await getDepositsByPage(searchFilter)
+
+  function getDateString(date:any){
+    const options = { month: 'short', day: '2-digit', year: 'numeric' };
+    const dateString = date.toLocaleDateString('en-US', options);
+    return dateString
+  }
+
   
   return(
     <div>
@@ -16,12 +58,20 @@ export default async function Deposits (){
       </div>
       
       <Search/>
-      <p >
-        ariko
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum voluptates minus assumenda fugit iure provident distinctio consectetur quidem dignissimos iusto mollitia dolores, aut tempora nisi molestiae quaerat omnis reprehenderit facere voluptatibus dicta maxime! Nostrum deleniti eligendi expedita impedit corporis natus. Voluptatem delectus molestias similique vel alias, repudiandae quaerat veritatis exercitationem.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus atque assumenda voluptatum consequuntur at facere animi, aut unde facilis explicabo ducimus dolor beatae cupiditate eius odit aperiam suscipit architecto dolore id voluptate veritatis perspiciatis odio vel asperiores? Possimus, labore minus?
-        stephen
-      </p>
+      <h4>Deposits Count: {depositsCount} </h4>
+      <div>
+        {deposits.map((deposit, index) => {
+          return (
+            <div key={index}>
+              <h5>{deposit.depositor_name}</h5>
+              <p>{deposit.deposit_amount}</p>
+              <p>{getDateString(deposit.deposit_date)}</p>
+              <p>{index}</p>
+              <hr />
+            </div>
+          )
+        })}
+      </div>
     </div>
   )
 }

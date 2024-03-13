@@ -3,9 +3,8 @@
 import { useEffect, useRef } from 'react';
 import {usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Row, Col,FormSelect, FormGroup, FormLabel } from 'react-bootstrap';
-import { ArrowUp} from 'react-bootstrap-icons';
 import styles from './search.module.css'
-import { Accordion, AccordionBody } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 
 export function Search() {
 
@@ -22,70 +21,79 @@ export function Search() {
   const months = [
     {
       month: "Jan",
-      value: 1
+      value: "1"
     },
     {
       month: "Feb",
-      value: 2
+      value: "2"
     },
     {
       month: "Mar",
-      value: 3
+      value: "3"
     },
     {
       month: "Apr",
-      value: 4
+      value: "4"
     },
     {
       month: "May",
-      value: 5
+      value: "5"
     },
     {
       month: "Jun",
-      value: 6
+      value: "6"
     },
     {
       month: "Jul",
-      value: 7
+      value: "7"
     },
     {
       month: "Aug",
-      value: 8
+      value: "8"
     },
     {
       month: "Sep",
-      value: 9
+      value: "9"
     },
     {
       month: "Oct",
-      value: 10
+      value: "10"
     },
     {
       month: "Nov",
-      value: 11
+      value: "11"
     },
     {
       month: "Dec",
-      value: 12
+      value: "12"
     }
   ]
 
   const currentMonth = new Date().getMonth() + 1;
 
-  // const searchParams = useSearchParams();
-  // const pathname = usePathname();
-  // const { replace } = useRouter();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-  //   function handleParamChange(paramKey:string, paramValue:string) {
-  //   const params = new URLSearchParams(searchParams);
-  //   params.set(paramKey, paramValue);
-  //   params.set('currentPage', '1');
-  //   replace(`${pathname}?${params.toString()}`);
-  // }
+  const params = new URLSearchParams(searchParams);
+  const keysArray = [...params.keys()];
+  const { year, month, member, sortBy, order, perPage } = Object.fromEntries(keysArray.map(key => [key, params.get(key)]));
+
+  const validMonths = months.map((month)=>month.value)
+  const validYears = ["2022", "2023", "2024"]
+  const validMembers = users;
+  const validSort = ['deposit_amount', 'deposit_date']
+  const validOrder = ['1', '-1']
+  const validPerPage = ["2", "5", "10", "50"]
+
+  function handleParamChange(paramKey:string, paramValue:string) {
+    const params = new URLSearchParams(searchParams);
+    params.set(paramKey, paramValue);
+    params.set('currentPage', '1');
+    replace(`${pathname}?${params.toString()}`);
+  }
 
   const accordionRef:any = useRef(null);
-
- 
 
   useEffect(() => {
     
@@ -120,17 +128,17 @@ export function Search() {
   return (
     <div ref = {accordionRef} >
       <Accordion className='position-relative' >
-        <Accordion.Item className='position-absolute w-100'  eventKey="0">
-          <Accordion.Header >Filter & Sort Deposits</Accordion.Header>
-          <Accordion.Body >
+        <Accordion.Item className='position-absolute bg-white z-1 w-100'  eventKey="0">
+          <Accordion.Header > <span className="fw-light">Filter & Sort Deposits</span> </Accordion.Header>
+          <Accordion.Body className = 'shadow' >
             <Row className = ' py-1 '>
               {/* Filter */}
               <Col className = " align-items-center" >
                 <FormGroup className ='d-md-flex align-items-center  mb-3' controlId='year-filter' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Year</FormLabel>
-                  <FormSelect  >
-                    <option value = "" >All</option>
-                    <option selected value="2024">2024</option>
+                  <FormSelect defaultValue={ year && validYears.includes(year)? year: "all" } onChange = {(e)=> handleParamChange('year', e.target.value)}  >
+                    <option value = "all" >All</option>
+                    <option value="2024">2024</option>
                     <option value="2023">2023</option>
                     <option value="2022">2022</option>
                   </FormSelect>
@@ -138,11 +146,11 @@ export function Search() {
      
                 <FormGroup className = 'd-md-flex align-items-center mb-3' controlId='month-filter' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Month</FormLabel>
-                  <FormSelect  >
-                    <option value = "" >All</option>
+                  <FormSelect defaultValue={ month && validMonths.includes(month)? month: "all" } onChange = {(e)=> handleParamChange('month', e.target.value)}  >
+                    <option value = "all" >All</option>
                     {months.map((month, index) => {
                       return (
-                        <option selected = {month.value == currentMonth} key = {index} value = {month.value} >{month.month}</option>
+                        <option key = {index} value = {month.value} >{month.month}</option>
                       )
                     })}
                   </FormSelect>
@@ -150,8 +158,8 @@ export function Search() {
                
                 <FormGroup className='d-md-flex align-items-center' controlId='member-filter'>
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Member</FormLabel>
-                  <FormSelect  >
-                    <option value = "" >All</option>
+                  <FormSelect defaultValue={ member && validMembers.includes(member)? member: "all" } onChange = {(e)=> handleParamChange('member', e.target.value)}  >
+                    <option value = "all" >All</option>
                     {users.map((user, index) => {
                       return (
                         <option key = {index} value = {user} >{user}</option>
@@ -165,15 +173,15 @@ export function Search() {
               <Col  className = " align-items-center" >
                 <FormGroup className ='d-md-flex align-items-center mb-3' controlId='sortby' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Sort By</FormLabel>
-                  <FormSelect  >
-                    <option selected value = "date" >Date</option>
-                    <option value="amount">Amount</option>
+                  <FormSelect defaultValue ={ sortBy && validSort.includes(sortBy)? sortBy: "deposit_date" } onChange = {(e)=> handleParamChange('sortBy', e.target.value)}  >
+                    <option value = "deposit_date" >Date</option>
+                    <option value="deposit_amount">Amount</option>
                   </FormSelect>
                 </FormGroup>
                 <FormGroup className ='d-md-flex align-items-center mb-3' controlId='order' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Order</FormLabel>
-                  <FormSelect   >
-                    <option selected value = "-1" >
+                  <FormSelect defaultValue = { order && validOrder.includes(order)? order: "-1" }  onChange = {(e)=> handleParamChange('order', e.target.value)}  >
+                    <option value = "-1" >
                       DESC 
                     
                     </option>
@@ -185,8 +193,8 @@ export function Search() {
                 </FormGroup>
                 <FormGroup className ='d-md-flex align-items-center' controlId='perpage' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Per page</FormLabel>
-                  <FormSelect  >
-                    <option selected  value = "1" > 2 </option>
+                  <FormSelect defaultValue={perPage && validPerPage.includes(perPage)? perPage : "5" } onChange = {(e)=> handleParamChange('perPage', e.target.value)}  >
+                    <option  value = "2" > 2 </option>
                     <option  value = "5" > 5 </option>
                     <option  value = "10" > 10 </option>
                     <option  value = "50" >  50 </option>
