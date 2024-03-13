@@ -1,7 +1,9 @@
 'use client';
+
+import { useEffect, useRef } from 'react';
 import {usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Row, Col,FormSelect, FormGroup, FormLabel } from 'react-bootstrap';
-import { Arrow90degDown, Arrow90degUp } from 'react-bootstrap-icons';
+import { ArrowUp} from 'react-bootstrap-icons';
 import styles from './search.module.css'
 import { Accordion, AccordionBody } from 'react-bootstrap';
 
@@ -81,7 +83,42 @@ export function Search() {
   //   replace(`${pathname}?${params.toString()}`);
   // }
 
+  const accordionRef:any = useRef(null);
+
+ 
+
+  useEffect(() => {
+    
+    function fireClickEvent(element: any){
+      // Create a new click event
+        const clickEvent = new MouseEvent('click', {
+          bubbles: true
+        });
+  
+      // Dispatch the click event on the element
+      element.dispatchEvent(clickEvent);
+    }
+
+    function handleClickOutside(event:any) {
+      if (!accordionRef.current.contains(event.target)){
+        const accordionButton = accordionRef.current.querySelector('.accordion-button');
+        const isCollapsed = accordionButton.classList.contains('collapsed');
+        if(!isCollapsed) fireClickEvent(accordionButton) //fire click event only when accordion is expanded
+      }
+    }
+    // Bind the event listener
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // Unbind the event listener on component unmount
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+
+  }, []);
+  
+
   return (
+    <div ref = {accordionRef} >
       <Accordion className='position-relative' >
         <Accordion.Item className='position-absolute w-100'  eventKey="0">
           <Accordion.Header >Filter & Sort Deposits</Accordion.Header>
@@ -138,7 +175,7 @@ export function Search() {
                   <FormSelect   >
                     <option selected value = "-1" >
                       DESC 
-                      {/* <Arrow90degDown/> */}
+                    
                     </option>
                     <option value="1">
                       ASC 
@@ -155,13 +192,15 @@ export function Search() {
                     <option  value = "50" >  50 </option>
                   </FormSelect>
                 </FormGroup>
-                <div className="vr me-2 d-none d-lg-block text-white"></div>
               </Col>
             </Row>
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>    
+      </Accordion>   
+    </div>
+     
   );
 }
 
 
+//<ArrowUp color="#ff33ff" size={96} />
