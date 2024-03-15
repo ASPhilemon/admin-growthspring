@@ -1,17 +1,19 @@
 
 export const generatePagination = (totalPages: number, currentPage: number, prevPage: number) => {
 
-  //if currentPage > totalPages, set currentPage = totalPages
-  currentPage = currentPage > totalPages ? totalPages : currentPage;
+
   //if currentPage < 1, set currentPage = 1
   currentPage = currentPage < 1 ? 1 : currentPage;
+
+  //if currentPage > totalPages, return empty array
+  if (currentPage > totalPages) return []
 
   // If the total number of pages is 6 or less,
   // display all pages without any ellipsis.
   if (totalPages <= 6) return  Array.from({ length: totalPages }, (_, i) => i + 1)
    
   //if current page is among the first 3 pages
-  if (currentPage <= 3) [
+  if (currentPage <= 3) return [
     1,
     2,
     3,

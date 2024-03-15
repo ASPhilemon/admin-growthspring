@@ -84,7 +84,7 @@ export function Search() {
   const validMembers = users;
   const validSort = ['deposit_amount', 'deposit_date']
   const validOrder = ['1', '-1']
-  const validPerPage = ["2", "5", "10", "50"]
+  const validPerPage = ["2", "5", "10", "50", "100"]
 
   function handleParamChange(paramKey:string, paramValue:string) {
     const params = new URLSearchParams(searchParams);
@@ -126,11 +126,11 @@ export function Search() {
   
 
   return (
-    <div ref = {accordionRef} >
+    <div className='px-3 ' ref = {accordionRef} >
       <Accordion className='position-relative' >
         <Accordion.Item className='position-absolute bg-white z-1 w-100'  eventKey="0">
-          <Accordion.Header > <span className="fw-light">Filter & Sort Deposits</span> </Accordion.Header>
-          <Accordion.Body className = 'shadow' >
+          <Accordion.Header > <span className="fw-bold text-primary">Filter & Sort Deposits</span> </Accordion.Header>
+          <Accordion.Body className = 'shadow-sm bg-light' >
             <Row className = ' py-1 '>
               {/* Filter */}
               <Col className = " align-items-center" >
@@ -198,6 +198,7 @@ export function Search() {
                     <option  value = "5" > 5 </option>
                     <option  value = "10" > 10 </option>
                     <option  value = "50" >  50 </option>
+                    <option  value = "100" >  100 </option>
                   </FormSelect>
                 </FormGroup>
               </Col>

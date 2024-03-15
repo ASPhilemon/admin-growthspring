@@ -1,7 +1,12 @@
 import { Button } from "react-bootstrap"
+import { PlusLg } from "react-bootstrap-icons";
 import { getTotalDepositsCount, getDepositsByPage } from "../data/dbQueries"
 import { Search } from "../components/search"
 import { searchFilterDeposit } from "../data/dbQueries";
+import { DepositCards } from "../components/DepositCards";
+import { Suspense } from "react";
+import PaginationWrapper from "../components/PaginationWrapper";
+
 
 
 export default async function DepositsPage ({
@@ -30,47 +35,30 @@ export default async function DepositsPage ({
   const order = Number(searchParams?.order) || -1;
   const perPage = Number(searchParams?.perPage) || 5;
  
-
   const searchFilter : searchFilterDeposit = {
+    year, month, member,
+    sortBy, order, perPage,
     page: currentPage,
-    year,
-    month,
-    member,
-    sortBy,
-    order,
-    perPage
-  }
-  const depositsCount = await getTotalDepositsCount(searchFilter)
-  const deposits = await getDepositsByPage(searchFilter)
-
-  function getDateString(date:any){
-    const options = { month: 'short', day: '2-digit', year: 'numeric' };
-    const dateString = date.toLocaleDateString('en-US', options);
-    return dateString
   }
 
-  
+
   return(
     <div>
-      <div className="d-flex align-items-center py-3">
-        <h5 className="me-4 mb-0" >Deposits</h5>
-        <Button variant = 'primary' >Add Deposit + </Button>
+      <div className="d-flex align-items-center py-3 px-3">
+        <h5 className="me-4 mb-0  fw-light " >Deposits</h5>
+        <Button className="shadow-sm"  variant = 'primary' >Add Deposit <PlusLg color="white" className="fw-bolder ms-2" size = {20} /> </Button>
       </div>
       
       <Search/>
-      <h4>Deposits Count: {depositsCount} </h4>
       <div>
-        {deposits.map((deposit, index) => {
-          return (
-            <div key={index}>
-              <h5>{deposit.depositor_name}</h5>
-              <p>{deposit.deposit_amount}</p>
-              <p>{getDateString(deposit.deposit_date)}</p>
-              <p>{index}</p>
-              <hr />
-            </div>
-          )
-        })}
+        <Suspense key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}
+          fallback = ''
+        >
+          <DepositCards searchFilter = {searchFilter} />
+        </Suspense>
+      </div>
+      <div>
+        <PaginationWrapper searchFilter = {searchFilter} />
       </div>
     </div>
   )

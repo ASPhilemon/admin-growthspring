@@ -3,8 +3,9 @@
 export default function Home() {
   return (
     <div>
-      <h3 > Home page </h3>
+      <h3 className = " py-3 lead " > Dashboard Overview </h3>
     </div>
       
   );
 }
+

@@ -26,7 +26,7 @@ export default function RootLayout({
       <body className = {inter.className}>
         <div>
           <ClientNavWrapper/>
-          <Col className="px-3" lg = {{  offset: 3 }}  >
+          <Col className="" lg = {{  offset: 3 }}  >
             {children}
           </Col>
         </div>

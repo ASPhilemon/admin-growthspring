@@ -10,4 +10,52 @@
 
 .accordion-button{
   padding: 10px;
+  font-size: 14px;
+  box-shadow: none !important;
+}
+
+.form-select{
+  box-shadow: none !important;
+  border-width: 2px;
+}
+
+.card{
+  border-radius: 0;
+  border:none;
+}
+
+.depositor-name{
+  color:#a07801;
+  font-size : 17px;
+
+
+}
+
+.btn{
+  border: none !important;
+}
+
+body{
+  overflow-y: scroll;
+}
+
+h1, h2, h3, h4, h5, h6, p{
+  margin: 0;
+}
+
+.btn:focus, .page-link {
+  box-shadow: none !important;
+
+}
+
+.page-link{
+  border-width: 2px;
+}
+
+.page-link:focus{
+  border-color: dodgerblue;
+}
+
+.deposit-cards{
+  padding-bottom: 80px;
 }
