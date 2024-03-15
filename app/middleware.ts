@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
  
   // Redirect to login page if not authenticated
   //return NextResponse.redirect(new URL('/login', request.url))
-  if (request.nextUrl.pathname.startsWith('/dash')) return NextResponse.redirect('https://growthspringers.com/test')
+  if (request.nextUrl.pathname == '/dash') return NextResponse.redirect( new URL( 'https://growthspringers.com/test'))
 
   return NextResponse.next()
 }
