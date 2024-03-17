@@ -1,4 +1,6 @@
 
+import jwt from 'jsonwebtoken'
+
 export const generatePagination = (totalPages: number, currentPage: number, prevPage: number) => {
 
 
@@ -41,4 +43,23 @@ export const generatePagination = (totalPages: number, currentPage: number, prev
     isFrontSeek? currentPage + 1: currentPage,
     isFrontSeek? Math.floor((currentPage + totalPages + 1)/2) : Math.floor((currentPage + totalPages )/2),
     totalPages]
+}
+
+
+
+export function getUser(token: any) {
+  const user: any = verifyToken(token)
+  if (user) return user
+  return null
+}
+
+
+function verifyToken(token: any){
+  try {
+    const { id, fullName , isAdmin} : any = jwt.verify(token, 'top_secret_xyz123')
+    return {id, fullName, isAdmin}
+  } catch (err) {
+    console.log(err)
+    return null
+  }
 }

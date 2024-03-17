@@ -23,7 +23,7 @@ export function SideNav({show, handleClose}: {show: true | false, handleClose: F
         <Profile />
         <DashboardPageLinks handleClose = {handleClose} />
         <div className='d-flex my-4'>
-          <button className="btn fw-bold text-white bg-dark px-5 py-2"> Log Out </button>
+          <a href="https://auth.growthspringers.com/signout" className="btn ms-3 fw-bold btn-dark px-5 py-2"> Sign Out </a>
         </div>
       </Offcanvas.Body>
     </Offcanvas>
