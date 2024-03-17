@@ -19,11 +19,9 @@ export function middleware(request: NextRequest) {
 
 
 function getUser(token: any) {
-  const {id, fullName, isAdmin} : any = verifyToken(token)
-  if(!id) {
-    return null
-  }
-  return {id, fullName, isAdmin}
+  const user: any = verifyToken(token)
+  if (user) return user
+  return null
   
 }
 
