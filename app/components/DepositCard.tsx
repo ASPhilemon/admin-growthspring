@@ -10,7 +10,7 @@ export function DepositCard({deposit}: any){
   }
 
   return (
-    <Card className="mb-2 rounded-1 shadow-sm bg-body-secondaryy bg-warning-subtle " >
+    <Card className="mb-2 rounded-1 shadow-sm  bg-warning-subtle " >
       <CardBody>
         <div className="d-flex mb-5 align-items-center border-bottom py-3 border-opacity-10"  >
           {/* avatar */}

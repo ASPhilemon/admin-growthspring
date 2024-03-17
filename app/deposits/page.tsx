@@ -41,6 +41,9 @@ export default async function DepositsPage ({
     page: currentPage,
   }
 
+  // const url = headers().get('x-url')
+  // // Stuff with the URL
+
 
   return(
     <div>
@@ -49,7 +52,7 @@ export default async function DepositsPage ({
         <Button className="shadow-sm"  variant = 'primary' >Add Deposit <PlusLg color="white" className="fw-bolder ms-2" size = {20} /> </Button>
       </div>
       
-      <Search/>
+      <Search key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`} />
       <div>
         <Suspense key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}
           fallback = ''
