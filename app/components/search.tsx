@@ -84,7 +84,7 @@ export function Search() {
   const validMembers = users;
   const validSort = ['deposit_amount', 'deposit_date']
   const validOrder = ['1', '-1']
-  const validPerPage = ["2", "5", "10", "50", "100"]
+  const validPerPage = ["2", "5", "20", "50", "100", "500"]
 
   function handleParamChange(paramKey:string, paramValue:string) {
     const params = new URLSearchParams(searchParams);
@@ -126,7 +126,7 @@ export function Search() {
   
 
   return (
-    <div className='px-3 ' ref = {accordionRef} >
+    <div className='' ref = {accordionRef} >
       <Accordion className='position-relative' >
         <Accordion.Item className='position-absolute bg-white z-1 w-100'  eventKey="0">
           <Accordion.Header > <span className="fw-bold text-primary">Filter & Sort Deposits</span> </Accordion.Header>
@@ -193,12 +193,13 @@ export function Search() {
                 </FormGroup>
                 <FormGroup className ='d-md-flex align-items-center' controlId='perpage' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Per page</FormLabel>
-                  <FormSelect defaultValue={perPage && validPerPage.includes(perPage)? perPage : "5" } onChange = {(e)=> handleParamChange('perPage', e.target.value)}  >
+                  <FormSelect defaultValue={perPage && validPerPage.includes(perPage)? perPage : "20" } onChange = {(e)=> handleParamChange('perPage', e.target.value)}  >
                     <option  value = "2" > 2 </option>
                     <option  value = "5" > 5 </option>
-                    <option  value = "10" > 10 </option>
+                    <option  value = "20" > 20 </option>
                     <option  value = "50" >  50 </option>
                     <option  value = "100" >  100 </option>
+                    <option  value = "500" >  500 </option>
                   </FormSelect>
                 </FormGroup>
               </Col>

@@ -1,5 +1,6 @@
 import { Card, CardBody } from "react-bootstrap";
 import { Trash, Pencil, Info } from "react-bootstrap-icons";
+import Link from "next/link";
 
 export function DepositCard({deposit}: any){
 
@@ -10,24 +11,24 @@ export function DepositCard({deposit}: any){
   }
 
   return (
-    <Card className="mb-2 rounded-1 shadow-sm  bg-warning-subtle " >
+    <Card className="mb-2 rounded-1  shadow-sm  " >
       <CardBody>
-        <div className="d-flex mb-5 align-items-center border-bottom py-3 border-opacity-10"  >
+        <div className="d-flex mb-5 align-items-center border-bottom pb-3 border-opacity-10"  >
           {/* avatar */}
-          <div style = {{width: "30px", height: "30px"}} className="rounded-circle shadow-sm bg-dark-subtle me-3">
+          <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
           </div>
-          <p className="mb-0 depositor-name fw-bold " > {deposit.depositor_name} </p>
+          <h6 className="mb-0 depositor-name" > {deposit.depositor_name} </h6>
         </div>
         <div className="d-flex align-items-end justify-content-between">
           <div>
-            <h6 className="mb-1 fw-bold mb-2">UGX {deposit.deposit_amount.toLocaleString()}</h6>
-            <p className=" mb-0 fw-light small text-muted">{getDateString(deposit.deposit_date)}</p>
+            <h6 className="mb-1 fw-bolder mb-2">UGX {deposit.deposit_amount.toLocaleString()}</h6>
+            <p className=" mb-0 fw-light small ">{getDateString(deposit.deposit_date)}</p>
           </div>
 
           {/* icons */}
           <div className="d-flex align-items-center" >
-            <a href="" className="btn btn-primary shadow-sm me-2 p-1 rounded-circle me-md-4"><Info size={22}/></a>
-            <a href="" className="btn me-2 me-md-4  disabled opacity-50 rounded-circle p-2"><Pencil size={18}  /></a>
+            <Link href={`/deposits/${deposit._id}`} className="btn btn-primary shadow-sm me-2 p-0 rounded-circle me-md-4"><Info size={22}/></Link>
+            <Link href= {`/deposits/${deposit._id}/edit`} className="btn me-2 me-md-4 rounded-circle p-2"><Pencil size={18}  /></Link>
             <a href="" className="btn disabled opacity-50  rounded-circle p-2"  > <Trash size={18} className=""/></a>
           </div>
         </div>

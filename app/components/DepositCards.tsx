@@ -6,7 +6,7 @@ export async function DepositCards({searchFilter}: any){
 
   return(
     deposits.length > 0 ?
-    <div className = " px-2 deposit-cards" >
+    <div className = " deposit-cards" >
       {deposits.map((deposit, index) => {
         return (
         <DepositCard key = {deposit._id} deposit = {deposit} />

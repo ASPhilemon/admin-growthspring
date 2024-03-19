@@ -1,10 +1,14 @@
+a{
+  text-decoration: none;
+}
+
 .accordion{
   height: 60px;
 }
 
 .form-label{
-  font-size: 14px;
-  font-weight: bold;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 
@@ -14,22 +18,21 @@
   box-shadow: none !important;
 }
 
-.form-select{
+.form-select, .form-control{
   box-shadow: none !important;
   border-width: 2px;
 }
 
 .card{
-  border-radius: 0;
-  border:none;
+  border-radius: 0 ;
+  border-color: rgb(228, 228, 228);
+  border-color: rgb(184, 181, 179);
+  /* border-color: rgb(248, 241, 137); */
+  border-width: 1px;
+  /* border: none; */
+  background-color: rgb(240, 240, 240);
 }
 
-.depositor-name{
-  color:#a07801;
-  font-size : 17px;
-
-
-}
 
 .btn{
   border: none !important;
@@ -58,4 +61,41 @@ h1, h2, h3, h4, h5, h6, p{
 
 .deposit-cards{
   padding-bottom: 80px;
+}
+
+.breadcrumb{
+  font-size: 20px;
+}
+
+.deposit-field{
+  width: 160px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.btn-back{
+  margin-left: 180px;
+  width: 100px;
+  display: block;
+}
+
+.nav-link.active{
+  background-color: rgb(255 193 7);
+  font-weight: bold;
+  color: rgb(61, 61, 61);
+}
+
+.logo{
+  height: 100px;
+  background-color: #143a61;
+  color: white;
+  font-weight: bold;
+
+}
+
+
+@media (max-width: 991px) {
+  .offcanvas-lg{
+    max-width: 270px;
+  }
 }

@@ -21,7 +21,7 @@ export function Paginator({ totalDeposits }: { totalDeposits: number }) {
   const searchParams = useSearchParams();
   const currentPage = Number(searchParams.get('currentPage')) || 1;
   const prevPage = Number(searchParams.get('prevPage')) || -1;
-  const perPage = Number(searchParams.get('perPage')) || 5;
+  const perPage = Number(searchParams.get('perPage')) || 20;
 
   const totalPages = Math.ceil(totalDeposits /perPage )
 

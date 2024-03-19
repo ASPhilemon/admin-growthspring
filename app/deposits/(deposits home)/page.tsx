@@ -1,13 +1,14 @@
 import { Button } from "react-bootstrap"
 import { PlusLg } from "react-bootstrap-icons";
-import { Search } from "../components/search"
-import { searchFilterDeposit } from "../data/dbQueries";
-import { DepositCards } from "../components/DepositCards";
+import { Search } from "@/app/components/search";
+import { searchFilterDeposit } from "@/app/data/dbQueries";
+import { DepositCards } from "@/app/components/DepositCards";
 import { Suspense } from "react";
-import PaginationWrapper from "../components/PaginationWrapper";
-import { getUser } from "../utils";
+import PaginationWrapper from "@/app/components/PaginationWrapper";
+import { getUser } from "@/app/utils";
 import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function DepositsPage ({
   searchParams
@@ -30,7 +31,7 @@ export default async function DepositsPage ({
   const token = cookieStore.get('jwt')?.value
   const user = getUser(token)
   if (!user) redirect('https://auth.growthspringers.com/signin?redirectURI=https://admin.growthspringers.com')
-  if (user && user.isAdmin == "false") redirect('https://auth.growthspringers.com/signin')
+  if (user && user.isAdmin == "false") redirect('https://growthspringers.com/signin')
 
 
   const prevPage = Number(searchParams?.prevPage) || -1;
@@ -40,7 +41,7 @@ export default async function DepositsPage ({
   const member = searchParams?.member || 'all';
   const sortBy = searchParams?.sortBy || 'deposit_date';
   const order = Number(searchParams?.order) || -1;
-  const perPage = Number(searchParams?.perPage) || 5;
+  const perPage = Number(searchParams?.perPage) || 20;
  
   const searchFilter : searchFilterDeposit = {
     year, month, member,
@@ -48,15 +49,16 @@ export default async function DepositsPage ({
     page: currentPage,
   }
 
-  // const url = headers().get('x-url')
-  // // Stuff with the URL
 
 
   return(
-    <div>
-      <div className="d-flex align-items-center py-3 px-3">
-        <h5 className="me-4 mb-0  fw-light " >Deposits</h5>
-        <Button className="shadow-sm"  variant = 'primary' >Add Deposit <PlusLg color="white" className="fw-bolder ms-2" size = {20} /> </Button>
+    <div className="px-md-5 px-3">
+      <div className="d-flex align-items-center py-3">
+        <h5 className="me-4 mb-0  fw-light " >Deposits </h5>
+        <Link className="shadow-sm btn btn-primary" href = "/deposits/add" >
+          Add Deposit
+          <PlusLg color="white" className="fw-bolder ms-2" size = {20} />
+        </Link>
       </div>
       
       <Search key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`} />

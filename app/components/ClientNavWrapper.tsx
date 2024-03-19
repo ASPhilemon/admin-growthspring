@@ -9,7 +9,7 @@ import { TopNav } from "./TopNav";
 import { SideNav } from "./SideNav";
 
 
-export function ClientNavWrapper(){
+export function ClientNavWrapper({adminName}:any){
   const [show, setShow] = useState(false)
 
   const handleShow = ()=> {
@@ -22,7 +22,7 @@ export function ClientNavWrapper(){
   return(
     <div>
       <SideNav show = {show} handleClose = {handleClose } />
-      <TopNav handleShow = {handleShow} />
+      <TopNav adminName = {adminName} handleShow = {handleShow} />
     </div>
   )
 }

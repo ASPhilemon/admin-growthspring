@@ -7,6 +7,7 @@ export interface Deposits extends mongoose.Document {
     recorded_by: string,
     balance_before: number,
     source: String,
+    cashLocations: any
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
@@ -22,8 +23,40 @@ const DepositSchema = new mongoose.Schema<Deposits>({
   },
   deposit_amount: {
     type: Number,
+    min: 10000,
     required: [true, "Please provide the deposit amount"]
-  }
+  },
+  recorded_by: {
+    type: String,
+    required: [true, "Please provide the admin who recorded the deposit"]
+  },
+  source: {
+    type: String,
+    required: [true, "The source of deposit is required"]
+  },
+  balance_before: {
+    type: Number,
+    required: [true, "Please provide depositor worth before deposit"]
+  },
+  cashLocations: {
+    standardChartered: {
+      type: Number,
+      required: true
+    },
+    unitTrust: {
+      type: Number,
+      required: true,
+   
+    },
+    adminAndrew: {
+      type: Number,
+      required: true
+    },
+    adminRogers: {
+      type: Number,
+      required: true
+    }
+  }, 
 
 });
 
