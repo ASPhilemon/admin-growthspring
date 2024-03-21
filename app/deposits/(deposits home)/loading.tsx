@@ -1,7 +1,4 @@
-
 import { PlusLg } from "react-bootstrap-icons";
-
-
 import Link from "next/link";
 import { Loader } from "@/app/components/Loader";
 

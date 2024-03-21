@@ -57,7 +57,7 @@ export default async function DepositsPage ({
       <div className="d-flex align-items-center py-3">
         <h5 className="me-4 mb-0  fw-light " >Deposits </h5>
         <Link className="shadow-sm btn btn-primary" href = "/deposits/add" >
-          Add Deposit
+          Add
           <PlusLg color="white" className="fw-bolder ms-2" size = {20} />
         </Link>
       </div>

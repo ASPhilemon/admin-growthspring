@@ -22,7 +22,7 @@ export default async function Page({params} : any){
     <div className="px-md-5 px-3 py-3 my-2" >
       <Breadcrumb>
         <BreadcrumbItem linkAs = { Link } href="/deposits"> Deposits </BreadcrumbItem>
-        <BreadcrumbItem  active>Edit Deposit</BreadcrumbItem>
+        <BreadcrumbItem  active>Edit</BreadcrumbItem>
       </Breadcrumb>
       <EditDepositForm deposit = { deposit} />
     </div>
