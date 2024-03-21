@@ -18,7 +18,7 @@ export async function DepositCards({searchFilter}: any){
 
 function NoDeposits() {
   return (
-    <div className = "ms-4" >
+    <div className = "ms-2" >
       <p>No deposits were found for this filter </p>
     </div>
   )

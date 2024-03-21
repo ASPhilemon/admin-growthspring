@@ -9,6 +9,7 @@ import { getUser } from "@/app/utils";
 import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
 import Link from "next/link";
+import { Loader } from "@/app/components/Loader";
 
 export default async function DepositsPage ({
   searchParams
@@ -64,7 +65,7 @@ export default async function DepositsPage ({
       <Search key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`} />
       <div>
         <Suspense key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}
-          fallback = ''
+          fallback = {<Loader/>}
         >
           <DepositCards searchFilter = {searchFilter} />
         </Suspense>
