@@ -18,7 +18,7 @@ export default function Page(){
     <div className="px-md-5 px-3 py-3 my-2" >
       <Breadcrumb>
         <BreadcrumbItem linkAs = {Link} href="/deposits"> Deposits </BreadcrumbItem>
-        <BreadcrumbItem  active>Add Deposit</BreadcrumbItem>
+        <BreadcrumbItem  active>Add</BreadcrumbItem>
       </Breadcrumb>
       <AddDepositForm user = {user.fullName} />
     </div>
