@@ -33,7 +33,6 @@ export function Paginator({ totalDeposits }: { totalDeposits: number }) {
   };
 
   const allPages = generatePagination(totalPages, currentPage, prevPage);
-  console.log(allPages);
 
   return (
     <Col lg = {{  offset: 3 }} className = 'fixed-bottom d-flex justify-content-center overflow-x-auto'  >

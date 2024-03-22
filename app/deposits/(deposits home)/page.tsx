@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap"
+
 import { PlusLg } from "react-bootstrap-icons";
 import { Search } from "@/app/components/search";
 import { searchFilterDeposit } from "@/app/data/dbQueries";
@@ -11,7 +11,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Loader } from "@/app/components/Loader";
 
-export default async function DepositsPage ({
+export default function DepositsPage ({
   searchParams
 }:  {
   searchParams?: {
@@ -34,8 +34,6 @@ export default async function DepositsPage ({
   if (!user) redirect('https://auth.growthspringers.com/signin?redirectURI=https://admin.growthspringers.com')
   if (user && user.isAdmin == "false") redirect('https://growthspringers.com/signin')
 
-
-  const prevPage = Number(searchParams?.prevPage) || -1;
   const currentPage = Number(searchParams?.currentPage) || 1;
   const year = Number(searchParams?.year) || 'all';
   const month = Number(searchParams?.month) || 'all';
@@ -64,11 +62,11 @@ export default async function DepositsPage ({
       
       <Search key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`} />
       <div>
-        <Suspense key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}
-          fallback = {<Loader/>}
-        >
+      <Suspense fallback = {<Loader/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
+
+      </Suspense>
           <DepositCards searchFilter = {searchFilter} />
-        </Suspense>
+     
       </div>
       <div>
         <PaginationWrapper searchFilter = {searchFilter} />
