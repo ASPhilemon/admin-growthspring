@@ -63,7 +63,7 @@ function  DashboardPageLinks({handleClose}:{handleClose: any}){
       {
         pages.map((page)=> {
           return(
-            <Nav.Link className="py-2" active = {page.linkUrl == pathname} as = {Link} href = {page.linkUrl}  key = {page.linkText} onClick = {handleClose} > {page.linkText}  </Nav.Link>
+            <Nav.Link className="py-2 mb-1" active = {page.linkUrl == pathname} as = {Link} href = {page.linkUrl}  key = {page.linkText} onClick = {handleClose} > {page.linkText}  </Nav.Link>
           )
         })
       }

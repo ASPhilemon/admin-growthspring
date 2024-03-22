@@ -57,12 +57,12 @@ export default function DepositsPage ({
           <PlusLg color="white" className="fw-bolder ms-2" size = {20} />
         </Link>
       </div>
-      
-      <Search key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`} />
       <div>
-      <Suspense fallback = {<Loader/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
-        <DepositCards searchFilter = {searchFilter} />
-      </Suspense>     
+        
+        <Suspense fallback = {<Loader/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
+          <Search />
+          <DepositCards searchFilter = {searchFilter} />
+        </Suspense>     
       </div>
       <div>
         <PaginationWrapper searchFilter = {searchFilter} />
