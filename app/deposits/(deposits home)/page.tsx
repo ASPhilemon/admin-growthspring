@@ -48,8 +48,6 @@ export default function DepositsPage ({
     page: currentPage,
   }
 
-
-
   return(
     <div className="px-md-5 px-3">
       <div className="d-flex align-items-center py-3">
@@ -63,10 +61,8 @@ export default function DepositsPage ({
       <Search key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`} />
       <div>
       <Suspense fallback = {<Loader/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
-
-      </Suspense>
-          <DepositCards searchFilter = {searchFilter} />
-     
+        <DepositCards searchFilter = {searchFilter} />
+      </Suspense>     
       </div>
       <div>
         <PaginationWrapper searchFilter = {searchFilter} />
