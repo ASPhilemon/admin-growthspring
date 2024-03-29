@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { headers } from "next/headers"
 import { findDepositById } from "@/app/data/dbQueries"
 import { Breadcrumb, BreadcrumbItem } from "react-bootstrap"
 import Link from "next/link"
@@ -9,8 +10,7 @@ import { Suspense } from "react"
 import { Loader } from "@/app/components/Loader"
 
 
-export default async function Page({params}: any){
-
+export default async function Page({params, req}: any){
 
   const cookieStore = cookies()
   const token = cookieStore.get('jwt')?.value
@@ -32,6 +32,8 @@ export default async function Page({params}: any){
 }
 
 async function DepositDetails({id}:any){
+  const headerList = headers()
+  const referer = headerList.get('referer') || "/deposits"
 
   const deposit = await findDepositById(id)
   if (!deposit) notFound()
@@ -69,7 +71,7 @@ async function DepositDetails({id}:any){
         <p>UGX {deposit.balance_before.toLocaleString()}</p>
       </div>
 
-      <Link className="btn btn-back btn-secondary mt-5 px-4" href = "/deposits" > Back </Link>
+      <Link className="btn btn-back btn-secondary mt-5 px-4" href = {referer} > Back </Link>
     
     </div>
   )

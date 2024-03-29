@@ -9,7 +9,8 @@ import { getUser } from "@/app/utils";
 import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Loader } from "@/app/components/Loader";
+// import { Loader } from "@/app/components/Loader";
+import { DepositsSkeleton } from "@/app/components/skeletons/skeletons";
 
 export default function DepositsPage ({
   searchParams
@@ -58,12 +59,12 @@ export default function DepositsPage ({
         </Link>
       </div>
       <div>
-        
-        <Suspense fallback = {<Loader/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
-          <Search />
+        <Search />
+        <Suspense fallback = {<DepositsSkeleton/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
           <DepositCards searchFilter = {searchFilter} />
         </Suspense>     
       </div>
+      
       <div>
         <PaginationWrapper searchFilter = {searchFilter} />
       </div>

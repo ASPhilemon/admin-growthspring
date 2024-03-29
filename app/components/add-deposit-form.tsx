@@ -6,7 +6,7 @@ import { addDeposit } from "../deposits/actions"
 import Link from "next/link"
 
 
-export function AddDepositForm({user}:{user: String}){
+export function AddDepositForm({user, referer}:{user: string, referer: string}){
   const minDate = getMinimumDepositDate()
   const maxDate = getMaxDepositDate()
 
@@ -88,7 +88,7 @@ export function AddDepositForm({user}:{user: String}){
       </Row>
       <FormError message = {state} />
       <div className="col-md-8 d-flex mt-3">
-        <Link className="btn  btn-secondary me-3 ms-auto px-2" href = "/deposits" >Cancel</Link>
+        <Link className="btn  btn-secondary me-3 ms-auto px-2" href = {referer} >Cancel</Link>
         <SubmitButton />
       </div>
     </form>

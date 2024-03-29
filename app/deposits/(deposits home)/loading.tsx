@@ -1,6 +1,11 @@
+"use client"
+import { Search } from "@/app/components/search";
+
 import { PlusLg } from "react-bootstrap-icons";
 import Link from "next/link";
-import { Loader } from "@/app/components/Loader";
+// import { Loader } from "@/app/components/Loader";
+import { DepositsSkeleton } from "@/app/components/skeletons/skeletons";
+
 
 
 export default function Loading(){
@@ -13,7 +18,8 @@ export default function Loading(){
         <PlusLg color="white" className="fw-bolder ms-2" size = {20} />
       </Link>
     </div>
-    <Loader/>
+    <Search/>
+    <DepositsSkeleton/>
   </div>
   )
 

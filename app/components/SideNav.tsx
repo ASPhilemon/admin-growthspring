@@ -1,8 +1,8 @@
 //next imports
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 //react imports
-import { useState } from "react";
 //installed components imports
 import { Nav } from "react-bootstrap";
 import { Offcanvas } from "react-bootstrap";
@@ -43,16 +43,25 @@ export function SideNav({show, handleClose}: {show: true | false, handleClose: F
 function  DashboardPageLinks({handleClose}:{handleClose: any}){
 
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const params = new URLSearchParams(searchParams)
+
+  let depositsURL = '/deposits'
+  if (pathname == "/deposits"){
+    depositsURL += `?${params.toString()}`
+  }
   
 
   let pages = [
     {
       linkText: "Home",
-      linkUrl: "/"
+      linkUrl: "/",
+      path: "/"
     },
     {
       linkText: "Deposits",
-      linkUrl: "/deposits"
+      linkUrl: depositsURL,
+      path: "/deposits"
     },
  
     
@@ -63,7 +72,7 @@ function  DashboardPageLinks({handleClose}:{handleClose: any}){
       {
         pages.map((page)=> {
           return(
-            <Nav.Link className="py-2 mb-1" active = {page.linkUrl == pathname} as = {Link} href = {page.linkUrl}  key = {page.linkText} onClick = {handleClose} > {page.linkText}  </Nav.Link>
+            <Nav.Link className="py-2 mb-1" active = {page.path == pathname} as = {Link} href = {page.linkUrl}  key = {page.linkText} onClick = {handleClose} > {page.linkText}  </Nav.Link>
           )
         })
       }

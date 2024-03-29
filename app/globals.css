@@ -106,3 +106,29 @@ h1, h2, h3, h4, h5, h6, p{
   border-width: 5px;
   /* animation-duration: 1.3s; */
 }
+
+.skeleton{
+  background-color: black;
+  opacity: 0.5;
+}
+.icon-skel{
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  opacity: 0.2 !important;
+}
+
+.amount-skel, .date-skel, .name-skel{
+  width: 120px;
+  background-color: white !important;
+  height: 12px;
+  opacity: 0.5;
+}
+
+.amount-skel, .name-skel{
+  opacity: 0.9;
+}
+
+.name-skel{
+  width: 220px;
+}
