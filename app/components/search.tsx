@@ -12,7 +12,7 @@ export function Search() {
     'Akampurira David', 'Ariko Stephen Philemon', 'Arinaitwe Solomon',
     'Atim Dyna Loy', 'Atuhairwe Mary', 'Babirye Nicolatte',
     'Chesuro Benerd Boris', 'Club Fund', 'Kamya Timothy',
-    'Kawuma Andrew', 'Mwebe Blaise Adrian', 'Nakato Leonora',
+    'Kawuma Andrew', 'Mutome Roggers', 'Mwebe Blaise Adrian', 'Nakato Leonora',
     'Nuwagira Noble', 'Omodo Joshua Deo', 'Paul Omare',
     'Pule Flavia', 'Rwothungeo Rogers', 'Sendikwanawa Jasper',
     'Sharon Natukunda', 'Wilson Mutebi'
