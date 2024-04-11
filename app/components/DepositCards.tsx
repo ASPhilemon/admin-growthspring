@@ -3,7 +3,7 @@ import { DepositCard } from "./DepositCard";
 
 export async function DepositCards({searchFilter}: any){
   const deposits = await getDepositsByPage(searchFilter)
-  await new Promise(resolve => setTimeout(resolve, 6000))
+  // await new Promise(resolve => setTimeout(resolve, 6000))
   
   return(
     deposits.length > 0 ?

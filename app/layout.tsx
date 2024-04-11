@@ -30,7 +30,6 @@ export default function RootLayout({
     const user = getUser(token)
     if (!user) redirect('https://auth.growthspringers.com/signin?redirectURI=https://admin.growthspringers.com')
     if (user && user.isAdmin == "false") redirect('https://growthspringers.com/signin')
-
     let names = user.fullName.split(" ")
     let displayName = names[names.length -1 ]
 
