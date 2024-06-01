@@ -164,5 +164,6 @@ export async function updateDeposit (deposit_id : any, newDeposit:any){
 //added
 export async function getUsers(){
     await dbConnect() //connect to db if not already connected
-    return await User.find({}, 'fullName -_id');
+    const users =  await User.find({}, 'fullName -_id');
+    return users.map((user)=>user.fullName)
 }
