@@ -160,3 +160,8 @@ export async function updateDeposit (deposit_id : any, newDeposit:any){
         user.save()
     ])
 }
+
+//added
+export async function getUsers(){
+ return await User.find({}, 'fullName -_id');
+}

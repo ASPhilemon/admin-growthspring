@@ -4,15 +4,18 @@ import { cookies } from "next/headers"
 import { getUser } from "@/app/utils"
 import { redirect } from "next/navigation"
 import { AddDepositForm } from "@/app/components/add-deposit-form"
+import { getUsers } from "@/app/data/dbQueries"
 
-export default function Page(){
+export default async function Page(){
 
-    //admin authorization
-    const cookieStore = cookies()
-    const token = cookieStore.get('jwt')?.value
-    const user = getUser(token)
-    if (!user) redirect('https://auth.growthspringers.com/signin?redirectURI=https://admin.growthspringers.com')
-    if (user && user.isAdmin == "false") redirect('https://growthspringers.com/signin')
+  //admin authorization
+  const cookieStore = cookies()
+  const token = cookieStore.get('jwt')?.value
+  const user = getUser(token)
+  if (!user) redirect('https://auth.growthspringers.com/signin?redirectURI=https://admin.growthspringers.com')
+  if (user && user.isAdmin == "false") redirect('https://growthspringers.com/signin')
+  
+  const users:any = await getUsers()
 
   return (
     <div className="px-md-5 px-3 py-3 my-2" >
@@ -20,7 +23,7 @@ export default function Page(){
         <BreadcrumbItem linkAs = {Link} href="/deposits"> Deposits </BreadcrumbItem>
         <BreadcrumbItem  active>Add</BreadcrumbItem>
       </Breadcrumb>
-      <AddDepositForm user = {user.fullName} />
+      <AddDepositForm user = {user.fullName} users = {users}  />
     </div>
 
   )

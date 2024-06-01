@@ -6,19 +6,10 @@ import { addDeposit } from "../deposits/actions"
 import Link from "next/link"
 
 
-export function AddDepositForm({user}:{user: String}){
+export function AddDepositForm({user, users}:{user: string, users: any}){
   const minDate = getMinimumDepositDate()
   const maxDate = getMaxDepositDate()
 
-  const users = [
-    'Akampurira David', 'Ariko Stephen Philemon', 'Arinaitwe Solomon',
-    'Atim Dyna Loy', 'Atuhairwe Mary', 'Babirye Nicolatte',
-    'Chesuro Benerd Boris', 'Club Fund', 'Kamya Timothy',
-    'Kawuma Andrew', 'Mutome Roggers', 'Mwebe Blaise Adrian', 'Nakato Leonora',
-    'Nuwagira Noble', 'Omodo Joshua Deo', 'Paul Omare',
-    'Pule Flavia', 'Rwothungeo Rogers', 'Sendikwanawa Jasper',
-    'Sharon Natukunda', 'Wilson Mutebi'
-  ]
   let addDepositWithRecorder = addDeposit.bind(null, user)
   const [state, dispatch] = useFormState(addDepositWithRecorder, {error: null})
 
@@ -32,7 +23,7 @@ export function AddDepositForm({user}:{user: String}){
         <Col xs={9} md={6}>
           <FormSelect name = "depositor_name" id = "depositor_name" >
             <option value = "" >Select depositor</option>
-            {users.map((user, index) => {
+            {users.map((user:any, index:any) => {
               return (
                 <option key = {index} value = {user} >{user}</option>
               )
