@@ -10,8 +10,9 @@ import { cookies } from 'next/headers'
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Loader } from "@/app/components/Loader";
+import { getUsers } from "@/app/data/dbQueries";
 
-export default function DepositsPage ({
+export default async function DepositsPage ({
   searchParams
 }:  {
   searchParams?: {
@@ -48,6 +49,8 @@ export default function DepositsPage ({
     page: currentPage,
   }
 
+  const users = await getUsers()
+
   return(
     <div className="px-md-5 px-3">
       <div className="d-flex align-items-center py-3">
@@ -60,7 +63,7 @@ export default function DepositsPage ({
       <div>
         
         <Suspense fallback = {<Loader/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
-          <Search />
+          <Search users = {users} />
           <DepositCards searchFilter = {searchFilter} />
         </Suspense>     
       </div>

@@ -6,17 +6,7 @@ import { Row, Col,FormSelect, FormGroup, FormLabel } from 'react-bootstrap';
 import styles from './search.module.css'
 import { Accordion } from 'react-bootstrap';
 
-export function Search() {
-
-  const users = [
-    'Akampurira David', 'Ariko Stephen Philemon', 'Arinaitwe Solomon',
-    'Atim Dyna Loy', 'Atuhairwe Mary', 'Babirye Nicolatte',
-    'Chesuro Benerd Boris', 'Club Fund', 'Kamya Timothy',
-    'Kawuma Andrew', 'Mutome Roggers', 'Mwebe Blaise Adrian', 'Nakato Leonora',
-    'Nuwagira Noble', 'Omodo Joshua Deo', 'Paul Omare',
-    'Pule Flavia', 'Rwothungeo Rogers', 'Sendikwanawa Jasper',
-    'Sharon Natukunda', 'Wilson Mutebi'
-  ]
+export function Search({users}: any) {
 
   const months = [
     {
