@@ -75,6 +75,7 @@ export async function createDeposit(deposit: any){
     if (!user) throw Error('User does not exist')
     await Deposit.create({...deposit, balance_before: user.investmentAmount})
     user.investmentAmount = user.investmentAmount + deposit.deposit_amount
+    user.points += Math.floor((deposit.deposit_amount * 3 / 10000))
     await user.save()
 
     //update cash locations
@@ -149,6 +150,7 @@ export async function updateDeposit (deposit_id : any, newDeposit:any){
     deposit.deposit_amount = newDeposit.deposit_amount
 
     user.investmentAmount =  user.investmentAmount - deposit.deposit_amount + newDeposit.deposit_amount
+    user.points += Math.floor((newDeposit.deposit_amount - deposit.deposit_amount) * 3 / 10000)
     
 
     await Promise.all([
