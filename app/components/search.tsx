@@ -6,7 +6,7 @@ import { Row, Col,FormSelect, FormGroup, FormLabel } from 'react-bootstrap';
 import styles from './search.module.css'
 import { Accordion } from 'react-bootstrap';
 
-export function Search({users}: any) {
+export function Search({users}:{users:string[]}) {
 
   const months = [
     {
