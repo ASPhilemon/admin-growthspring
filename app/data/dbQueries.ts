@@ -144,15 +144,12 @@ export async function updateDeposit (deposit_id : any, newDeposit:any){
     }
 
     user.investmentAmount =  user.investmentAmount - deposit.deposit_amount + newDeposit.deposit_amount
+    user.points += Math.floor((newDeposit.deposit_amount - deposit.deposit_amount) * 3 / 10000)
     
     deposit.depositor_name = newDeposit.depositor_name
     deposit.deposit_date = newDeposit.deposit_date
     deposit.deposit_amount = newDeposit.deposit_amount
-
-    user.investmentAmount =  user.investmentAmount - deposit.deposit_amount + newDeposit.deposit_amount
-    user.points += Math.floor((newDeposit.deposit_amount - deposit.deposit_amount) * 3 / 10000)
-    
-
+   
     await Promise.all([
         standardCharteredDoc.save(),
         unitTrustDoc.save(),
