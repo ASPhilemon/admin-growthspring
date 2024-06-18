@@ -5,9 +5,6 @@ import { searchFilterDeposit } from "@/app/data/dbQueries";
 import { DepositCards } from "@/app/components/DepositCards";
 import { Suspense } from "react";
 import PaginationWrapper from "@/app/components/PaginationWrapper";
-import { getUser } from "@/app/utils";
-import { cookies } from 'next/headers'
-import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Loader } from "@/app/components/Loader";
 import { getUsers } from "@/app/data/dbQueries";
@@ -28,12 +25,6 @@ export default async function DepositsPage ({
 })
 
 {
-  //admin authorization
-  const cookieStore = cookies()
-  const token = cookieStore.get('jwt')?.value
-  const user = getUser(token)
-  if (!user) redirect('https://auth.growthspringers.com/signin?redirectURI=https://admin.growthspringers.com')
-  if (user && user.isAdmin == "false") redirect('https://growthspringers.com/signin')
 
   const currentPage = Number(searchParams?.currentPage) || 1;
   const year = Number(searchParams?.year) || 'all';

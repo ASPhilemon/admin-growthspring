@@ -3,6 +3,7 @@ import Deposit from './models/DepositModel'
 import dbConnect from './dbConnect';
 import User from './models/UserModel';
 import CashLocation from './models/CashLocationModel';
+import { headers } from 'next/headers';
 
 export type searchFilterDeposit = {
     year? : number | string,
