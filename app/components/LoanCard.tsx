@@ -21,9 +21,9 @@ export function LoanCard({loan}: any){
           {/* avatar */}
           <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
           </div>
-          <h6 className="mb-0 depositor-name" > {loan.borrower_name} </h6>
-          { loan.loan_status == "Ended" && <Badge className="ms-auto me-4 py-1 px-2" pill bg="success">Ended <Check2 className="ms-1" size={16}/> </Badge>}
-          {  loan.loan_status == "Ongoing" && <Badge className="ms-auto me-4 py-1 px-2" pill bg="secondary">Ongoing <Clock className="ms-1" size={16}/> </Badge>}
+          <h6 className="mb-0 depositor-name me-2" > {loan.borrower_name} </h6>
+          { loan.loan_status == "Ended" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="success">Ended <Check2 className="ms-1" size={16}/> </Badge>}
+          {  loan.loan_status == "Ongoing" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="secondary">Ongoing <Clock className="ms-1" size={16}/> </Badge>}
         </div>
         <div className="d-flex align-items-end justify-content-between">
           <div>
