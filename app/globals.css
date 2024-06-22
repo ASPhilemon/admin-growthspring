@@ -34,11 +34,6 @@ a{
 }
 
 
-
-body{
-  overflow-y: scroll;
-}
-
 h1, h2, h3, h4, h5, h6, p{
   margin: 0;
 }
@@ -46,6 +41,10 @@ h1, h2, h3, h4, h5, h6, p{
 .btn:focus, .page-link {
   box-shadow: none !important;
 
+}
+
+body{
+  overflow-y: scroll;
 }
 
 .page-link{

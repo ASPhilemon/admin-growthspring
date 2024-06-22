@@ -1,12 +1,15 @@
 "use client"
 
 
-import { Card, CardBody } from "react-bootstrap";
+import { Card, CardBody, Button, Modal } from "react-bootstrap";
 import { Info, Check2, Clock } from "react-bootstrap-icons";
 import Link from "next/link";
 import {Badge} from "react-bootstrap";
+import { useState } from "react";
 
 export function LoanCard({loan}: any){
+
+  const [status, setStatus] = useState("flat");
 
   function getDateString(date:any){
     const options = { month: 'short', day: '2-digit', year: 'numeric' };
@@ -15,7 +18,8 @@ export function LoanCard({loan}: any){
   }
 
   return (
-    <Card className="mb-2 loan-card border-0   " >
+    <>
+     <Card className="mb-2 loan-card border-0   " >
       <CardBody>
         <div className="d-flex mb-5 align-items-center header pb-3"  >
           {/* avatar */}
@@ -33,11 +37,49 @@ export function LoanCard({loan}: any){
 
           {/* icons */}
           <div className="d-flex align-items-center" >
-            <Link href= {`/loans/${loan._id}/pay`} className= { "btn btn-sm btn-outline-primary px-3 fw-bold me-2 me-md-4 rounded-1 " + (loan.loan_status =="Ended"? " disabled" : " ") }> Pay </Link>
+            <Button
+              size="sm"
+              variant="outline-primary"
+              className= { "px-3 fw-bold me-2 me-md-4 rounded-1 " + (loan.loan_status =="Ended"? " disabled" : " ") }
+              disabled = {status !== "flat"}
+              onClick={()=>setStatus("input")}
+              > Pay </Button>
             <Link href={`/loans/${loan._id}`} className="btn btn-sm btn-outline-primary me-2 rounded-1 me-md-4"><Info size={22}/></Link>
           </div>
         </div>
       </CardBody>
-    </Card>
+      </Card>
+      <LoanPaymentModal setStatus = {setStatus} status = {status}/>
+    </>
+   
   )
+}
+
+function LoanPaymentModal({status, setStatus}:any){
+  function handleClose(){
+    setStatus("flat")
+  }
+  function handlePending(){
+    setStatus("pending")
+  }
+
+  return(
+    <Modal
+      centered
+      show = {status == "input"}
+      onHide = {handleClose}
+      animation = {false}
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>Modal heading</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+      <Modal.Footer>
+        <Button variant="secondary" onClick = {handleClose}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  )
+
 }
