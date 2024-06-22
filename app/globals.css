@@ -23,7 +23,7 @@ a{
   border-width: 2px;
 }
 
-.card{
+.deposit-cards .card{
   border-radius: 0 ;
   border-color: rgb(228, 228, 228);
   border-color: rgb(184, 181, 179);
@@ -34,9 +34,6 @@ a{
 }
 
 
-.btn{
-  border: none !important;
-}
 
 body{
   overflow-y: scroll;
@@ -105,4 +102,21 @@ h1, h2, h3, h4, h5, h6, p{
   width: 50px;
   border-width: 5px;
   /* animation-duration: 1.3s; */
+}
+
+.disabled{
+  opacity: 0.4 !important;
+}
+
+.navbar .btn{
+  border: none !important
+}
+
+.loan-cards{
+  background-color: rgb(249 250 251);
+  background-color: rgba(0,0,0, 0.04);
+}
+
+.card-body .header{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
 }

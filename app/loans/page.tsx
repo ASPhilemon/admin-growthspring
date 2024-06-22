@@ -2,10 +2,23 @@ import Link from "next/link"
 import { PlusLg } from "react-bootstrap-icons"
 import { Suspense } from "react"
 import { loanCount, getLoans } from "../data/loan-queries"
+import { LoanCards } from "../components/LoanCards"
+import { LoanFilter } from "../components/LoanFilter"
+import { getUsers } from "../data/dbQueries"
 
-export default async function Page(){
-  let count = await loanCount({loan_status:"Ongoing"})
-  let loans = await getLoans({page: 1, order:1, perPage:500, sortBy: "borrower_name" })
+export default async function Page({searchParams}: any){
+
+  const loanFilter = {
+    year: Number(searchParams.year),
+    member: searchParams.member,
+    loan_status: searchParams.loan_status,
+    page: Number(searchParams?.page) || 1,
+    sortBy: searchParams.sortBy || 'loan_date',
+    order: Number(searchParams?.order) || -1,
+    perPage: Number(searchParams?.perPage) || 20
+  }
+
+  const users = await getUsers()
 
     return(
     <div className="px-md-5 px-3">
@@ -15,10 +28,8 @@ export default async function Page(){
           Requests
         </Link>
       </div>
-      {count}
-      {loans.map((loan)=> {
-        return <h6 key = {loan._id}>  {loan.borrower_name} {loan.loan_date.toUTCString()} </h6>
-      })}
+      <LoanFilter users = {users} />
+      <LoanCards loanFilter = {loanFilter} />
     </div>
     )
 }
