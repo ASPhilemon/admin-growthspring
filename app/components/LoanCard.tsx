@@ -71,8 +71,8 @@ function LoanPaymentModal({status, setStatus, loan}:any){
     
       className="rounded-0"
     >
-      <Modal.Header closeButton className="py-2 border-0">
-        <Modal.Title className="h6 fw-bolder">Loan payment for {loan.borrower_name} </Modal.Title>
+      <Modal.Header closeButton>
+        <Modal.Title className="h6">Loan payment | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <LoanPaymentForm/>
@@ -106,7 +106,7 @@ function LoanPaymentForm() {
       </fieldset>
  
 
-      <Button variant="primary" className="d-block ms-auto mt-4" type="submit">
+      <Button variant="primary" className="d-block ms-auto mt-4 mb-2" type="submit">
         Submit
       </Button>
     </Form>
