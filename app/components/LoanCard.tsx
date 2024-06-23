@@ -51,6 +51,7 @@ export function LoanCard({loan}: any){
     </Card>
     {status == "error" && "An error occured"}
     {status == "success" && "Loan payment sucessful"}
+    {status == "pending" && "Processing loan payment ..."}
       <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
     </>
    
