@@ -49,18 +49,15 @@ export function LoanCard({loan}: any){
         </div>
       </CardBody>
       </Card>
-      <LoanPaymentModal setStatus = {setStatus} status = {status}/>
+      <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
     </>
    
   )
 }
 
-function LoanPaymentModal({status, setStatus}:any){
+function LoanPaymentModal({status, setStatus, loan}:any){
   function handleClose(){
     setStatus("flat")
-  }
-  function handlePending(){
-    setStatus("pending")
   }
 
   return(
@@ -68,14 +65,17 @@ function LoanPaymentModal({status, setStatus}:any){
       centered
       show = {status == "input"}
       onHide = {handleClose}
+      backdrop="static"
+      keyboard={false}
       animation = {false}
+      className="rounded-0"
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+      <Modal.Header>
+        <Modal.Title className="h5">Loan payment for {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick = {handleClose}>
+        <Button variant="secondary" onClick={handleClose} >
           Close
         </Button>
       </Modal.Footer>
