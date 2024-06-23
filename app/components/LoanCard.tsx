@@ -100,8 +100,6 @@ function LoanPaymentForm({loan}: any) {
       },
       body: JSON.stringify(payload)
     })
-
-    alert(res.ok)
     console.log( await res.json())
   }
   return (
