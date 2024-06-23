@@ -143,7 +143,7 @@ function PaymentPending(){
 
   return (
     <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
-      <div className="d-flex align-items-center p-4 bg-light shadow-sm">
+      <div className="d-flex align-items-center p-4 bg-light shadow">
         <Spinner animation="border" variant="primary" /> <span className="text-dark ms-2">processing payment ...</span>
       </div>
     </div>
