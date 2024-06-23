@@ -46,12 +46,13 @@ export function LoanCard({loan}: any){
               > Pay </Button>
             <Link href={`/loans/${loan._id}`} className="btn btn-sm btn-outline-primary me-2 rounded-1 me-md-4"><Info size={22}/></Link>
           </div>
+          {status == "error" && "An error occured"}
+          {status == "success" && "Loan payment sucessful"}
+          {status == "pending" && "Processing payment, please wait ..."}
         </div>
       </CardBody>
     </Card>
-    {status == "error" && "An error occured"}
-    {status == "success" && "Loan payment sucessful"}
-    {status == "pending" && "Processing loan payment ..."}
+
       <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
     </>
    
