@@ -1,7 +1,7 @@
 "use client"
 
 
-import { Card, CardBody, Button, Modal } from "react-bootstrap";
+import { Card, Form, CardBody, Button, Modal } from "react-bootstrap";
 import { Info, Check2, Clock } from "react-bootstrap-icons";
 import Link from "next/link";
 import {Badge} from "react-bootstrap";
@@ -68,18 +68,47 @@ function LoanPaymentModal({status, setStatus, loan}:any){
       backdrop="static"
       keyboard={false}
       animation = {false}
+    
       className="rounded-0"
     >
-      <Modal.Header>
-        <Modal.Title className="h5">Loan payment for {loan.borrower_name} </Modal.Title>
+      <Modal.Header closeButton className="py-2 border-0">
+        <Modal.Title className="h6 fw-bolder">Loan payment for {loan.borrower_name} </Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose} >
-          Close
-        </Button>
-      </Modal.Footer>
+      <Modal.Body>
+        <LoanPaymentForm/>
+      </Modal.Body>
     </Modal>
   )
 
+}
+
+function LoanPaymentForm() {
+  return (
+    <Form>
+      <fieldset className="faint p-3  rounded-1">
+        <Form.Group className="mb-3" controlId = "payment-amount">
+          <Form.Label>Amount</Form.Label>
+          <Form.Control type="number" placeholder="" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId = "payment-date">
+          <Form.Label>Date</Form.Label>
+          <Form.Control type="date" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId = "payment-cash-location">
+          <Form.Label>Cash Location</Form.Label>
+          <Form.Select aria-label="Default select example">
+            <option value ='-1'>select cash location</option>
+            <option value="1">Standard Chartered</option>
+            <option value="2">Admin Andrew</option>
+            <option value="3">Admin Joshua</option>
+          </Form.Select>
+        </Form.Group>
+      </fieldset>
+ 
+
+      <Button variant="primary" className="d-block ms-auto mt-4" type="submit">
+        Submit
+      </Button>
+    </Form>
+  );
 }
