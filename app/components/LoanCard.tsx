@@ -101,7 +101,7 @@ function LoanPaymentForm({loan}: any) {
     })
 
     alert(res.ok)
-    alert(await res.json())
+    console.log( await res.json())
   }
   return (
     <Form onSubmit={handleSubmit}>
