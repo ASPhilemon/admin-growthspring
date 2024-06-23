@@ -48,7 +48,9 @@ export function LoanCard({loan}: any){
           </div>
         </div>
       </CardBody>
-      </Card>
+    </Card>
+    {status == "error" && "An error occured"}
+    {status == "success" && "Loan payment sucessful"}
       <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
     </>
    
@@ -102,6 +104,8 @@ function LoanPaymentForm({loan, setStatus}: any) {
       body: JSON.stringify(payload)
     })
     console.log( await res.json())
+    if (res.ok) setStatus("success");
+    else setStatus("error");
   }
   return (
     <Form onSubmit={handleSubmit}>
