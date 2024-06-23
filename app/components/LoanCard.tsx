@@ -83,6 +83,7 @@ function LoanPaymentModal({status, setStatus, loan}:any){
 }
 
 function LoanPaymentForm({loan}: any) {
+  const API = "https://api.growthspringers.com"
   async function handleSubmit(e:any){
     e.preventDefault()
     const payload = {
@@ -91,7 +92,7 @@ function LoanPaymentForm({loan}: any) {
       payment_date: e.target.payment_date.value,
       payment_location: e.target.payment_location.value,
     }
-    const res = await fetch('https://api.growthspringers.com/make-loan-payment', {
+    const res = await fetch(`${API}/make-loan-payment`, {
       method: "POST",
       credentials: 'include',
       headers:{
