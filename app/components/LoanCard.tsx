@@ -75,34 +75,54 @@ function LoanPaymentModal({status, setStatus, loan}:any){
         <Modal.Title className="h6">Loan payment | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <LoanPaymentForm/>
+        <LoanPaymentForm loan = {loan}/>
       </Modal.Body>
     </Modal>
   )
 
 }
 
-function LoanPaymentForm() {
+function LoanPaymentForm({loan}: any) {
+  async function handleSubmit(e:any){
+    e.preventDefault()
+    const payload = {
+      loan_id: e.target.loan_id.value,
+      payment_amount: e.target.payment_amount.value,
+      payment_date: e.target.payment_date.value,
+      payment_location: e.target.payment_location.value,
+    }
+    const res = await fetch('https://api.growthspringers.com', {
+      method: "POST",
+      credentials: 'include',
+      headers:{
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+
+    alert(res.ok)
+  }
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <fieldset className="faint p-3  rounded-1">
         <Form.Group className="mb-3" controlId = "payment-amount">
           <Form.Label>Amount</Form.Label>
-          <Form.Control type="number" placeholder="" />
+          <Form.Control name="payment_amount" required type="number" placeholder="" />
         </Form.Group>
         <Form.Group className="mb-3" controlId = "payment-date">
           <Form.Label>Date</Form.Label>
-          <Form.Control type="date" />
+          <Form.Control max={new Date().toLocaleDateString()} name="payment_date" required type="date" />
         </Form.Group>
         <Form.Group className="mb-3" controlId = "payment-cash-location">
           <Form.Label>Cash Location</Form.Label>
-          <Form.Select aria-label="Default select example">
-            <option value ='-1'>select cash location</option>
-            <option value="1">Standard Chartered</option>
-            <option value="2">Admin Andrew</option>
-            <option value="3">Admin Joshua</option>
+          <Form.Select name="payment_location" required aria-label="Default select example">
+            <option value =''>select cash location</option>
+            <option value="Standard Chatered">Standard Chatered</option>
+            <option value="Admin Andrew">Admin Andrew</option>
+            <option value="Admin Joshua">Admin Joshua</option>
           </Form.Select>
         </Form.Group>
+        <input name="loan_id" hidden type="text" value = {loan._id} />
       </fieldset>
  
 
