@@ -91,7 +91,7 @@ function LoanPaymentForm({loan}: any) {
       payment_date: e.target.payment_date.value,
       payment_location: e.target.payment_location.value,
     }
-    const res = await fetch('https://api.growthspringers.com', {
+    const res = await fetch('https://api.growthspringers.com/make-loan-payment', {
       method: "POST",
       credentials: 'include',
       headers:{
@@ -101,6 +101,7 @@ function LoanPaymentForm({loan}: any) {
     })
 
     alert(res.ok)
+    alert(await res.json())
   }
   return (
     <Form onSubmit={handleSubmit}>
