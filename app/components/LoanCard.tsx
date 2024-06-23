@@ -142,8 +142,8 @@ function LoanPaymentForm({loan, setStatus}: any) {
 function PaymentPending(){
 
   return (
-    <div className="d-flex align-items-center justify-content-center backdrop pending">
-      <div className="d-flex p-2 ">
+    <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
+      <div className="d-flex p-2 bg-light">
         <Spinner animation="border" variant="primary" /> processing payment ...
       </div>
     </div>
