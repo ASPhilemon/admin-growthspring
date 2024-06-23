@@ -75,17 +75,18 @@ function LoanPaymentModal({status, setStatus, loan}:any){
         <Modal.Title className="h6">Loan payment | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <LoanPaymentForm loan = {loan}/>
+        <LoanPaymentForm setStatus = {setStatus} loan = {loan}/>
       </Modal.Body>
     </Modal>
   )
 
 }
 
-function LoanPaymentForm({loan}: any) {
+function LoanPaymentForm({loan, setStatus}: any) {
   const API = "https://api.growthspringers.com"
   async function handleSubmit(e:any){
     e.preventDefault()
+    setStatus("pending")
     const payload = {
       loan_id: e.target.loan_id.value,
       payment_amount: e.target.payment_amount.value,
