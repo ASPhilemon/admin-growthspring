@@ -123,7 +123,7 @@ function LoanPaymentForm({loan, setStatus}: any) {
           <Form.Label>Cash Location</Form.Label>
           <Form.Select name="payment_location" required aria-label="Default select example">
             <option value =''>select cash location</option>
-            <option value="Standard Chatered">Standard Chatered</option>
+            <option value="Standard Chartered">Standard Chatered</option>
             <option value="Admin Andrew">Admin Andrew</option>
             <option value="Admin Joshua">Admin Joshua</option>
           </Form.Select>
@@ -143,8 +143,8 @@ function PaymentPending(){
 
   return (
     <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
-      <div className="d-flex p-2 bg-light">
-        <Spinner animation="border" variant="primary" /> processing payment ...
+      <div className="d-flex align-items-center p-4 bg-light">
+        <Spinner animation="border" variant="primary" /> <span className="text-dark ms-2">processing payment ...</span>
       </div>
     </div>
     
