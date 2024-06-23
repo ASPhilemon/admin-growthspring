@@ -1,7 +1,7 @@
 "use client"
 
 
-import { Card, Form, CardBody, Button, Modal } from "react-bootstrap";
+import { Card, Form, CardBody, Button, Modal, Spinner } from "react-bootstrap";
 import { Info, Check2, Clock } from "react-bootstrap-icons";
 import Link from "next/link";
 import {Badge} from "react-bootstrap";
@@ -41,16 +41,15 @@ export function LoanCard({loan}: any){
               size="sm"
               variant="outline-primary"
               className= { "px-3 fw-bold me-2 me-md-4 rounded-1 " + (loan.loan_status =="Ended"? " disabled" : " ") }
-              disabled = {status !== "flat"}
               onClick={()=>setStatus("input")}
               > Pay </Button>
             <Link href={`/loans/${loan._id}`} className="btn btn-sm btn-outline-primary me-2 rounded-1 me-md-4"><Info size={22}/></Link>
           </div>
           {status == "error" && "An error occured"}
           {status == "success" && "Loan payment sucessful"}
-          {status == "pending" && "Processing payment, please wait ..."}
         </div>
       </CardBody>
+      {status == "pending" && <PaymentPending/>}
     </Card>
 
       <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
@@ -138,4 +137,16 @@ function LoanPaymentForm({loan, setStatus}: any) {
       </Button>
     </Form>
   );
+}
+
+function PaymentPending(){
+
+  return (
+    <div className="d-flex align-items-center justify-content-center backdrop pending">
+      <div className="d-flex p-2 ">
+        <Spinner animation="border" variant="primary" /> processing payment ...
+      </div>
+    </div>
+    
+  )
 }

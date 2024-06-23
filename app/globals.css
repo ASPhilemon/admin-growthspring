@@ -127,3 +127,16 @@ body{
 .faint{
   background-color: rgba(0,0,0, 0.03);
 }
+
+.pending{
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.backdrop.pending{
+  background-color: rgb(0,0,0);
+  opacity: 0.5;
+}
