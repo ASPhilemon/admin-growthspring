@@ -137,8 +137,10 @@ body{
 }
 .v-center{
   position: absolute;
-  left: 50%;
-  top: 50%;
+  left: 5%;
+  right: 5%;
+  top: 25%;
+  bottom: 25%;
 }
 .backdrop.pending{
   background-color: rgba(0,0,0, 0.15);

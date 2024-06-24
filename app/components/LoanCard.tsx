@@ -162,7 +162,7 @@ function PaymentPending(){
 function PaymentError({setStatus}: any) {
 
     return (
-      <Alert className="shadow-lg v-center" variant="danger" onClose = {() => setStatus("flat")} dismissible>
+      <Alert className="shadow-sm v-center" variant="danger" onClose = {() => setStatus("flat")} dismissible>
         <p> An error occured processing the payment </p>
       </Alert>
     );
@@ -171,7 +171,7 @@ function PaymentError({setStatus}: any) {
 function PaymentSuccess({setStatus}: any) {
 
   return (
-    <Alert className="shadow-lg v-center" variant="success" onClose = {() => setStatus("flat")} dismissible>
+    <Alert className="shadow-sm v-center" variant="success" onClose = {() => setStatus("flat")} dismissible>
       <p> The payment was successful <Check2 className="ms-2 me-3" size = {20} /> </p>
     </Alert>
   );
