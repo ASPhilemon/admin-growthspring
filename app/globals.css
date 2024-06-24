@@ -128,14 +128,18 @@ body{
   background-color: rgba(0,0,0, 0.03);
 }
 
-.pending, .v-center{
+.pending{
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
 }
-
+.v-center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
 .backdrop.pending{
   background-color: rgba(0,0,0, 0.15);
 }
