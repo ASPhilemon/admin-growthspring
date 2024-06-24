@@ -162,17 +162,23 @@ function PaymentPending(){
 function PaymentError({setStatus}: any) {
 
     return (
-      <Alert className="shadow-sm v-center" variant="danger" onClose = {() => setStatus("flat")} dismissible>
-        <p> An error occured processing the payment </p>
-      </Alert>
+      <div className="v-center d-flex justify-content-center align-items-center">
+        <Alert className="shadow v-center" variant="danger" onClose = {() => setStatus("flat")} dismissible>
+          <p> An error occured processing payment</p>
+        </Alert>
+      </div>
+     
     );
 }
 
 function PaymentSuccess({setStatus}: any) {
 
   return (
-    <Alert className="shadow-sm v-center" variant="success" onClose = {() => setStatus("flat")} dismissible>
-      <p> The payment was successful <Check2 className="ms-2 me-3" size = {20} /> </p>
-    </Alert>
+    <div className="v-center d-flex justify-content-center align-items-center">
+      <Alert className="shadow v-center" variant="success" onClose = {() => setStatus("flat")} dismissible>
+        <p> Payment successful</p>
+      </Alert>
+    </div>
+   
   );
 }
