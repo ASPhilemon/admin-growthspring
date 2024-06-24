@@ -46,11 +46,12 @@ export function LoanCard({loan}: any){
             <Link href={`/loans/${loan._id}`} className="btn btn-sm btn-outline-primary me-2 rounded-1 me-md-4"><Info size={22}/></Link>
           </div>
           
-          {status == "success" && "Loan payment sucessful"}
+          
         </div>
       </CardBody>
       {status == "pending" && <PaymentPending/>}
       {status == "error" && <PaymentError setStatus={setStatus} />}
+      {status == "success" && <PaymentSuccess setStatus = {setStatus} />}
     </Card>
 
       <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
@@ -167,4 +168,15 @@ function PaymentError({setStatus}: any) {
       </Alert>
     </div>
     );
+}
+
+function PaymentSuccess({setStatus}: any) {
+
+  return (
+  <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
+    <Alert className="shadow-lg" variant="success" onClose = {() => setStatus("flat")} dismissible>
+      <p> Payment successful <Check2 className="ms-2" size = {16} /> </p>
+    </Alert>
+  </div>
+  );
 }
