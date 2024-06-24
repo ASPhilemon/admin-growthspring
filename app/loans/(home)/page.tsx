@@ -1,10 +1,10 @@
 import Link from "next/link"
 import { PlusLg } from "react-bootstrap-icons"
 import { Suspense } from "react"
-import { loanCount, getLoans } from "../data/loan-queries"
-import { LoanCards } from "../components/LoanCards"
-import { LoanFilter } from "../components/LoanFilter"
-import { getUsers } from "../data/dbQueries"
+import { loanCount, getLoans } from "@/app/data/loan-queries"
+import { LoanCards } from "@/app/components/LoanCards"
+import { LoanFilter } from "@/app/components/LoanFilter"
+import { getUsers } from "@/app/data/dbQueries"
 
 export default async function Page({searchParams}: any){
 
