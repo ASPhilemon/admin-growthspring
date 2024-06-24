@@ -96,17 +96,22 @@ function LoanPaymentForm({loan, setStatus}: any) {
       payment_date: e.target.payment_date.value,
       payment_location: e.target.payment_location.value,
     }
-    const res = await fetch(`${API}/make-loan-payment`, {
-      method: "POST",
-      credentials: 'include',
-      headers:{
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    })
-    console.log( await res.json())
-    if (res.ok) setStatus("success");
-    else setStatus("error");
+    try{
+      const res = await fetch(`${API}/make-loan-payment`, {
+        method: "POST",
+        credentials: 'include',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      console.log( await res.json())
+      if (res.ok) setStatus("success");
+      else setStatus("error");
+    } catch(err){
+      console.log(err)
+    }
+   
   }
   return (
     <Form onSubmit={handleSubmit}>
@@ -123,7 +128,7 @@ function LoanPaymentForm({loan, setStatus}: any) {
           <Form.Label>Cash Location</Form.Label>
           <Form.Select name="payment_location" required aria-label="Default select example">
             <option value =''>select cash location</option>
-            <option value="Standard Chartered">Standard Chatered</option>
+            <option value="Standard Chartered">Standard Chartered</option>
             <option value="Admin Andrew">Admin Andrew</option>
             <option value="Admin Joshua">Admin Joshua</option>
           </Form.Select>
@@ -143,7 +148,7 @@ function PaymentPending(){
 
   return (
     <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
-      <div className="d-flex align-items-center p-4 bg-light shadow">
+      <div className="d-flex align-items-center py-3 px-5 bg-white shadow-lg">
         <Spinner animation="border" variant="primary" /> <span className="text-dark ms-2">processing payment ...</span>
       </div>
     </div>
