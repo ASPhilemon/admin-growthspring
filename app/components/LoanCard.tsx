@@ -109,7 +109,7 @@ function LoanPaymentForm({loan, setStatus}: any) {
     const payload = {
       loan_id: e.target.loan_id.value,
       payment_amount: e.target.payment_amount.value,
-      payment_date: e.target.payment_date.value,
+      payment_date: formatDate(e.target.payment_date.value),
       payment_location: e.target.payment_location.value,
     }
     try{
@@ -129,6 +129,14 @@ function LoanPaymentForm({loan, setStatus}: any) {
       setStatus("error")
     }
    
+  }
+
+  function formatDate(date:string){
+    const dateObj = new Date(date)
+    const day = dateObj.getDay();
+    const month = dateObj.getMonth()
+    const year = dateObj.getFullYear()
+    return `${day}-${month}-${year}`
   }
   return (
     <Form onSubmit = {handleSubmit}>
