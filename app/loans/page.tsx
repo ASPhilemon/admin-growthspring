@@ -15,7 +15,7 @@ export default async function Page({searchParams}: any){
     page: Number(searchParams?.page) || 1,
     sortBy: searchParams.sortBy || 'loan_date',
     order: Number(searchParams?.order) || -1,
-    perPage: Number(searchParams?.perPage) || 20
+    perPage: Number(searchParams?.perPage) || 500
   }
 
   const users = await getUsers()

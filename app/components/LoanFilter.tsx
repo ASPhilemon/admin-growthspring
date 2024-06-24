@@ -123,17 +123,6 @@ export function LoanFilter({users}:{users:string[]}) {
                     </option>
                   </FormSelect>
                 </FormGroup>
-                <FormGroup className ='d-md-flex align-items-center' controlId='perpage' >
-                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Per page</FormLabel>
-                  <FormSelect defaultValue={perPage && validPerPage.includes(perPage)? perPage : "20" } onChange = {(e)=> handleParamChange('perPage', e.target.value)}  >
-                    <option  value = "2" > 2 </option>
-                    <option  value = "5" > 5 </option>
-                    <option  value = "20" > 20 </option>
-                    <option  value = "50" >  50 </option>
-                    <option  value = "100" >  100 </option>
-                    <option  value = "500" >  500 </option>
-                  </FormSelect>
-                </FormGroup>
               </Col>
             </Row>
           </Accordion.Body>

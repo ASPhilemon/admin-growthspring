@@ -29,7 +29,6 @@ export function DepositCard({deposit}: any){
           <div className="d-flex align-items-center" >
             <Link href={`/deposits/${deposit._id}`} className="btn btn-primary shadow-sm me-2 p-0 rounded-circle me-md-4"><Info size={22}/></Link>
             <Link href= {`/deposits/${deposit._id}/edit`} className="btn me-2 me-md-4 rounded-circle p-2"><Pencil size={18}  /></Link>
-            <a href="" className="btn disabled opacity-50  rounded-circle p-2"  > <Trash size={18} className=""/></a>
           </div>
         </div>
       </CardBody>
