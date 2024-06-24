@@ -1,7 +1,7 @@
 "use client"
 
 
-import { Card, Form, CardBody, Button, Modal, Spinner } from "react-bootstrap";
+import { Card, Alert, Form, CardBody, Button, Modal, Spinner } from "react-bootstrap";
 import { Info, Check2, Clock } from "react-bootstrap-icons";
 import Link from "next/link";
 import {Badge} from "react-bootstrap";
@@ -45,11 +45,12 @@ export function LoanCard({loan}: any){
               > Pay </Button>
             <Link href={`/loans/${loan._id}`} className="btn btn-sm btn-outline-primary me-2 rounded-1 me-md-4"><Info size={22}/></Link>
           </div>
-          {status == "error" && "An error occured"}
+          
           {status == "success" && "Loan payment sucessful"}
         </div>
       </CardBody>
       {status == "pending" && <PaymentPending/>}
+      {status == "error" && <PaymentError setStatus={setStatus} />}
     </Card>
 
       <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
@@ -115,7 +116,7 @@ function LoanPaymentForm({loan, setStatus}: any) {
    
   }
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit = {handleSubmit}>
       <fieldset className="faint p-3  rounded-1">
         <Form.Group className="mb-3" controlId = "payment-amount">
           <Form.Label>Amount</Form.Label>
@@ -155,4 +156,15 @@ function PaymentPending(){
     </div>
     
   )
+}
+
+function PaymentError({setStatus}: any) {
+
+    return (
+    <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
+      <Alert variant="danger" onClose = {() => setStatus("flat")} dismissible>
+          <p> An error occured, that&apos;s all we know </p>
+        </Alert>
+    </div>
+    );
 }
