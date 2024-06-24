@@ -128,7 +128,7 @@ body{
   background-color: rgba(0,0,0, 0.03);
 }
 
-.pending{
+.pending, .v-center{
   position: absolute;
   left: 0;
   right: 0;
