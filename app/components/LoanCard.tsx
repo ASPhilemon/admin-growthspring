@@ -162,8 +162,8 @@ function PaymentPending(){
 function PaymentError({setStatus}: any) {
 
     return (
-    <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
-      <Alert className="shadow-lg py-3 px-5" variant="danger" onClose = {() => setStatus("flat")} dismissible>
+    <div className="d-flex px-5 align-items-center justify-content-center rounded-1 backdrop pending">
+      <Alert className="shadow-lg" variant="danger" onClose = {() => setStatus("flat")} dismissible>
         <p> An error occured processing the payment </p>
       </Alert>
     </div>
@@ -173,8 +173,8 @@ function PaymentError({setStatus}: any) {
 function PaymentSuccess({setStatus}: any) {
 
   return (
-  <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
-    <Alert className="shadow-lg py-3 px-5 " variant="success" onClose = {() => setStatus("flat")} dismissible>
+  <div className="d-flex align-items-center px-5 justify-content-center rounded-1 backdrop pending">
+    <Alert className="shadow-lg" variant="success" onClose = {() => setStatus("flat")} dismissible>
       <p> The payment was successful <Check2 className="ms-2" size = {20} /> </p>
     </Alert>
   </div>
