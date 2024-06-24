@@ -20,7 +20,7 @@ export function SideNav({show, handleClose}: {show: true | false, handleClose: F
       responsive = "lg"
       className = "col-3 min-vh-100  overflow-auto  bg-body-tertiary position-fixed px-0"
     >
-      <Offcanvas.Body className = "flex-column bg-danger">
+      <Offcanvas.Body className = "flex-column">
         <GrowthSpringLogo/>
         <DashboardPageLinks handleClose = {handleClose} />
         <div className="d-flex align-items-center  mt-2  mb-5">
