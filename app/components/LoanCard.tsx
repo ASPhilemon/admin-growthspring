@@ -162,9 +162,9 @@ function PaymentError({setStatus}: any) {
 
     return (
     <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
-      <Alert variant="danger" onClose = {() => setStatus("flat")} dismissible>
-          <p> An error occured, that&apos;s all we know </p>
-        </Alert>
+      <Alert className="shadow-lg" variant="danger" onClose = {() => setStatus("flat")} dismissible>
+        <p> An error occured, that&apos;s all we know </p>
+      </Alert>
     </div>
     );
 }
