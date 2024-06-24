@@ -44,7 +44,7 @@ export function LoanCard({loan}: any){
               ref = {toolTipTarget}
               size="sm"
               variant="outline-primary"
-              className= { "px-3 fw-bold me-2 me-md-4 rounded-1 " + (loanStatus =="Ended"? "opacity-50" : " ") }
+              className= { "px-3 fw-bold me-2 me-md-4 rounded-1 " + (loanStatus =="Ended"? "opacity-25" : " ") }
               onClick = {
                 ()=> {
                   if (loanStatus !== "Ended") setStatus("input");
