@@ -110,6 +110,7 @@ function LoanPaymentForm({loan, setStatus}: any) {
       else setStatus("error");
     } catch(err){
       console.log(err)
+      setStatus("error")
     }
    
   }
@@ -149,7 +150,7 @@ function PaymentPending(){
   return (
     <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
       <div className="d-flex align-items-center py-3 px-5 bg-white shadow-lg">
-        <Spinner animation="border" variant="primary" /> <span className="text-dark ms-2">processing payment ...</span>
+        <Spinner animation="border" variant="primary" /> <span className="text-dark ms-4">processing payment ...</span>
       </div>
     </div>
     
