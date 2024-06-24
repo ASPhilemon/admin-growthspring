@@ -53,7 +53,7 @@ export function LoanCard({loan}: any){
               }
               > Pay
             </Button>
-            <Overlay target = {toolTipTarget.current} show={showToolTip} placement="left">
+            <Overlay rootClose = {true} onHide={()=>setShowToolTip(false)} target = {toolTipTarget.current} show={showToolTip} placement="left">
               <Tooltip id="loan-tool-tip">
                 This loan is fully paid
               </Tooltip>
