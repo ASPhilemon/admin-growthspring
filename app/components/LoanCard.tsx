@@ -1,15 +1,18 @@
 "use client"
 
 
-import { Card, Alert, Form, CardBody, Button, Modal, Spinner } from "react-bootstrap";
+import { Card, Overlay, Tooltip, Alert, Form, CardBody, Button, Modal, Spinner } from "react-bootstrap";
 import { Info, Check2, Clock } from "react-bootstrap-icons";
 import Link from "next/link";
 import {Badge} from "react-bootstrap";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export function LoanCard({loan}: any){
 
   const [status, setStatus] = useState("flat");
+  const [loanStatus, setLoanStatus] = useState(loan.loan_status)
+  const [showToolTip, setShowToolTip] = useState(false)
+  const toolTipTarget = useRef(null);
 
   function getDateString(date:any){
     const options = { month: 'short', day: '2-digit', year: 'numeric' };
@@ -38,15 +41,25 @@ export function LoanCard({loan}: any){
           {/* icons */}
           <div className="d-flex align-items-center" >
             <Button
+              ref = {toolTipTarget}
               size="sm"
               variant="outline-primary"
-              className= { "px-3 fw-bold me-2 me-md-4 rounded-1 " + (loan.loan_status =="Ended"? " disabled" : " ") }
-              onClick={()=>setStatus("input")}
-              > Pay </Button>
+              className= { "px-3 fw-bold me-2 me-md-4 rounded-1 " + (loanStatus =="Ended"? "opacity-50" : " ") }
+              onClick = {
+                ()=> {
+                  if (loanStatus !== "Ended") setStatus("input");
+                  else setShowToolTip(!showToolTip);
+                }
+              }
+              > Pay
+            </Button>
+            <Overlay target = {toolTipTarget.current} show={showToolTip} placement="left">
+              <Tooltip id="loan-tool-tip">
+                This loan is fully paid
+              </Tooltip>
+            </Overlay>
             <Link href={`/loans/${loan._id}`} className="btn btn-sm btn-outline-primary me-2 rounded-1 me-md-4"><Info size={22}/></Link>
           </div>
-          
-          
         </div>
       </CardBody>
       {status == "pending" && <PaymentPending/>}
@@ -59,6 +72,7 @@ export function LoanCard({loan}: any){
    
   )
 }
+
 
 function LoanPaymentModal({status, setStatus, loan}:any){
   function handleClose(){
