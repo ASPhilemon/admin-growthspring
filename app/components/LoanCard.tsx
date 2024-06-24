@@ -163,7 +163,7 @@ function PaymentError({setStatus}: any) {
 
     return (
       <div className="v-center d-flex justify-content-center align-items-center">
-        <Alert className="shadow v-center" variant="danger" onClose = {() => setStatus("flat")} dismissible>
+        <Alert className="shadow" variant="danger" onClose = {() => setStatus("flat")} dismissible>
           <p> An error occured processing payment</p>
         </Alert>
       </div>
@@ -175,8 +175,8 @@ function PaymentSuccess({setStatus}: any) {
 
   return (
     <div className="v-center d-flex justify-content-center align-items-center">
-      <Alert className="shadow v-center" variant="success" onClose = {() => setStatus("flat")} dismissible>
-        <p> Payment successful</p>
+      <Alert className="shadow" variant="success" onClose = {() => setStatus("flat")} dismissible>
+        <p> Payment successful </p>
       </Alert>
     </div>
    
