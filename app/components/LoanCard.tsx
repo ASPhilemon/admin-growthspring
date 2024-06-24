@@ -112,7 +112,7 @@ function LoanPaymentForm({loan, setStatus}: any) {
       payment_date: formatDate(e.target.payment_date.value),
       payment_location: e.target.payment_location.value,
     }
-    console.log(payload)
+    console.log({payload: payload})
     try{
       const res = await fetch(`${API}/make-loan-payment`, {
         method: "POST",
