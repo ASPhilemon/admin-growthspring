@@ -112,7 +112,7 @@ function LoanPaymentForm({loan, setStatus}: any) {
       payment_date: formatDate(e.target.payment_date.value),
       payment_location: e.target.payment_location.value,
     }
-    console.log({payload})
+    console.log(payload)
     try{
       const res = await fetch(`${API}/make-loan-payment`, {
         method: "POST",
@@ -134,8 +134,8 @@ function LoanPaymentForm({loan, setStatus}: any) {
 
   function formatDate(date:string){
     const dateObj = new Date(date)
-    const day = dateObj.getDay();
-    const month = dateObj.getMonth()
+    const day = dateObj.getDate();
+    const month = dateObj.getMonth() + 1
     const year = dateObj.getFullYear()
     return `${day}-${month}-${year}`
   }
