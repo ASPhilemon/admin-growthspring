@@ -55,13 +55,17 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
         </Col>
         <Col xs = {9} md = {6}>
           <Form.Select className="col-8" name="cash_location" required>
-            <option value =''></option>
+            <option disabled selected hidden value =''></option>
             <option value="Standard Chartered">Standard Chartered</option>
             <option value="Admin Andrew">Admin Andrew</option>
             <option value="Admin Joshua">Admin Joshua</option>
           </Form.Select>
         </Col>
       </Row>
+      <Form.Group xs = {12} md = {8} as = {Col} className="mt-3" controlId="deposit-comment">
+        <Form.Label>Comment</Form.Label>
+        <Form.Control placeholder="Optional" name="comment" as="textarea" rows={3} />
+      </Form.Group>
 
       <FormError message = {state} />
       <div className="col-md-8 d-flex mt-3">

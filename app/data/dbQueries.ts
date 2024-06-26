@@ -122,6 +122,7 @@ export async function updateDeposit (deposit_id : any, newDeposit:any){
     deposit.deposit_date = newDeposit.deposit_date
     deposit.deposit_amount = newDeposit.deposit_amount
     deposit.cashLocation = newDeposit.cashLocation
+    deposit.comment= newDeposit.comment
 
     await Promise.all([
         deposit.save(),

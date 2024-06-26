@@ -7,7 +7,8 @@ export interface Deposits extends mongoose.Document {
     recorded_by: string,
     balance_before: number,
     source: String,
-    cashLocation: string
+    cashLocation: string,
+    comment: string
 }
 
 /* PetSchema will correspond to a collection in your MongoDB database. */
@@ -39,6 +40,10 @@ const DepositSchema = new mongoose.Schema<Deposits>({
     required: [true, "Please provide depositor worth before deposit"]
   },
   cashLocation: {
+    type: String,
+    required: false
+  },
+  comment:{
     type: String,
     required: false
   }

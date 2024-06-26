@@ -71,6 +71,10 @@ export function EditDepositForm({deposit}:any){
           </Col>
         </Row>
       </fieldset>
+      <Form.Group xs = {12} md = {8} as = {Col} className="mt-3" controlId="deposit-comment">
+        <Form.Label>Comment</Form.Label>
+        <Form.Control defaultValue={deposit.comment} name="comment" as="textarea" rows={3} />
+      </Form.Group>
    
       <FormError message = {state} />
       <div className="col-md-8 d-flex mt-3">

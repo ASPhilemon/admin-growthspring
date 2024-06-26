@@ -10,6 +10,7 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
   const deposit_amount = Number( formData.get('deposit_amount')) || 0
   const deposit_date = formData.get('deposit_date')
   const cash_location = formData.get('cash_location')
+  const comment = formData.get('comment')
 
   if (!depositor_name) return {error: "Please select depositor"}
   
@@ -20,7 +21,8 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
       deposit_date,
       source: "Savings",
       recorded_by: user,
-      cashLocation: cash_location
+      cashLocation: cash_location,
+      comment
     })
   } catch(err : any){
     console.log(err)
@@ -38,6 +40,7 @@ export async function editDeposit(deposit: any, prevState: any, formData: FormDa
   const deposit_amount = Number( formData.get('deposit_amount')) || 0
   const deposit_date = formData.get('deposit_date')
   const cashLocation = formData.get('cash_location')
+  const comment = formData.get('comment')
 
   if (!depositor_name) return {error: "Please select depositor"}
   
@@ -47,7 +50,8 @@ export async function editDeposit(deposit: any, prevState: any, formData: FormDa
       deposit_amount,
       deposit_date,
       source: "Savings",
-      cashLocation
+      cashLocation,
+      comment
     })
   } catch(err : any){
     return {error: err.message}
