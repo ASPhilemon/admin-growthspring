@@ -94,7 +94,7 @@ function LoanPaymentModal({status, setStatus, loan, setLoanStatus}:any){
         <Modal.Title className="h6">Loan payment | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <LoanPaymentForm setStatus = {setStatus} loan = {loan}/>
+        <LoanPaymentForm setLoanStatus = {setLoanStatus} setStatus = {setStatus} loan = {loan}/>
       </Modal.Body>
     </Modal>
   )
