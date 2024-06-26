@@ -56,34 +56,18 @@ export function EditDepositForm({deposit}:any){
           <Form.Control defaultValue = { formatDate(deposit.deposit_date) }  name="deposit_date" required  max ={maxDate} id="deposit_date" type="date" placeholder="Date of deposit" />
         </Col>
       </Row>
-      <h6 className="mt-4 mb-3 fw-bolder text-primary" >Cash Locations </h6>
-      <fieldset disabled = { !deposit.cashLocations } >
-        <Row>
-          <Col xs={6} md={4}>
-            <Form.Group className="mb-3" controlId="sc">
-              <Form.Label>Standard Chartered</Form.Label>
-              <Form.Control defaultValue = {deposit.cashLocations?.standardChartered} name="standardChartered" type="number" />
-          </Form.Group>
+      <fieldset disabled = { !deposit.cashLocation} >
+        <Row className="mt-2">
+          <Col xs = {3} md = {2}>
+            <Form.Label className="col-2">Cash Location</Form.Label>
           </Col>
-          <Col xs={6} md={4}>
-            <Form.Group className="mb-3" controlId="unit-trust">
-              <Form.Label>Unit Trust</Form.Label>
-              <Form.Control defaultValue = {deposit.cashLocations?.unitTrust} name="unitTrust" type="number" />
-          </Form.Group>
-          </Col>
-        </Row>
-        <Row>
-          <Col xs={6} md={4}>
-            <Form.Group className="mb-3" controlId="adminAndrew">
-              <Form.Label>Admin Andrew</Form.Label>
-              <Form.Control defaultValue = {deposit.cashLocations?.adminAndrew} name="adminAndrew" type="number" />
-          </Form.Group>
-          </Col>
-          <Col xs={6} md={4}>
-            <Form.Group className="mb-3" controlId="adminRogers">
-              <Form.Label> Admin Rogers </Form.Label>
-              <Form.Control defaultValue = {deposit.cashLocations?.adminRogers} name="adminRogers" type="number" />
-          </Form.Group>
+          <Col xs = {9} md = {6}>
+            <Form.Select defaultValue = {deposit.cashLocation} className="col-8" name="cash_location" required>
+              <option value=""></option>
+              <option value="Standard Chartered">Standard Chartered</option>
+              <option value="Admin Joshua">Admin Joshua</option>
+              <option value="Admin Andrew">Admin Andrew</option>
+            </Form.Select>
           </Col>
         </Row>
       </fieldset>

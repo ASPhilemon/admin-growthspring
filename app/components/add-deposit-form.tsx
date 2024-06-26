@@ -21,8 +21,8 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
           Depositor
         </FormLabel>
         <Col xs={9} md={6}>
-          <FormSelect name = "depositor_name" id = "depositor_name" >
-            <option value = "" >Select depositor</option>
+          <FormSelect required name = "depositor_name" id = "depositor_name" >
+            <option value = '' ></option>
             {users.map((user:any, index:any) => {
               return (
                 <option key = {index} value = {user} >{user}</option>
@@ -37,10 +37,10 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
           Amount
         </FormLabel>
         <Col xs={9} md={6}>
-          <Form.Control  name="deposit_amount" required id="deposit_amount" min={"10000"} type="number" placeholder="Amount" />
+          <Form.Control  name="deposit_amount" required id="deposit_amount" min={"10000"} type="number"  />
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-2" >
         <FormLabel htmlFor ="deposit_date" column md={2} xs={3}>
           Date
         </FormLabel>
@@ -48,35 +48,21 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
           <Form.Control name="deposit_date" required min={minDate} max ={maxDate} id="deposit_date" type="date" placeholder="Date of deposit" />
         </Col>
       </Row>
-      <h6 className="mt-4 mb-3 fw-bolder text-primary" >Cash Locations </h6>
+    
       <Row>
-        <Col xs={6} md={4}>
-          <Form.Group className="mb-3" controlId="sc">
-            <Form.Label>Standard Chartered</Form.Label>
-            <Form.Control name="standardChartered" type="number" />
-        </Form.Group>
+        <Col xs = {3} md = {2}>
+          <Form.Label className="col-2">Cash Location</Form.Label>
         </Col>
-        <Col xs={6} md={4}>
-          <Form.Group className="mb-3" controlId="unit-trust">
-            <Form.Label>Unit Trust</Form.Label>
-            <Form.Control name="unitTrust" type="number" />
-        </Form.Group>
+        <Col xs = {9} md = {6}>
+          <Form.Select className="col-8" name="cash_location" required>
+            <option value =''></option>
+            <option value="Standard Chartered">Standard Chartered</option>
+            <option value="Admin Andrew">Admin Andrew</option>
+            <option value="Admin Joshua">Admin Joshua</option>
+          </Form.Select>
         </Col>
       </Row>
-      <Row>
-        <Col xs={6} md={4}>
-          <Form.Group className="mb-3" controlId="adminAndrew">
-            <Form.Label>Admin Andrew</Form.Label>
-            <Form.Control name="adminAndrew" type="number" />
-        </Form.Group>
-        </Col>
-        <Col xs={6} md={4}>
-          <Form.Group className="mb-3" controlId="adminRogers">
-            <Form.Label>Admin Rogers</Form.Label>
-            <Form.Control name="adminRogers" type="number" />
-        </Form.Group>
-        </Col>
-      </Row>
+
       <FormError message = {state} />
       <div className="col-md-8 d-flex mt-3">
         <Link className="btn  btn-secondary me-3 ms-auto px-2" href = "/deposits" >Cancel</Link>
@@ -109,9 +95,9 @@ function FormError(message: any){
 
 function getMinimumDepositDate(){
   const minDate = new Date()
-  minDate.setMonth(minDate.getMonth()-8)
+  minDate.setDate(minDate.getDate()-40)
   const year = minDate.getFullYear()
-  const month = minDate.getMonth().toString().padStart(2, '0');
+  const month = (minDate.getMonth() + 1).toString().padStart(2, '0');
   const day = minDate.getDate()
   const minDateString = `${year}-${month}-${day}`
   return minDateString

@@ -9,15 +9,9 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
   const depositor_name = formData.get('depositor_name') 
   const deposit_amount = Number( formData.get('deposit_amount')) || 0
   const deposit_date = formData.get('deposit_date')
-  const standardChartered = Number(formData.get('standardChartered')) || 0
-  const unitTrust = Number(formData.get('unitTrust')) || 0
-  const adminAndrew = Number(formData.get('adminAndrew')) || 0
-  const adminRogers = Number(formData.get('adminRogers')) || 0
-
-  const totalLocationsAmount = standardChartered + unitTrust + adminAndrew + adminRogers
+  const cash_location = formData.get('cash_location')
 
   if (!depositor_name) return {error: "Please select depositor"}
-  if (totalLocationsAmount !== deposit_amount) return {error: "The total amount in the cash locations must be equal to the deposit amount"}
   
   try{
     await createDeposit({
@@ -26,15 +20,10 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
       deposit_date,
       source: "Savings",
       recorded_by: user,
-      cashLocations: {
-        standardChartered,
-        unitTrust,
-        adminAndrew,
-        adminRogers
-      }
-
+      cashLocation: cash_location
     })
   } catch(err : any){
+    console.log(err)
     return {error: err.message}
   }
 
@@ -48,15 +37,9 @@ export async function editDeposit(deposit: any, prevState: any, formData: FormDa
   const depositor_name = formData.get('depositor_name') 
   const deposit_amount = Number( formData.get('deposit_amount')) || 0
   const deposit_date = formData.get('deposit_date')
-  const standardChartered = Number(formData.get('standardChartered')) || 0
-  const unitTrust = Number(formData.get('unitTrust')) || 0
-  const adminAndrew = Number(formData.get('adminAndrew')) || 0
-  const adminRogers = Number(formData.get('adminRogers')) || 0
-
-  const totalLocationsAmount = standardChartered + unitTrust + adminAndrew + adminRogers
+  const cashLocation = formData.get('cash_location')
 
   if (!depositor_name) return {error: "Please select depositor"}
-  if (totalLocationsAmount !== deposit_amount && deposit.cashLocations  ) return {error: "The total amount in the cash locations must be equal to the deposit amount"}
   
   try{
     await updateDeposit( deposit._id, {
@@ -64,13 +47,7 @@ export async function editDeposit(deposit: any, prevState: any, formData: FormDa
       deposit_amount,
       deposit_date,
       source: "Savings",
-      cashLocations: {
-        standardChartered,
-        unitTrust,
-        adminAndrew,
-        adminRogers
-      }
-
+      cashLocation
     })
   } catch(err : any){
     return {error: err.message}

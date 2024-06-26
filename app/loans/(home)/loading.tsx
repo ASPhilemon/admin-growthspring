@@ -6,7 +6,7 @@ export default function Loading(){
   return(
     <div className="px-md-5 px-3">
       <div className="d-flex align-items-center py-3">
-        <Placeholder className = "me-3 col-12" as = "div" animation="glow" >
+        <Placeholder className = "me-3 col-12 col-md-4" as = "div" animation="glow" >
           <Placeholder className="me-2 rounded-1 py-3"  xs = {3}/>
           <PlaceholderButton size="sm" className = "py-1" variant="primary" xs = {3}/>
         </Placeholder>

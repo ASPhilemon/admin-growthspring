@@ -54,9 +54,13 @@ async function DepositDetails({id}:any){
         <h5 className="deposit-field">Source</h5>
         <p>{deposit.source}</p>
       </div>
-      <div className="d-flex align-items-start">
+      <div className="d-flex align-items-start mb-3">
         <h5 className="deposit-field">Balance Before</h5>
         <p>UGX {deposit.balance_before.toLocaleString()}</p>
+      </div>
+      <div className="d-flex align-items-start">
+        <h5 className="deposit-field">Cash Location</h5>
+        { deposit.cashLocation? <p> {deposit.cashLocation}</p> : <p className="text-muted">Not Available</p>}
       </div>
 
       <Link className="btn btn-back btn-secondary mt-5 px-4" href = "/deposits" > Back </Link>

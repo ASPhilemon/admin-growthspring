@@ -80,25 +80,9 @@ export async function createDeposit(deposit: any){
     await user.save()
 
     //update cash locations
-
-    const [standardCharteredDoc, unitTrustDoc, adminAndrewDoc, adminRogersDoc] : any = await Promise.all([
-        CashLocation.findOne({name: "Standard Chartered"}),
-        CashLocation.findOne({name: "Unit Trust"}),
-        CashLocation.findOne({name: "Admin Andrew"}),
-        CashLocation.findOne({name: "Admin Rogers"})
-    ])
-
-    standardCharteredDoc.amount += deposit.cashLocations.standardChartered
-    unitTrustDoc.amount += deposit.cashLocations.unitTrust
-    adminAndrewDoc.amount += deposit.cashLocations.adminAndrew
-    adminRogersDoc.amount += deposit.cashLocations.adminRogers
-
-    await Promise.all([
-        standardCharteredDoc.save(),
-        unitTrustDoc.save(),
-        adminAndrewDoc.save(),
-        adminRogersDoc.save()
-    ])
+    const cashLocation : any = await CashLocation.findOne({name: deposit.cashLocation})
+    cashLocation.amount += deposit.deposit_amount
+    await cashLocation.save()
 
 }
 
@@ -121,44 +105,29 @@ export async function updateDeposit (deposit_id : any, newDeposit:any){
     let user = await User.findOne({fullName: deposit.depositor_name})
     if (!user) throw Error('User does not exist')
     
-
-     //update cash locations
-     const [standardCharteredDoc, unitTrustDoc, adminAndrewDoc, adminRogersDoc] : any = await Promise.all([
-        CashLocation.findOne({name: "Standard Chartered"}),
-        CashLocation.findOne({name: "Unit Trust"}),
-        CashLocation.findOne({name: "Admin Andrew"}),
-        CashLocation.findOne({name: "Admin Rogers"})
-    ])
-
-
-    if (deposit.cashLocations){
-        //update cash locations
-        standardCharteredDoc.amount = standardCharteredDoc.amount - deposit.cashLocations.standardChartered  + newDeposit.cashLocations.standardChartered
-        unitTrustDoc.amount = unitTrustDoc.amount - deposit.cashLocations.unitTrust + newDeposit.cashLocations.unitTrust
-        adminAndrewDoc.amount = adminAndrewDoc.amount - deposit.cashLocations.adminAndrew + newDeposit.cashLocations.adminAndrew
-        adminRogersDoc.amount = adminRogersDoc.amount - deposit.cashLocations.adminRogers + newDeposit.cashLocations.adminRogers
-        //update deposit
-        deposit.cashLocations.standardChartered = newDeposit.cashLocations.standardChartered
-        deposit.cashLocations.unitTrust = newDeposit.cashLocations.unitTrust
-        deposit.cashLocations.adminAndrew = newDeposit.cashLocations.adminAndrew
-        deposit.cashLocations.adminRogers = newDeposit.cashLocations.adminRogers
-    }
-
     user.investmentAmount =  user.investmentAmount - deposit.deposit_amount + newDeposit.deposit_amount
     user.points += Math.floor((newDeposit.deposit_amount - deposit.deposit_amount) * 3 / 10000)
     
+
+    //update cash locations
+    if (deposit.cashLocation && newDeposit.cashLocation){
+        const oldCashLocation = await CashLocation.findOne({name: deposit.cashLocation})
+        oldCashLocation.amount -= deposit.deposit_amount
+        const newCashLocation = await CashLocation.findOne({name: newDeposit.cashLocation})
+        newCashLocation.amount += newDeposit.deposit_amount
+    }
+
+    //update Deposit
     deposit.depositor_name = newDeposit.depositor_name
     deposit.deposit_date = newDeposit.deposit_date
     deposit.deposit_amount = newDeposit.deposit_amount
-   
+    deposit.cashLocation = newDeposit.cashLocation
+
     await Promise.all([
-        standardCharteredDoc.save(),
-        unitTrustDoc.save(),
-        adminAndrewDoc.save(),
-        adminRogersDoc.save(),
         deposit.save(),
         user.save()
     ])
+    
 }
 
 //added
