@@ -29,8 +29,8 @@ export function LoanCard({loan}: any){
           <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
           </div>
           <h6 className="mb-0 depositor-name me-2" > {loan.borrower_name} </h6>
-          { loan.loan_status == "Ended" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="success">Ended <Check2 className="ms-1" size={16}/> </Badge>}
-          {  loan.loan_status == "Ongoing" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="secondary">Ongoing <Clock className="ms-1" size={16}/> </Badge>}
+          { loanStatus == "Ended" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="success">Ended <Check2 className="ms-1" size={16}/> </Badge>}
+          {  loanStatus == "Ongoing" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="secondary">Ongoing <Clock className="ms-1" size={16}/> </Badge>}
         </div>
         <div className="d-flex align-items-end justify-content-between">
           <div>
@@ -67,14 +67,14 @@ export function LoanCard({loan}: any){
       {status == "success" && <PaymentSuccess setStatus = {setStatus} />}
     </Card>
 
-      <LoanPaymentModal setStatus = {setStatus} status = {status} loan = {loan}/>
+      <LoanPaymentModal setLoanStatus = {setLoanStatus} setStatus = {setStatus} status = {status} loan = {loan}/>
     </>
    
   )
 }
 
 
-function LoanPaymentModal({status, setStatus, loan}:any){
+function LoanPaymentModal({status, setStatus, loan, setLoanStatus}:any){
   function handleClose(){
     setStatus("flat")
   }
@@ -101,7 +101,7 @@ function LoanPaymentModal({status, setStatus, loan}:any){
 
 }
 
-function LoanPaymentForm({loan, setStatus}: any) {
+function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
   const API = "https://api.growthspringers.com"
   async function handleSubmit(e:any){
     e.preventDefault()
@@ -122,8 +122,12 @@ function LoanPaymentForm({loan, setStatus}: any) {
         },
         body: JSON.stringify(payload)
       })
-      console.log( await res.json())
-      if (res.ok) setStatus("success");
+      const data = await res.json()
+      console.log( data)
+      if (res.ok) {
+        setStatus("success");
+        setLoanStatus(data.loan_status)
+      }
       else setStatus("error");
     } catch(err){
       console.log(err)
