@@ -149,3 +149,12 @@ body{
 .alert-success{
   background-color: #2dc781;
 }
+
+.placeholder{
+  background-color: rgba(0,0,0,0.3);
+}
+
+
+.placeholder.btn-primary{
+opacity: 30%;
+}
