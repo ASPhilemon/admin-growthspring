@@ -58,6 +58,8 @@ export async function getLoans( {member, year, loan_status, page, order, perPage
   return loans;
 }
 
-export async  function getLoan(id:string){
-  return await LoanModel.findById(id)
+export async function getLoan(id:string){
+  noStore()
+  await dbConnect() // Connect to the database if not already connected
+  return LoanModel.findById(id)
 }
