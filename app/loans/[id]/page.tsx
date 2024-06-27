@@ -63,8 +63,8 @@ export default async function Page({params}:any) {
           </thead>
           <tbody>
           {
-            loan.payments.map((payment:any)=>(
-              <tr>
+            loan.payments.map((payment:any, index: any)=>(
+              <tr key = {index} >
                 <td>{payment.payment_amount.toLocaleString()}</td>
                 <td>{payment.payment_date.toDateString()}</td>
                 <td>{payment.updated_by}</td>
