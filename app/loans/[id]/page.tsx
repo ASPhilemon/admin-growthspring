@@ -61,7 +61,7 @@ export default async function Page({params}:any) {
           <Table className="table-warning" responsive striped  bordered hover>
           <thead>
             <tr>
-              <th>Amount</th>
+              <th>Amount (UGX)</th>
               <th>Date</th>
               <th>Recorded By</th>
           </tr>
