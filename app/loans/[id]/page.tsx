@@ -4,6 +4,11 @@ import Link from "next/link";
 
 export default async function Page({params}:any) {
   const loan = await getLoan(params.id)
+  function getDateString(date:any){
+    const options = { month: 'short', day: '2-digit', year: 'numeric' };
+    const dateString = date.toLocaleDateString('en-US', options);
+    return dateString
+  }
   
 
   return (
@@ -14,7 +19,7 @@ export default async function Page({params}:any) {
       </Breadcrumb>
       <h6 className="mb-3 fw-bold">Summary</h6>
       <div className="col-md-6">
-        <Table className="table-warning" size="sm" responsive striped bordered hover>
+        <Table className="table-warning" responsive striped bordered hover>
           <thead>
             <tr>
               <th>Borrower</th>
@@ -36,7 +41,7 @@ export default async function Page({params}:any) {
             </tr>
             <tr>
               <th>Last payment date</th>
-              <td>{loan.last_payment_date.toDateString()}</td>
+              <td>{getDateString(loan.last_payment_date)}</td>
             </tr>
             <tr>
               <th>Interest Paid</th>
@@ -53,7 +58,7 @@ export default async function Page({params}:any) {
       <h6 className="mb-3 mt-4 fw-bold">Payment History</h6>
       <div className="col-md-6">
         {loan.payments.length > 0?
-          <Table className="table-warning" size="sm" responsive striped  bordered hover>
+          <Table className="table-warning" responsive striped  bordered hover>
           <thead>
             <tr>
               <th>Amount</th>
@@ -66,7 +71,7 @@ export default async function Page({params}:any) {
             loan.payments.map((payment:any, index: any)=>(
               <tr key = {index} >
                 <td>{payment.payment_amount.toLocaleString()}</td>
-                <td>{payment.payment_date.toDateString()}</td>
+                <td>{getDateString(payment.payment_date)}</td>
                 <td>{payment.updated_by}</td>
               </tr>
             ))
