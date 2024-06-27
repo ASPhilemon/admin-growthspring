@@ -19,7 +19,7 @@ export default async function Page({params}:any) {
       </Breadcrumb>
       <h6 className="mb-3 fw-bold">Summary</h6>
       <div className="col-md-6">
-        <Table className="table-warning" responsive striped bordered hover>
+        <Table align="center" className="table-warning" responsive striped bordered hover>
           <thead>
             <tr>
               <th>Borrower</th>
@@ -58,7 +58,7 @@ export default async function Page({params}:any) {
       <h6 className="mb-3 mt-4 fw-bold">Payment History</h6>
       <div className="col-md-6">
         {loan.payments.length > 0?
-          <Table className="table-warning" responsive striped  bordered hover>
+          <Table className="table-warning align-middle" responsive striped  bordered hover>
           <thead>
             <tr>
               <th>Amount (UGX)</th>
