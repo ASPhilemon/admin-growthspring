@@ -5,6 +5,8 @@ import { findDepositById } from "@/app/data/dbQueries"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 import { Loader } from "@/app/components/Loader"
+import { getUsers } from "@/app/data/dbQueries"
+
 
 export default async function Page({params} : any){
   const deposit = await findDepositById(params.id)
@@ -24,10 +26,11 @@ export default async function Page({params} : any){
 }
 
 async function EditDeposit({id}:any){
+  const users = await getUsers()
   const deposit = await findDepositById(id)
   if (!deposit) notFound()
 
   return(
-    <EditDepositForm deposit = {deposit} />
+    <EditDepositForm users = {users} deposit = {deposit} />
   )
 }

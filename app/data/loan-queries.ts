@@ -1,6 +1,7 @@
 import { unstable_noStore as noStore } from "next/cache";
 import dbConnect from "./dbConnect"
 import Loan from "./models/LoanModel"
+import LoanModel from "./models/LoanModel";
 
 
 export async function loanCount( {member, year, loan_status } : any) {
@@ -55,4 +56,8 @@ export async function getLoans( {member, year, loan_status, page, order, perPage
 
   const loans = await Loan.aggregate(pipeline);
   return loans;
+}
+
+export async  function getLoan(id:string){
+  return await LoanModel.findById(id)
 }

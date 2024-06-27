@@ -6,19 +6,11 @@ import { editDeposit } from "../deposits/actions"
 import Link from "next/link"
 
 
-export function EditDepositForm({deposit}:any){
+export function EditDepositForm({deposit, users}:any){
   const minDate = getMinimumDepositDate()
   const maxDate = getMaxDepositDate()
 
-  const users = [
-    'Akampurira David', 'Ariko Stephen Philemon', 'Arinaitwe Solomon',
-    'Atim Dyna Loy', 'Atuhairwe Mary', 'Babirye Nicolatte',
-    'Chesuro Benerd Boris', 'Club Fund', 'Kamya Timothy',
-    'Kawuma Andrew', 'Mutome Roggers', 'Mwebe Blaise Adrian', 'Nakato Leonora',
-    'Nuwagira Noble', 'Omodo Joshua Deo', 'Paul Omare',
-    'Pule Flavia', 'Rwothungeo Rogers', 'Sendikwanawa Jasper',
-    'Sharon Natukunda', 'Wilson Mutebi'
-  ]
+
   let editDepositBind = editDeposit.bind(null, deposit)
   const [state, dispatch] = useFormState(editDepositBind, {error: null})
 
@@ -30,8 +22,7 @@ export function EditDepositForm({deposit}:any){
         </FormLabel>
         <Col xs={9} md={6}>
           <FormSelect defaultValue = {deposit.depositor_name} name = "depositor_name" id = "depositor_name" >
-            <option value = "" >Select depositor</option>
-            {users.map((user, index) => {
+            {users.map((user:any, index:any) => {
               return (
                 <option key = {index} value = {user} >{user}</option>
               )
