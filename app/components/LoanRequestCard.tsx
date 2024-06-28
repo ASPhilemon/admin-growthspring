@@ -91,7 +91,7 @@ function RequestApprovalModal({status, setStatus, loan, StatusSetter, handleLoan
       className="rounded-0"
     >
       <Modal.Header closeButton>
-        <Modal.Title className="h6">Loan Request Approval | {loan.borrower_name} </Modal.Title>
+        <Modal.Title className="h6">Approve Loan Request | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h6 className="fw-bold mb-1">Please fill in the cash location amounts. <br/>  </h6>
@@ -184,7 +184,7 @@ function RequestDeleteModal({status, setStatus, loan, StatusSetter, handleLoanDe
       className="rounded-0"
     >
       <Modal.Header closeButton>
-        <Modal.Title className="h6">Loan Request Approval | {loan.borrower_name} </Modal.Title>
+        <Modal.Title className="h6">Delete loan request | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <h6 className="fw-light mb-1">Type <span className="fw-bold text-danger" >delete</span> to delete loan request</h6>
