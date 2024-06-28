@@ -1,7 +1,6 @@
 
 import { getLoans } from "../data/loan-queries";
 import { LoanCard } from "./LoanCard";
-import { Search } from "react-bootstrap-icons";
 
 export async function LoanCards({loanFilter}: any){
   const loans = await getLoans(loanFilter)
@@ -21,8 +20,7 @@ export async function LoanCards({loanFilter}: any){
 function NoLoans() {
   return (
     <div className = "ms-22" >
-      <Search className="ms-4 my-4" size = {70} />
-      <p>No records were found for this filter </p>
+      <p className="text-muted">No records were found for this filter </p>
     </div>
   )
 }

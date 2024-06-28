@@ -13,6 +13,6 @@ export async function LoanRequestCards(){
         <LoanRequestCard key = {loan._id} loan = {loan} />
         )
       })}
-    </div> : <p>There are no pending requests at the moment</p>
+    </div> : <p className="text-muted mt-2">There are no pending requests at the moment</p>
   )
 }
