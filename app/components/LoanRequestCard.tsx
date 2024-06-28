@@ -140,7 +140,7 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
     } catch(err){
       console.log(err)
       setStatus("error")
-      StatusSetter.setErrMsg("An error occured 1")
+      StatusSetter.setErrMsg("An error occured")
     }
    
   }
