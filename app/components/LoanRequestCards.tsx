@@ -3,7 +3,7 @@
 import { LoanRequestCard } from "./LoanRequestCard";
 import { useState} from "react";
 
-export async function LoanRequestCards({initialLoans}:any){
+export function LoanRequestCards({initialLoans}:any){
 const [loans, setLoans] = useState(initialLoans)
 
   function handleLoanDelete(loan_id:string){
