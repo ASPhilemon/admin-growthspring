@@ -19,8 +19,8 @@ export async function LoanCards({loanFilter}: any){
 
 function NoLoans() {
   return (
-    <div className = "ms-22" >
-      <p className="text-muted">No records were found for this filter </p>
+    <div className = "px-2 my-2" >
+      <p className="text-muted">No loans were found for this filter </p>
     </div>
   )
 }
