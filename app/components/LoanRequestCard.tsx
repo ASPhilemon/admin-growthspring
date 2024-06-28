@@ -5,12 +5,18 @@ import { Card, Alert, Form, CardBody, Button, Modal, Spinner } from "react-boots
 import {  Trash } from "react-bootstrap-icons";
 import { useState} from "react";
 
-export function LoanRequestCard({loan}: any){
+export function LoanRequestCard({loan, handleLoanDelete}: any){
 
   const [status, setStatus] = useState("flat");
   const [errMsg, setErrMsg] = useState("")
   const [pendingMsg, setPendingMsg] = useState("")
   const [successMsg, setSuccessMsg] = useState("")
+
+  const StatusSetter= {
+    setErrMsg,
+    setPendingMsg,
+    setSuccessMsg
+  }
 
   function getDateString(date:any){
     const options = { month: 'short', day: '2-digit', year: 'numeric' };
@@ -31,7 +37,7 @@ export function LoanRequestCard({loan}: any){
         <div className="d-flex align-items-end justify-content-between">
           <div>
             <h6 className="mb-1 fw-bolder mb-2">UGX {loan.loan_amount.toLocaleString()}</h6>
-            <p className=" mb-0 fw-light small ">{getDateString(loan.latest_date)}</p>
+            <p className=" mb-0 fw-light small ">{getDateString(loan.latest_date)} | {loan.loan_duration} months </p>
           </div>
 
           {/* icons */}
@@ -63,7 +69,7 @@ export function LoanRequestCard({loan}: any){
       {status == "success" && <Success msg = {successMsg} setStatus = {setStatus} />}
     </Card>
 
-      <RequestApprovalModal status = {status} setStatus = {setStatus} loan = {loan}/>
+      <RequestApprovalModal handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} status = {status} setStatus = {setStatus} loan = {loan}/>
       {/* <LoanDeleteModal setStatus = {setStatus} loan = {loan}/> */}
     </>
    
@@ -71,7 +77,7 @@ export function LoanRequestCard({loan}: any){
 }
 
 
-function RequestApprovalModal({status, setStatus, loan}:any){
+function RequestApprovalModal({status, setStatus, loan, StatusSetter, handleLoanDelete}:any){
   function handleClose(){
     setStatus("flat")
   }
@@ -88,23 +94,31 @@ function RequestApprovalModal({status, setStatus, loan}:any){
       className="rounded-0"
     >
       <Modal.Header closeButton>
-        <Modal.Title className="h6">Loan payment | {loan.borrower_name} </Modal.Title>
+        <Modal.Title className="h6">Loan Request Approval | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <RequestApprovalForm setStatus = {setStatus} loan = {loan}/>
+        <h6 className="fw-bold mb-1">Please fill in the cash location amounts. <br/>  </h6>
+        <p className="fw-light mb-3">(The total amount should be equal to the loan amount UGX {loan.loan_amount.toLocaleString()})</p>
+
+        <RequestApprovalForm handleLoanDelete StatusSetter = {StatusSetter} setStatus = {setStatus} loan = {loan}/>
       </Modal.Body>
     </Modal>
   )
 
 }
 
-function RequestApprovalForm({loan, setStatus}: any) {
+function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: any) {
   const API =  "https://api.growthspringers.com"
   async function handleSubmit(e:any){
     e.preventDefault()
     setStatus("pending")
+    StatusSetter.setPendingMsg("approving loan request")
     const payload = {
       loan_id: e.target.loan_id.value,
+      sources: [
+        { "Standard Chartered": e.target['Standard Chartered'].value }, 
+        { "Mobile Money": e.target['Mobile Money'].value }
+      ]
     }
     console.log({payload: payload})
     try{
@@ -119,42 +133,31 @@ function RequestApprovalForm({loan, setStatus}: any) {
       const data = await res.json()
       console.log( data)
       if (res.ok) {
-        setStatus("success");
+        handleLoanDelete(loan._id)
       }
-      else setStatus("error");
+      else {
+        setStatus("error");
+        StatusSetter.setErrMsg(data.msg || data.error)
+      } 
+
     } catch(err){
       console.log(err)
       setStatus("error")
+      StatusSetter.setErrMsg("An error occured")
     }
    
   }
 
-  function formatDate(date:string){
-    const dateObj = new Date(date)
-    const day = dateObj.getDate();
-    const month = dateObj.getMonth() + 1
-    const year = dateObj.getFullYear()
-    return `${month}-${day}-${year}`
-  }
   return (
     <Form onSubmit = {handleSubmit}>
       <fieldset className="faint p-3  rounded-1">
-        <Form.Group className="mb-3" controlId = "payment-amount">
-          <Form.Label>Amount</Form.Label>
-          <Form.Control name="payment_amount" required type="number" placeholder="" />
+        <Form.Group className="mb-3" controlId = "location-standard-chartered">
+          <Form.Label>Standard Chartered</Form.Label>
+          <Form.Control name="Standard Chartered" type="number" placeholder="" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId = "payment-date">
-          <Form.Label>Date</Form.Label>
-          <Form.Control max={new Date().toLocaleDateString()} name="payment_date" required type="date" />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId = "payment-cash-location">
-          <Form.Label>Cash Location</Form.Label>
-          <Form.Select name="payment_location" required aria-label="Default select example">
-            <option value =''>select cash location</option>
-            <option value="Standard Chartered">Standard Chartered</option>
-            <option value="Admin Andrew">Admin Andrew</option>
-            <option value="Admin Joshua">Admin Joshua</option>
-          </Form.Select>
+        <Form.Group className="mb-3" controlId = "location-Mobile-Money">
+          <Form.Label>Mobile Money</Form.Label>
+          <Form.Control name="Mobile Money" type="number" placeholder="" />
         </Form.Group>
         <input name="loan_id" hidden type="text" value = {loan._id} />
       </fieldset>
