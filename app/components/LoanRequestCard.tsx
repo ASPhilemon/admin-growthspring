@@ -113,8 +113,8 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
     const payload = {
       loan_id: e.target.loan_id.value,
       sources: [
-        { "Standard Chartered": Number(e.target['Standard Chartered'].value) || 0 }, 
-        { "Mobile Money": Number(e.target['Mobile Money'].value) || 0 }
+        { location: "Standard Chartered", amount: Number(e.target['Standard Chartered'].value) || 0 }, 
+        { location:  "Mobile Money", amount: Number(e.target['Mobile Money'].value) || 0 }
       ]
     }
     console.log({payload: payload})
