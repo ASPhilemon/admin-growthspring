@@ -187,7 +187,7 @@ function RequestDeleteModal({status, setStatus, loan, StatusSetter, handleLoanDe
         <Modal.Title className="h6">Delete loan request | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h6 className="fw-light mb-1">Type <span className="fw-bold text-danger" >delete</span> to delete loan request</h6>
+        <h6 className="fw-light mb-2">Type <span className="fw-bold text-danger" >delete</span> to delete loan request</h6>
 
         <RequestDeleteForm handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} setStatus = {setStatus} loan = {loan}/>
       </Modal.Body>
@@ -239,7 +239,7 @@ function RequestDeleteForm({loan, setStatus, StatusSetter, handleLoanDelete}: an
   return(
     <Form onSubmit = { handleSubmit }>
       <fieldset className="faint p-3  rounded-1">
-        <Form.Group className="mb-3" controlId = "delete-field">
+        <Form.Group className="py-2" controlId = "delete-field">
           <Form.Control value = {deleteField} onChange={(e)=>setDeleteField(e.target.value)} name="Standard Chartered" placeholder="delete" />
         </Form.Group>
         <input name="loan_id" hidden type="text" value = {loan._id} />
