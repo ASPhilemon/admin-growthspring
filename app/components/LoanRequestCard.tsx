@@ -10,12 +10,10 @@ export function LoanRequestCard({loan, handleLoanDelete}: any){
   const [status, setStatus] = useState("flat");
   const [errMsg, setErrMsg] = useState("")
   const [pendingMsg, setPendingMsg] = useState("")
-  const [successMsg, setSuccessMsg] = useState("")
 
   const StatusSetter= {
     setErrMsg,
-    setPendingMsg,
-    setSuccessMsg
+    setPendingMsg
   }
 
   function getDateString(date:any){
@@ -66,7 +64,6 @@ export function LoanRequestCard({loan, handleLoanDelete}: any){
       </CardBody>
       {status == "pending" && <Pending msg = {pendingMsg} />}
       {status == "error" && <Error msg = {errMsg} setStatus = {setStatus} />}
-      {status == "success" && <Success msg = {successMsg} setStatus = {setStatus} />}
     </Card>
 
       <RequestApprovalModal handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} status = {status} setStatus = {setStatus} loan = {loan}/>
@@ -100,7 +97,7 @@ function RequestApprovalModal({status, setStatus, loan, StatusSetter, handleLoan
         <h6 className="fw-bold mb-1">Please fill in the cash location amounts. <br/>  </h6>
         <p className="fw-light mb-3">(The total amount should be equal to the loan amount UGX {loan.loan_amount.toLocaleString()})</p>
 
-        <RequestApprovalForm handleLoanDelete StatusSetter = {StatusSetter} setStatus = {setStatus} loan = {loan}/>
+        <RequestApprovalForm handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} setStatus = {setStatus} loan = {loan}/>
       </Modal.Body>
     </Modal>
   )
@@ -143,7 +140,7 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
     } catch(err){
       console.log(err)
       setStatus("error")
-      StatusSetter.setErrMsg("An error occured")
+      StatusSetter.setErrMsg("An error occured 1")
     }
    
   }
