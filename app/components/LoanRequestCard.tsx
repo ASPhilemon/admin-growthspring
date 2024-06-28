@@ -35,7 +35,7 @@ export function LoanRequestCard({loan, handleLoanDelete}: any){
         <div className="d-flex align-items-end justify-content-between">
           <div>
             <h6 className="mb-1 fw-bolder mb-2">UGX {loan.loan_amount.toLocaleString()}</h6>
-            <p className=" mb-0 fw-light small ">{getDateString(loan.latest_date)} | {loan.loan_duration} months </p>
+            <p className=" mb-0 fw-light small ">{getDateString(loan.latest_date)} <br /> {loan.loan_duration} months </p>
           </div>
 
           {/* icons */}
