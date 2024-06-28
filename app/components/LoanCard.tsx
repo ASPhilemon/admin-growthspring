@@ -102,7 +102,7 @@ function LoanPaymentModal({status, setStatus, loan, setLoanStatus}:any){
 }
 
 function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
-  const API = "https://api.growthspringers.com"
+  const API =  "https://api.growthspringers.com"
   async function handleSubmit(e:any){
     e.preventDefault()
     setStatus("pending")
