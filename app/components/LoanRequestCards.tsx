@@ -1,6 +1,5 @@
 "use client"
 
-import { getLoans } from "../data/loan-queries";
 import { LoanRequestCard } from "./LoanRequestCard";
 import { useState} from "react";
 

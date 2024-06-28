@@ -134,7 +134,7 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
       }
       else {
         setStatus("error");
-        StatusSetter.setErrMsg(data.msg || data.error)
+        StatusSetter.setErrMsg(data.msg)
       } 
 
     } catch(err){
@@ -195,17 +195,5 @@ function Error({setStatus, msg}: any) {
         <p> { msg } </p>
       </Alert>
     </div>
-  );
-}
-
-function Success({setStatus, msg}: any) {
-
-  return (
-    <div className="v-center d-flex justify-content-center align-items-center">
-      <Alert className="shadow" variant="success" onClose = {() => setStatus("flat")} dismissible>
-        <p> { msg } </p>
-      </Alert>
-    </div>
-   
   );
 }
