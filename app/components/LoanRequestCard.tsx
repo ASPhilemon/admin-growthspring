@@ -67,7 +67,7 @@ export function LoanRequestCard({loan, handleLoanDelete}: any){
     </Card>
 
       <RequestApprovalModal handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} status = {status} setStatus = {setStatus} loan = {loan}/>
-      {/* <LoanDeleteModal setStatus = {setStatus} loan = {loan}/> */}
+      <RequestDeleteModal handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} status = {status} setStatus = {setStatus} loan = {loan}/>
     </>
    
   )
@@ -167,13 +167,91 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
   );
 }
 
-// function LoanDeleteModal(){
+function RequestDeleteModal({status, setStatus, loan, StatusSetter, handleLoanDelete}:any){
+  function handleClose(){
+    setStatus("flat")
+  }
 
-// }
+  return(
+    <Modal
+      centered
+      show = {status == "modal-delete"}
+      onHide = {handleClose}
+      backdrop="static"
+      keyboard={false}
+      animation = {false}
+    
+      className="rounded-0"
+    >
+      <Modal.Header closeButton>
+        <Modal.Title className="h6">Loan Request Approval | {loan.borrower_name} </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <h6 className="fw-bold mb-1">Type <span className="fw-bold" >delete</span> to delete loan request.</h6>
 
-// function LoanDeleteForm({loan}:any){
+        <RequestDeleteForm handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} setStatus = {setStatus} loan = {loan}/>
+      </Modal.Body>
+    </Modal>
+  )
 
-// }
+}
+
+
+function RequestDeleteForm({loan, setStatus, StatusSetter, handleLoanDelete}: any){
+  const [deleteField , setDeleteField] = useState("")
+
+  const API =  "https://api.growthspringers.com"
+
+  async function handleSubmit(e:any){
+    e.preventDefault()
+    setStatus("pending")
+    StatusSetter.setPendingMsg("deleting loan request")
+    const payload = {
+      loan_id: e.target.loan_id.value,
+    }
+    console.log({payload: payload})
+    try{
+      const res = await fetch(`${API}/delete-loan-request`, {
+        method: "POST",
+        credentials: 'include',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      const data = await res.json()
+      console.log( data)
+      if (res.ok) {
+        handleLoanDelete(loan._id)
+      }
+      else {
+        setStatus("error");
+        StatusSetter.setErrMsg(data.msg)
+      } 
+
+    } catch(err){
+      console.log(err)
+      setStatus("error")
+      StatusSetter.setErrMsg("An error occured")
+    }
+   
+  }
+  return(
+    <Form onSubmit = { handleSubmit }>
+      <fieldset className="faint p-3  rounded-1">
+        <Form.Group className="mb-3" controlId = "delete-field">
+          <Form.Control value = {deleteField} onChange={(e)=>setDeleteField(e.target.value)} name="Standard Chartered" placeholder="delete" />
+        </Form.Group>
+        <input name="loan_id" hidden type="text" value = {loan._id} />
+      </fieldset>
+      <Button disabled = {deleteField != "delete"} variant="danger" className="d-block ms-auto mt-4 mb-2" type = "submit">
+        Delete
+      </Button>
+    </Form>
+  )
+
+}
+
 
 function Pending({msg}:any){
 
