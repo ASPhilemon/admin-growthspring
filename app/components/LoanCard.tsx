@@ -143,6 +143,25 @@ function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
     const year = dateObj.getFullYear()
     return `${month}-${day}-${year}`
   }
+  function getMinPaymentDate(){
+    const minDate = new Date()
+    minDate.setDate(minDate.getDate()-40)
+    const year = minDate.getFullYear()
+    const month = (minDate.getMonth() + 1).toString().padStart(2, '0');
+    const day = minDate.getDate()
+    const minDateString = `${year}-${month}-${day}`
+    return minDateString
+  }
+  
+  function getMaxPaymentDate(){
+    const today = new Date()
+    const currentYear = today.getFullYear()
+    const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
+    const day = today.getDate()
+    const maxDateString = `${currentYear}-${currentMonth}-${day}`
+    return maxDateString
+  }
+
   return (
     <Form onSubmit = {handleSubmit}>
       <fieldset className="faint p-3  rounded-1">
@@ -152,7 +171,7 @@ function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
         </Form.Group>
         <Form.Group className="mb-3" controlId = "payment-date">
           <Form.Label>Date</Form.Label>
-          <Form.Control max={new Date().toLocaleDateString()} name="payment_date" required type="date" />
+          <Form.Control max = {getMaxPaymentDate()} min = {getMinPaymentDate()} name="payment_date" required type="date" />
         </Form.Group>
         <Form.Group className="mb-3" controlId = "payment-cash-location">
           <Form.Label>Cash Location</Form.Label>
