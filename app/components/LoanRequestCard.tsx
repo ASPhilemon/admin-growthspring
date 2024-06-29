@@ -105,6 +105,20 @@ function RequestApprovalModal({status, setStatus, loan, StatusSetter, handleLoan
 }
 
 function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: any) {
+  const [standardChartered, setStandardChartered] = useState('');
+  const [mobileMoney, setMobileMoney] = useState('')
+
+  // Function to format number with thousands separator
+  const formatNumber = (num:any) => {
+    return num.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  // Handle input change
+  const handleChange = (e:any, setFunc:any) => {
+    const formattedValue = formatNumber(e.target.value);
+    setFunc(formattedValue);
+  };
+
   const API =  "https://api.growthspringers.com"
   async function handleSubmit(e:any){
     e.preventDefault()
@@ -113,8 +127,8 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
     const payload = {
       loan_id: e.target.loan_id.value,
       sources: [
-        { location: "Standard Chartered", amount: Number(e.target['Standard Chartered'].value) || 0 }, 
-        { location:  "Mobile Money", amount: Number(e.target['Mobile Money'].value) || 0 }
+        { location: "Standard Chartered", amount: parseFloat(e.target['Standard Chartered'].value.replace(/,/g, '')) || 0 }, 
+        { location:  "Mobile Money", amount: parseFloat(e.target['Mobile Money'].value.replace(/,/g, '')) || 0 }
       ]
     }
     console.log({payload: payload})
@@ -150,11 +164,11 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
       <fieldset className="faint p-3  rounded-1">
         <Form.Group className="mb-3" controlId = "location-standard-chartered">
           <Form.Label>Standard Chartered</Form.Label>
-          <Form.Control name="Standard Chartered" type="number" placeholder="" />
+          <Form.Control value = {standardChartered} onChange={(e)=>handleChange(e, setStandardChartered)} name="Standard Chartered" type="text" placeholder="" />
         </Form.Group>
         <Form.Group className="mb-3" controlId = "location-Mobile-Money">
           <Form.Label>Mobile Money</Form.Label>
-          <Form.Control name="Mobile Money" type="number" placeholder="" />
+          <Form.Control value = {mobileMoney} onChange={(e)=>handleChange(e, setMobileMoney)}  name="Mobile Money" type="text" placeholder="" />
         </Form.Group>
         <input name="loan_id" hidden type="text" value = {loan._id} />
       </fieldset>
