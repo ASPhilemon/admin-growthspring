@@ -138,3 +138,20 @@ export async function getUsers(){
     const users =  await User.find({}, 'fullName -_id');
     return users.map((user)=>user.fullName).sort()
 }
+
+export async function getUsersWithIds(){
+    noStore()
+    await dbConnect() //connect to db if not already connected
+    const users =  await User.find({}, 'fullName');
+    const sortedUsers = users.sort((a, b) => {
+      if (a.fullName < b.fullName) {
+          return -1;
+      }
+      if (a.fullName > b.fullName) {
+          return 1;
+      }
+        return 0;
+    });
+
+    return sortedUsers
+}

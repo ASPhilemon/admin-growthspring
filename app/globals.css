@@ -170,3 +170,8 @@ opacity: 30%;
 .tooltip-arrow::before{
   border-left-color: rgb(7, 106, 255)  !important;
 }
+
+
+.modal .btn-close{
+  margin-right: 10px;
+}

@@ -187,7 +187,7 @@ function RequestDeleteModal({status, setStatus, loan, StatusSetter, handleLoanDe
         <Modal.Title className="h6">Delete loan request | {loan.borrower_name} </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <h6 className="fw-light mb-2">Type <span className="fw-bold text-danger" >delete</span> to delete loan request</h6>
+        <h6 className="fw-light mb-3">Type <span className="fw-bold text-danger" >delete</span> to delete loan request</h6>
 
         <RequestDeleteForm handleLoanDelete = {handleLoanDelete} StatusSetter = {StatusSetter} setStatus = {setStatus} loan = {loan}/>
       </Modal.Body>
