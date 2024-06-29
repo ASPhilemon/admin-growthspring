@@ -57,8 +57,7 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
           <Form.Select className="col-8" name="cash_location" required>
             <option disabled selected hidden value =''></option>
             <option value="Standard Chartered">Standard Chartered</option>
-            <option value="Admin Andrew">Admin Andrew</option>
-            <option value="Admin Joshua">Admin Joshua</option>
+            <option value="Mobile Money">Mobile Money</option>
           </Form.Select>
         </Col>
       </Row>
@@ -114,11 +113,4 @@ function getMaxDepositDate(){
   const day = today.getDate()
   const maxDateString = `${currentYear}-${currentMonth}-${day}`
   return maxDateString
-}
-
-function formatDate(date:any){
-  date = new Date(date)
-  const options = { month: 'short', day: '2-digit', year: 'numeric' };
-  const dateString = date.toLocaleDateString('en-US', options);
-  return dateString
 }
