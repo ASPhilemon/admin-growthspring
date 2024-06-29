@@ -216,6 +216,7 @@ function RequestDeleteModal({status, setStatus, loan, StatusSetter, handleLoanDe
 
 function RequestDeleteForm({loan, setStatus, StatusSetter, handleLoanDelete}: any){
   const [deleteField , setDeleteField] = useState("")
+  const router = useRouter()
 
   const API =  "https://api.growthspringers.com"
 
@@ -240,6 +241,7 @@ function RequestDeleteForm({loan, setStatus, StatusSetter, handleLoanDelete}: an
       console.log( data)
       if (res.ok) {
         handleLoanDelete(loan._id)
+        router.refresh()
       }
       else {
         setStatus("error");
