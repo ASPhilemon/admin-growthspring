@@ -103,7 +103,7 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
 
         <Form.Group className = "mb-3 " controlId = "loan-duration">
           <Form.Label>Loan Duration</Form.Label>
-          <Form.Control name="loan_duration" type="number" required />
+          <Form.Control min={1} max={24} name="loan_duration" type="number" required />
         </Form.Group>
 
         <Form.Group className = "mb-3 " controlId = "loan-date">
