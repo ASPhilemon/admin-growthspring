@@ -30,7 +30,7 @@ export default async function Page({searchParams}: any){
         </Link>
       </div>
       <LoanFilter users = {users} />
-      <Suspense fallback = {<LoanCardsSkeleton/>} key = {loanFilter.toString()} >
+      <Suspense key = {Math.random()} fallback = {<LoanCardsSkeleton/>} >
         <LoanCards loanFilter = {loanFilter} />
       </Suspense>
     </div>
