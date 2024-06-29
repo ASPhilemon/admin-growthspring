@@ -4,9 +4,23 @@ import { Row, Col, Form, FormLabel, FormSelect, FormGroup } from "react-bootstra
 import { useFormStatus, useFormState } from "react-dom"
 import { addDeposit } from "../deposits/actions"
 import Link from "next/link"
+import { useState } from "react"
 
 
 export function AddDepositForm({user, users}:{user: string, users: any}){
+  const [amount, setAmount] = useState('')
+
+  // Function to format number with thousands separator
+  const formatNumber = (num:any) => {
+    return num.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  // Handle input change
+  const handleChange = (e:any, setFunc:any) => {
+    const formattedValue = formatNumber(e.target.value);
+    setFunc(formattedValue);
+  };
+
   const minDate = getMinimumDepositDate()
   const maxDate = getMaxDepositDate()
 
@@ -37,7 +51,7 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
           Amount
         </FormLabel>
         <Col xs={9} md={6}>
-          <Form.Control  name="deposit_amount" required id="deposit_amount" min={"10000"} type="number"  />
+          <Form.Control value ={amount} onChange={(e)=>handleChange(e, setAmount)}  name="deposit_amount" required id="deposit_amount" min={"10000"} type="text"  />
         </Col>
       </Row>
       <Row className="mb-2" >

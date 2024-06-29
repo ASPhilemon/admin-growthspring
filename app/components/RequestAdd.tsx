@@ -20,6 +20,18 @@ export function AddRequest({users}:any){
 export function RequestAddForm({users, setFormStatus, setError, error, formStatus}: any){
 
   const router = useRouter()
+  const [loanAmount, setLoanAmount] = useState('')
+
+  // Function to format number with thousands separator
+  const formatNumber = (num:any) => {
+    return num.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  // Handle input change
+  const handleChange = (e:any, setFunc:any) => {
+    const formattedValue = formatNumber(e.target.value);
+    setFunc(formattedValue);
+  };
 
   const API =  "https://api.growthspringers.com"
 
@@ -28,7 +40,7 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
     setFormStatus("pending")
     const payload = {
       borrower_name_id: e.target.borrower_name_id.value,
-      loan_amount: e.target.loan_amount.value,
+      loan_amount: parseFloat(e.target.loan_amount.value.replace(/,/g, '')),
       loan_duration: e.target.loan_duration.value,
       earliest_date: e.target.loan_date.value,
       latest_date: e.target.loan_date.value,
@@ -98,7 +110,7 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
 
         <Form.Group className = "mb-3 " controlId = "loan-amount">
           <Form.Label>Loan Amount</Form.Label>
-          <Form.Control name="loan_amount" type="number" required />
+          <Form.Control value={loanAmount} onChange={(e)=>handleChange(e, setLoanAmount)} name="loan_amount" type="text" required />
         </Form.Group>
 
         <Form.Group className = "mb-3 " controlId = "loan-duration">

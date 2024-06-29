@@ -102,13 +102,26 @@ function LoanPaymentModal({status, setStatus, loan, setLoanStatus}:any){
 }
 
 function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
+  const [amount, setAmount] = useState('')
+
+  // Function to format number with thousands separator
+  const formatNumber = (num:any) => {
+    return num.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
+
+  // Handle input change
+  const handleChange = (e:any, setFunc:any) => {
+    const formattedValue = formatNumber(e.target.value);
+    setFunc(formattedValue);
+  };
+
   const API =  "https://api.growthspringers.com"
   async function handleSubmit(e:any){
     e.preventDefault()
     setStatus("pending")
     const payload = {
       loan_id: e.target.loan_id.value,
-      payment_amount: e.target.payment_amount.value,
+      payment_amount: parseFloat(e.target.payment_amount.value.replace(/,/g, '')),
       payment_date: formatDate(e.target.payment_date.value),
       payment_location: e.target.payment_location.value,
     }
@@ -167,7 +180,7 @@ function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
       <fieldset className="faint p-3  rounded-1">
         <Form.Group className="mb-3" controlId = "payment-amount">
           <Form.Label>Amount</Form.Label>
-          <Form.Control name="payment_amount" required type="number" placeholder="" />
+          <Form.Control value = {amount} onChange={(e)=>handleChange(e, setAmount)} name="payment_amount" required type="text" placeholder="" />
         </Form.Group>
         <Form.Group className="mb-3" controlId = "payment-date">
           <Form.Label>Date</Form.Label>

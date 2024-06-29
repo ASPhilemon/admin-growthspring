@@ -7,10 +7,12 @@ import {createDeposit,  updateDeposit } from '../data/dbQueries';
 export async function addDeposit(user:String, prevState: any, formData: FormData) {
   
   const depositor_name = formData.get('depositor_name') 
-  const deposit_amount = Number( formData.get('deposit_amount')) || 0
+  let deposit_amount:any = formData.get('deposit_amount') || ""
   const deposit_date = formData.get('deposit_date')
   const cash_location = formData.get('cash_location')
   const comment = formData.get('comment')
+
+  deposit_amount = parseFloat(String(deposit_amount).replace(/,/g, ''))
 
   if (!depositor_name) return {error: "Please select depositor"}
   
@@ -37,11 +39,13 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
 export async function editDeposit(deposit: any, prevState: any, formData: FormData) {
   
   const depositor_name = formData.get('depositor_name') 
-  const deposit_amount = Number( formData.get('deposit_amount')) || 0
+  let deposit_amount:any = formData.get('deposit_amount') || ""
   const deposit_date = formData.get('deposit_date')
   const cashLocation = formData.get('cash_location')
   const comment = formData.get('comment')
 
+  deposit_amount = parseFloat(String(deposit_amount).replace(/,/g, ''))
+  
   if (!depositor_name) return {error: "Please select depositor"}
   
   try{
