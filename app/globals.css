@@ -162,3 +162,11 @@ opacity: 30%;
 ::placeholder{
   opacity: 0.4 !important;
 }
+
+.tooltip-inner{
+  background-color: rgb(7, 106, 255) !important;
+}
+
+.tooltip-arrow::before{
+  border-left-color: rgb(7, 106, 255)  !important;
+}
