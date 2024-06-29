@@ -14,14 +14,7 @@ export default function Loading(){
       <Placeholder animation="glow" >
         <Placeholder className="py-3 pb-4 mb-3 rounded-1" xs = {12}/>
       </Placeholder>
-      
-      <div>
-        <div className="loan-cards p-2 rounded-2">
-          <LoanCardSkeleton/>  
-          <LoanCardSkeleton/> 
-          <LoanCardSkeleton/> 
-        </div>
-      </div>
+      <LoanCardsSkeleton/>
   </div>
     
   )
@@ -65,5 +58,15 @@ function LoanCardSkeleton(){
         </div>
       </CardBody>
     </Card>
+  )
+}
+
+export function LoanCardsSkeleton(){
+  return(
+    <div className="loan-cards p-2 rounded-2">
+      <LoanCardSkeleton/>  
+      <LoanCardSkeleton/> 
+      <LoanCardSkeleton/> 
+  </div>
   )
 }

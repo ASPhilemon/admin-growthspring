@@ -5,6 +5,7 @@ import { loanCount, getLoans } from "@/app/data/loan-queries"
 import { LoanCards } from "@/app/components/LoanCards"
 import { LoanFilter } from "@/app/components/LoanFilter"
 import { getUsers } from "@/app/data/dbQueries"
+import { LoanCardsSkeleton } from "./loading"
 
 export default async function Page({searchParams}: any){
 
@@ -29,7 +30,9 @@ export default async function Page({searchParams}: any){
         </Link>
       </div>
       <LoanFilter users = {users} />
-      <LoanCards loanFilter = {loanFilter} />
+      <Suspense fallback = {<LoanCardsSkeleton/>} key = {loanFilter.toString()} >
+        <LoanCards loanFilter = {loanFilter} />
+      </Suspense>
     </div>
     )
 }
