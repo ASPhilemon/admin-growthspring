@@ -63,8 +63,6 @@ export function LoanRequestCardsSkeleton(){
   return(
     <div className="loan-cards p-2 rounded-2">
       <RequestCardSkeleton/>  
-      <RequestCardSkeleton/> 
-      <RequestCardSkeleton/> 
   </div>
   )
 }
