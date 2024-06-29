@@ -4,6 +4,7 @@
 import { Card, Alert, Form, CardBody, Button, Modal, Spinner } from "react-bootstrap";
 import {  Trash } from "react-bootstrap-icons";
 import { useState} from "react";
+import { useRouter } from "next/navigation";
 
 export function LoanRequestCard({loan, handleLoanDelete}: any){
 
@@ -107,6 +108,7 @@ function RequestApprovalModal({status, setStatus, loan, StatusSetter, handleLoan
 function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: any) {
   const [standardChartered, setStandardChartered] = useState('');
   const [mobileMoney, setMobileMoney] = useState('')
+  const router = useRouter()
 
   // Function to format number with thousands separator
   const formatNumber = (num:any) => {
@@ -145,6 +147,7 @@ function RequestApprovalForm({loan, setStatus, StatusSetter, handleLoanDelete}: 
       console.log( data)
       if (res.ok) {
         handleLoanDelete(loan._id)
+        router.refresh()
       }
       else {
         setStatus("error");
