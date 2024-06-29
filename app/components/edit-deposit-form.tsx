@@ -54,7 +54,7 @@ export function EditDepositForm({deposit, users}:any){
           </Col>
           <Col xs = {9} md = {6}>
             <Form.Select defaultValue = {deposit.cashLocation} className="col-8" name="cash_location" required>
-              <option value=""></option>
+              <option selected hidden disabled value=""></option>
               <option value="Standard Chartered">Standard Chartered</option>
               <option value="Mobile Money">Mobile Money</option>
             </Form.Select>
