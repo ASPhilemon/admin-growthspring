@@ -1,15 +1,16 @@
 "use client"
 
 import { Placeholder, Card, CardBody, PlaceholderButton } from "react-bootstrap";
+import Link from "next/link";
 
 export default function Loading(){
   return(
     <div className="px-md-5 px-3">
-      <div className="d-flex align-items-center py-3">
-        <Placeholder className = "me-3 col-12 col-md-4" as = "div" animation="glow" >
-          <Placeholder className="me-2 rounded-1 py-3"  xs = {3}/>
-          <PlaceholderButton size="sm" className = "py-1" variant="primary" xs = {3}/>
-        </Placeholder>
+       <div className="d-flex align-items-center py-3">
+        <h5 className="me-4 mb-0  fw-light " >Loans </h5>
+        <Link className="btn btn-primary btn-sm"  href = "/loans/requests" >
+          Requests
+        </Link>
       </div>
       <Placeholder animation="glow" >
         <Placeholder className="py-3 pb-4 mb-3 rounded-1" xs = {12}/>
@@ -21,7 +22,7 @@ export default function Loading(){
 }
 
 
-function LoanCardSkeleton(){
+export function LoanCardSkeleton(){
   return(
     <Card className="mb-2 loan-card border-0 " >
       <CardBody>
