@@ -60,7 +60,6 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
       const data = await res.json()
       console.log( data)
       if (res.ok) {
-        revalidatePath("/loans/requests")
         router.push("/loans/requests")
       }
       else {
