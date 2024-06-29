@@ -176,10 +176,9 @@ function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
         <Form.Group className="mb-3" controlId = "payment-cash-location">
           <Form.Label>Cash Location</Form.Label>
           <Form.Select name="payment_location" required aria-label="Default select example">
-            <option value =''>select cash location</option>
+            <option disabled hidden value =''></option>
             <option value="Standard Chartered">Standard Chartered</option>
-            <option value="Admin Andrew">Admin Andrew</option>
-            <option value="Admin Joshua">Admin Joshua</option>
+            <option value="Mobile Money">Mobile Money</option>
           </Form.Select>
         </Form.Group>
         <input name="loan_id" hidden type="text" value = {loan._id} />
