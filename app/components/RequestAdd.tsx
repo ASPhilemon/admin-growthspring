@@ -1,8 +1,10 @@
 "use client"
 
+
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Form, Button, Alert, Spinner} from "react-bootstrap"
+import { revalidatePath } from "next/cache"
 
 export function AddRequest({users}:any){
   const [formStatus, setFormStatus] = useState("input")
@@ -58,6 +60,7 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
       const data = await res.json()
       console.log( data)
       if (res.ok) {
+        revalidatePath("/loans/requests")
         router.push("/loans/requests")
       }
       else {
