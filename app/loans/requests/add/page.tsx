@@ -5,7 +5,7 @@ import { AddRequest } from "@/app/components/RequestAdd"
 
 export default async function Page(){
   const users = await getUsersWithIds()
-  await new Promise(resolve => setTimeout(resolve, 5000));
+ // await new Promise(resolve => setTimeout(resolve, 5000));
     return(
     <div className="px-md-5 px-3 py-3 my-2" >
       <div className="d-flex align-items-center py-0">
