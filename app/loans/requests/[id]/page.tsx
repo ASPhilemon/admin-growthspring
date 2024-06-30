@@ -74,8 +74,8 @@ export default async function Page({params}:any) {
           <ul className="list-unstyled">
             <li className="mb-2"> <span className="fw-bold">Borrower Worth.</span>  This is the worth of borrower at loan request time.</li>
             <li className="mb-2"> <span className="fw-bold">Installment Amount.</span>  This is the amount to be paid on one month intervals.</li>
-            <li className="mb-2"> <span className="fw-bold">Total Interest.</span>  This is the total interest the borrower will pay if equal monthly installmets are paid </li>
-            <li> <span className="fw-bold">Total Points.</span>  This is the total number of points used if equal monthly installmets are paid </li>
+            <li className="mb-2"> <span className="fw-bold">Total Interest.</span>  This is the total interest the borrower will pay if a single loan payment is made at the end of the loan duration </li>
+            <li> <span className="fw-bold">Total Points.</span>  This is the total number of points the borrower spends if a single loan payment is made at the end of the loan duration </li>
           </ul>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { getLoans } from "@/app/data/loan-queries"
 
 
 export default async  function Page(){
-  const loans = await getLoans({loan_status: "Initiation", sortBy:"latest_date", order: 1, page: 1, perPage: 100})
+  const loans = await getLoans({loan_status: "Pending Approval", sortBy:"latest_date", order: 1, page: 1, perPage: 100})
 
   return (
     <div className="px-md-5 px-3 py-3 my-2" >
