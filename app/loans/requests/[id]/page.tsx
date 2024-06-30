@@ -56,7 +56,7 @@ export default async function Page({params}:any) {
               </tr>
               <tr>
                 <th>Borrower Worth</th>
-                <td>{loan.points_spent}</td>
+                <td>UGX {loan.worth_at_loan.toLocaleString()}</td>
               </tr>
               <tr>
                 <th>Initiated By</th>
