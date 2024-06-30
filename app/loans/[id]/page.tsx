@@ -58,7 +58,7 @@ export default async function Page({params}:any) {
                 </tr>
                 <tr>
                   <th>Last payment date</th>
-                  <td> { loan.loan_payments > 0?  getDateString(loan.last_payment_date) : "No payment yet"}</td>
+                  <td> { loan.payments > 0?  getDateString(loan.last_payment_date) : "No payment yet"}</td>
                 </tr>
                 <tr>
                   <th>Loan Status</th>
