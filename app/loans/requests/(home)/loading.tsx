@@ -45,11 +45,14 @@ function RequestCardSkeleton(){
           </div>
 
           {/* icons */}
-          <div className="d-flex align-items-center w-25 ms-auto justify-content-end" >
-            <Placeholder xs={7} className="me-2" animation="glow">
+          <div className="d-flex align-items-center w-75 w-md-25 ms-auto justify-content-end" >
+            <Placeholder xs={5} className="me-2" animation="glow">
               <PlaceholderButton xs={12} variant="primary" />
             </Placeholder>
-            <Placeholder xs={5} animation="glow">
+            <Placeholder xs={3} className="me-2" animation="glow">
+              <PlaceholderButton xs={12} variant="primary" />
+            </Placeholder>
+            <Placeholder xs={3} animation="glow">
               <PlaceholderButton xs={12} variant="primary" />
             </Placeholder>
           </div>
