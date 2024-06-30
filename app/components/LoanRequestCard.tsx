@@ -2,9 +2,10 @@
 
 
 import { Card, Alert, Form, CardBody, Button, Modal, Spinner } from "react-bootstrap";
-import {  Trash } from "react-bootstrap-icons";
+import {  Trash, Info } from "react-bootstrap-icons";
 import { useState} from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export function LoanRequestCard({loan, handleLoanDelete}: any){
 
@@ -44,16 +45,17 @@ export function LoanRequestCard({loan, handleLoanDelete}: any){
             <Button
               size="sm"
               variant="outline-primary"
-              className= { "px-3 fw-bold me-2 me-md-4 rounded-1 "}
+              className= { "px-2 fw-bold me-2 me-md-2 rounded-1 "}
               onClick = {
                 ()=> setStatus("modal-approve")
               }
               > Approve
             </Button>
+            <Link href={`/loans/requests/${loan._id}`} className="btn btn-sm btn-outline-primary me-3 rounded-1 me-md-4"><Info size={22}/></Link>
             <Button
               size="sm"
               variant="outline-danger"
-              className= { "px-3 fw-bold me-2 me-md-4 rounded-1 "}
+              className= { "px-2 fw-bold me-md-4 rounded-1 "}
               onClick = {
                 ()=> setStatus("modal-delete")
               }
