@@ -19,7 +19,7 @@ export default async function Page({params}:any) {
         <BreadcrumbItem linkAs = {Link} href="/loans/requests"> Requests </BreadcrumbItem>
         <BreadcrumbItem  active>Detail</BreadcrumbItem>
       </Breadcrumb>
-      <h6 className="mb-3 fw-bold">Loan Request Details</h6>
+      <h6 className="mb-3 fw-light">Loan Request Details</h6>
       <div className="d-md-flex">
         <div className="col-md-6">
           <Table align="center" className="table-warning" responsive striped bordered hover>

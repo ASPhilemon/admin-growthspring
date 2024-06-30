@@ -4,7 +4,6 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Form, Button, Alert, Spinner} from "react-bootstrap"
-import { revalidatePath } from "next/cache"
 
 export function AddRequest({users}:any){
   const [formStatus, setFormStatus] = useState("input")
@@ -77,7 +76,6 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
 
   function getMinDate(){
     const minDate = new Date()
-    minDate.setDate(minDate.getDate()-40)
     const year = minDate.getFullYear()
     const month = (minDate.getMonth() + 1).toString().padStart(2, '0');
     const day = minDate.getDate()

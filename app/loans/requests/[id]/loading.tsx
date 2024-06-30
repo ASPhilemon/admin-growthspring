@@ -12,7 +12,7 @@ export default function Page({params}:any) {
         <BreadcrumbItem linkAs = {Link} href="/loans"> Loans </BreadcrumbItem>
         <BreadcrumbItem  active>Detail</BreadcrumbItem>
       </Breadcrumb>
-      <h6 className="mb-3 fw-bold">Loan Request Info</h6>
+      <h6 className="mb-3 fw-light">Loan Request Details</h6>
  
       <div className="d-md-flex">
         <div className="col-md-6">
