@@ -154,6 +154,18 @@ export default function Page({params}:any) {
                     </Placeholder>
                   </td>
                 </tr>
+                <tr>
+                  <td>
+                    <Placeholder animation="glow" >
+                      <Placeholder className="rounded-1" xs={12} />
+                    </Placeholder>
+                  </td>
+                  <td>
+                    <Placeholder animation="glow" >
+                      <Placeholder className="rounded-1" xs={12} />
+                    </Placeholder>
+                  </td>
+                </tr>
               </tbody>
             </Table>
           </div>
