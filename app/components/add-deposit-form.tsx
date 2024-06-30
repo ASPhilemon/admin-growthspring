@@ -36,7 +36,7 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
         </FormLabel>
         <Col xs={9} md={6}>
           <FormSelect required name = "depositor_name" id = "depositor_name" >
-            <option value = '' ></option>
+            <option selected hidden disabled value = '' ></option>
             {users.map((user:any, index:any) => {
               return (
                 <option key = {index} value = {user} >{user}</option>
