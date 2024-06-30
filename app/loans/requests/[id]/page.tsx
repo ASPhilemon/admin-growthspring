@@ -44,11 +44,11 @@ export default async function Page({params}:any) {
               </tr>
               <tr>
                 <th>Installment Amount</th>
-                <td>UGX {loan.installment_amount?.toLocaleString()}</td>
+                <td>UGX {Math.floor(loan.installment_amount)?.toLocaleString()}</td>
               </tr>
               <tr>
                 <th>Total Interest</th>
-                <td>UGX {loan.interest_amount.toLocaleString()}</td>
+                <td>UGX {Math.floor(loan.interest_amount).toLocaleString()}</td>
               </tr>
               <tr>
                 <th>Total Points</th>

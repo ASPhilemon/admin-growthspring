@@ -41,6 +41,10 @@ export default async function Page({params}:any) {
                   <td>{loan.loan_duration} months</td>
                 </tr>
                 <tr>
+                  <th>Approved By</th>
+                  <td>{loan.approved_by}</td>
+                </tr>
+                <tr>
                   <th>Installment Amount</th>
                   {
                     loan.installment_amount? 
