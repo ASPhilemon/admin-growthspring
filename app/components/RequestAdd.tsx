@@ -79,7 +79,7 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
     const minDate = new Date()
     const year = minDate.getFullYear()
     const month = (minDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = minDate.getDate()
+    const day = minDate.getDate().toString().padStart(2, '0');
     const minDateString = `${year}-${month}-${day}`
     return minDateString
   }
