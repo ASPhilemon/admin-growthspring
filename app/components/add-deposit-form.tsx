@@ -124,7 +124,7 @@ function getMaxDepositDate(){
   const today = new Date()
   const currentYear = today.getFullYear()
   const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
-  const day = today.getDate()
+  const day = today.getDate().toString().padStart(2, '0');
   const maxDateString = `${currentYear}-${currentMonth}-${day}`
   return maxDateString
 }

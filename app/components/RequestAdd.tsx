@@ -89,7 +89,7 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
     maxDate.setDate(maxDate.getDate()+120)
     const currentYear = maxDate.getFullYear()
     const currentMonth = (maxDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = maxDate.getDate()
+    const day = maxDate.getDate().toString().padStart(2, '0');
     const maxDateString = `${currentYear}-${currentMonth}-${day}`
     return maxDateString
   }
