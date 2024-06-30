@@ -12,113 +12,16 @@ export default function Page({params}:any) {
         <BreadcrumbItem linkAs = {Link} href="/loans"> Loans </BreadcrumbItem>
         <BreadcrumbItem  active>Detail</BreadcrumbItem>
       </Breadcrumb>
-      <h6 className="mb-3 fw-bold">Summary</h6>
-      <div className="col-md-6">
-        <Table borderless align="center" responsive  >
-          <thead>
-            <tr>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs = {12} />
-                </Placeholder>
-              </td>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-          <tr>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs = {12} />
-                </Placeholder>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs ={12} />
-                </Placeholder>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs = {12} />
-                </Placeholder>
-              </td>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12}/>
-                </Placeholder>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-              <td>
-                <Placeholder animation="glow" >
-                  <Placeholder className="rounded-1" xs={12} />
-                </Placeholder>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
-      </div>
-      <h6 className="mb-3 mt-4 fw-bold">Payment History</h6>
-      <div className="col-md-6">
-        
-          <Table className="align-middle" responsive borderless>
+      <h6 className="mb-3 fw-bold">Loan Request Info</h6>
+ 
+      <div className="d-md-flex">
+        <div className="col-md-6">
+          <Table borderless align="center" responsive  >
             <thead>
               <tr>
                 <td>
                   <Placeholder animation="glow" >
                     <Placeholder className="rounded-1" xs = {12} />
-                  </Placeholder>
-                </td>
-                <td>
-                  <Placeholder animation="glow" >
-                    <Placeholder className="rounded-1" xs={12} />
                   </Placeholder>
                 </td>
                 <td>
@@ -132,9 +35,16 @@ export default function Page({params}:any) {
               <tr>
                 <td>
                   <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
                     <Placeholder className="rounded-1" xs = {12} />
                   </Placeholder>
                 </td>
+              </tr>
+              <tr>
                 <td>
                   <Placeholder animation="glow" >
                     <Placeholder className="rounded-1" xs={12} />
@@ -142,7 +52,7 @@ export default function Page({params}:any) {
                 </td>
                 <td>
                   <Placeholder animation="glow" >
-                    <Placeholder className="rounded-1" xs={12} />
+                    <Placeholder className="rounded-1" xs ={12} />
                   </Placeholder>
                 </td>
               </tr>
@@ -157,6 +67,13 @@ export default function Page({params}:any) {
                     <Placeholder className="rounded-1" xs={12} />
                   </Placeholder>
                 </td>
+              </tr>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
                 <td>
                   <Placeholder animation="glow" >
                     <Placeholder className="rounded-1" xs={12} />
@@ -166,9 +83,64 @@ export default function Page({params}:any) {
               <tr>
                 <td>
                   <Placeholder animation="glow" >
-                    <Placeholder className="rounded-1" xs = {12} />
+                    <Placeholder className="rounded-1" xs={12} />
                   </Placeholder>
                 </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12}/>
+                  </Placeholder>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+              </tr>
+              <tr>
                 <td>
                   <Placeholder animation="glow" >
                     <Placeholder className="rounded-1" xs={12} />
@@ -181,10 +153,31 @@ export default function Page({params}:any) {
                 </td>
               </tr>
             </tbody>
-         
-          </Table> :
+          </Table>
+        </div>
+        <div className="px-md-4 col-md-6">
+          <Placeholder className="mb-3 d-block" animation="glow">
+            <Placeholder className="rounded-1" xs = {3}/>
+          </Placeholder>
+          <Placeholder animation="glow"className="d-block mb-2">
+            <Placeholder className="rounded-1" xs = {12}/>
+            <Placeholder className="rounded-1" xs = {12} />
+          </Placeholder>
+          <Placeholder className="d-block mb-2" animation="glow">
+            <Placeholder className="rounded-1" xs = {12}/>
+            <Placeholder className="rounded-1" xs = {12} />
+          </Placeholder>
+          <Placeholder className="d-block mb-2" animation="glow">
+            <Placeholder className="rounded-1" xs = {12}/>
+            <Placeholder className="rounded-1" xs = {12} />
+          </Placeholder>
+          <Placeholder className="d-block mb-2" animation="glow">
+            <Placeholder className="rounded-1" xs = {12}/>
+            <Placeholder className="rounded-1" xs = {12} />
+          </Placeholder>
+        </div>
       </div>
-
+   
     </div>
   
   );

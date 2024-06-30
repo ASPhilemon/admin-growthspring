@@ -54,10 +54,10 @@ function  DashboardPageLinks({handleClose}:{handleClose: any}){
       linkText: "Deposits",
       linkUrl: "/deposits"
     },
-    {
-      linkText: "Loans",
-      linkUrl: "/loans"
-    },
+    // {
+    //   linkText: "Loans",
+    //   linkUrl: "/loans"
+    // },
   ]
 
   return(
