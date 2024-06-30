@@ -161,7 +161,7 @@ function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
     minDate.setDate(minDate.getDate()-40)
     const year = minDate.getFullYear()
     const month = (minDate.getMonth() + 1).toString().padStart(2, '0');
-    const day = minDate.getDate()
+    const day = minDate.getDate().toString().padStart(2, '0');
     const minDateString = `${year}-${month}-${day}`
     return minDateString
   }
@@ -170,7 +170,7 @@ function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
     const today = new Date()
     const currentYear = today.getFullYear()
     const currentMonth = (today.getMonth() + 1).toString().padStart(2, '0');
-    const day = today.getDate()
+    const day = today.getDate().toString().padStart(2, '0');
     const maxDateString = `${currentYear}-${currentMonth}-${day}`
     return maxDateString
   }
@@ -189,7 +189,7 @@ function LoanPaymentForm({loan, setStatus, setLoanStatus}: any) {
         <Form.Group className="mb-3" controlId = "payment-cash-location">
           <Form.Label>Cash Location</Form.Label>
           <Form.Select name="payment_location" required aria-label="Default select example">
-            <option disabled hidden value =''></option>
+            <option selected disabled hidden value =''></option>
             <option value="Standard Chartered">Standard Chartered</option>
             <option value="Mobile Money">Mobile Money</option>
           </Form.Select>
