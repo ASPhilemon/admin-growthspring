@@ -56,6 +56,7 @@ export default async function Page({params}:any) {
                   <th> {loan.loan_status == "Ongoing"? "Tentative Points" : "Points Spent" }</th>
                   <td>{loan.points_spent}</td>
                 </tr>
+            
                 <tr>
                   <th>Principal Left</th>
                   <td>UGX {loan.principal_left.toLocaleString()}</td>
@@ -63,6 +64,10 @@ export default async function Page({params}:any) {
                 <tr>
                   <th>Last payment date</th>
                   <td> { loan.payments.length > 0?  getDateString(loan.last_payment_date) : "No payment yet"}</td>
+                </tr>
+                <tr>
+                  <th> Total Payments (To Date)</th>
+                  <td>UGX {loan.payments.reduce((acc:any, cur:any)=> acc + cur.payment_amount, 0).toLocaleString()}</td>
                 </tr>
                 <tr>
                   <th>Loan Status</th>

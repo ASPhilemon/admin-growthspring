@@ -60,6 +60,7 @@ export function RequestAddForm({users, setFormStatus, setError, error, formStatu
       console.log( data)
       if (res.ok) {
         router.push("/loans/requests")
+        router.refresh()
       }
       else {
         setFormStatus("error")
