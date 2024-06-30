@@ -44,7 +44,7 @@ export default async function Page({params}:any) {
               </tr>
               <tr>
                 <th>Installment Amount</th>
-                <td>UGX {Math.floor((loan.loan_amount + loan.interest_amount)/loan.loan_duration).toLocaleString()}</td>
+                <td>UGX {loan.installment_amount?.toLocaleString()}</td>
               </tr>
               <tr>
                 <th>Total Interest</th>

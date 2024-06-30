@@ -20,6 +20,10 @@ const LoanSchema = new mongoose.Schema({
     discount: Number,
     points_worth_bought: Number,
     interest_amount: Number,
+    installment_amount: {
+        type: Number,
+        required: false
+    },
     payments: [{
         payment_date: Date,
         payment_amount: Number,

@@ -42,8 +42,12 @@ export default async function Page({params}:any) {
                 </tr>
                 <tr>
                   <th>Installment Amount</th>
-                  <td>UGX {Math.floor((loan.loan_amount + loan.interest_amount)/loan.loan_duration).toLocaleString()}</td>
-                  </tr>
+                  {
+                    loan.installment_amount? 
+                    <td>UGX {loan.installment_amount.toLocaleString()}</td>:
+                    <td className="text-muted">Not Available</td>
+                  }
+                </tr>
                 <tr>
                   <th>{loan.loan_status == "Ongoing"? "Tentative Interest" : "Interest Paid" }</th>
                   <td>UGX {loan.interest_amount.toLocaleString()}</td>
