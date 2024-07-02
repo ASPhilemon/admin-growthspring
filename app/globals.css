@@ -176,6 +176,10 @@ opacity: 30%;
   margin-right: 10px;
 }
 
+.loan-cards th, .loan-cards td{
+  font-weight: 300;
+}
+
 
 td, th{
   white-space: nowrap !important;
@@ -183,4 +187,11 @@ td, th{
 
 .filter-summary-heading{
   color: rgb(255 193 7);
+  font-weight: bolder;
+}
+
+.vr{
+  width: 3px;
+  height: 20px;;
+  font-weight: 900;
 }

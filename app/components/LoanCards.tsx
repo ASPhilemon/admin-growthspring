@@ -34,26 +34,26 @@ function NoLoans() {
 function FilterSummary({loans_summary}:any){
   return (
     <div className="bg-white p-2 rounded-2" >
-      <h6 className="mb-1 filter-summary-heading fw-light">Filter Summary</h6>
+      <h6 className="mb-1 filter-summary-heading">Filter Summary</h6>
       <Table className="rounded-table mb-0" size="sm" responsive >
         <thead>
           <tr>
             <th>Loan Count</th>
-            <td> {loans_summary.ongoingLoansCount} | {loans_summary.endedLoansCount}  </td>
+            <td> {loans_summary.ongoingLoansCount} <div className="vr mx-3 bg-dark"/> {loans_summary.endedLoansCount}  </td>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th>Principal (UGX)</th>
-            <td> {Math.floor(loans_summary.totalPrincipal).toLocaleString()} | {Math.floor(loans_summary.principalLeft).toLocaleString()}  </td>
+            <td> {Math.floor(loans_summary.totalPrincipal).toLocaleString()} <div className="vr mx-3 bg-dark"/> {Math.floor(loans_summary.principalLeft).toLocaleString()}  </td>
           </tr>
           <tr>
             <th>Interest (UGX)</th>
-            <td> {Math.floor(loans_summary.interestPaid).toLocaleString()} | {Math.floor(loans_summary.expectedInterest).toLocaleString()}  </td>
+            <td> {Math.floor(loans_summary.interestPaid).toLocaleString()} <div className="vr mx-3 bg-dark"/> {Math.floor(loans_summary.expectedInterest).toLocaleString()}  </td>
           </tr>
           <tr>
             <th>Member Count</th>
-            <td> {loans_summary.membersOngoingLoans.size} | {loans_summary.membersEndedLoans.size} | {loans_summary.members.size}</td>
+            <td> {loans_summary.membersOngoingLoans.size} <div className="vr mx-3 bg-dark"/> {loans_summary.membersEndedLoans.size} <div className="vr mx-3 bg-dark"/> {loans_summary.members.size}</td>
           </tr>
         </tbody>
     </Table>
