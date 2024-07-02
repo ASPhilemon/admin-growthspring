@@ -53,14 +53,26 @@ export default async function Page({params}:any) {
                   }
                 </tr>
                 <tr>
+                  <th>Interest Accrued</th>
+                  { loan.interest_accrued? <td>UGX {loan.interest_accrued.toLocaleString()}</td>:
+                  <td><span className="text-muted">Not Available</span></td>
+                  }
+                </tr>
+                <tr>
                   <th>{loan.loan_status == "Ongoing"? "Tentative Interest" : "Interest Paid" }</th>
                   <td>UGX {loan.interest_amount.toLocaleString()}</td>
                 </tr>
                 <tr>
-                  <th> {loan.loan_status == "Ongoing"? "Tentative Points" : "Points Spent" }</th>
-                  <td>{loan.points_spent}</td>
+                  <th>Points Accrued</th>
+                  { loan.points_accrued? <td>{loan.points_accrued.toLocaleString()} points</td>:
+                  <td><span className="text-muted">Not Available</span></td>
+                  }
                 </tr>
-            
+                <tr>
+                  <th> {loan.loan_status == "Ongoing"? "Tentative Points" : "Points Spent" }</th>
+                  <td>{loan.points_spent} points</td>
+                </tr>
+           
                 <tr>
                   <th>Principal Left</th>
                   <td>UGX {loan.principal_left.toLocaleString()}</td>
