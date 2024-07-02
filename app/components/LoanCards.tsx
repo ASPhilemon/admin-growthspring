@@ -34,7 +34,7 @@ function NoLoans() {
 function FilterSummary({loans_summary}:any){
   return (
     <div className="bg-white p-2 rounded-2" >
-      <h6 className="mb-2 text-warning fw-bolder">Filter Summary</h6>
+      <h6 className="mb-1 filter-summary-heading fw-light">Filter Summary</h6>
       <Table className="rounded-table mb-0" size="sm" responsive >
         <thead>
           <tr>

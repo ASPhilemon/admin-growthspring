@@ -180,3 +180,7 @@ opacity: 30%;
 td, th{
   white-space: nowrap !important;
 }
+
+.filter-summary-heading{
+  color: rgb(255 193 7);
+}
