@@ -195,3 +195,7 @@ td, th{
   height: 20px;;
   font-weight: 900;
 }
+
+.filter-summary td{
+  font-weight: 500;
+}

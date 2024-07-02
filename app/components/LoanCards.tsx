@@ -33,7 +33,7 @@ function NoLoans() {
 
 function FilterSummary({loans_summary}:any){
   return (
-    <div className="bg-white p-2 rounded-2" >
+    <div className="bg-white filter-summary p-2 rounded-2" >
       <h6 className="mb-1 filter-summary-heading">Filter Summary</h6>
       <Table className="rounded-table mb-0" size="sm" responsive >
         <thead>
@@ -49,7 +49,7 @@ function FilterSummary({loans_summary}:any){
           </tr>
           <tr>
             <th>Interest (UGX)</th>
-            <td> {Math.floor(loans_summary.interestPaid).toLocaleString()} <div className="vr mx-3 bg-dark"/> {Math.floor(loans_summary.expectedInterest).toLocaleString()}  </td>
+            <td>{Math.floor(loans_summary.expectedInterest).toLocaleString()} <div className="vr mx-3 bg-dark"/>{Math.floor(loans_summary.interestPaid).toLocaleString()}   </td>
           </tr>
           <tr>
             <th>Member Count</th>
