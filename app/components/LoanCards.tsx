@@ -6,7 +6,7 @@ import { LoansFilterSummary } from "./LoansFilterSummary";
 export async function LoanCards({loanFilter}: any){
   const loans = await getLoans(loanFilter)
   const loans_summary = summarize_loans(loans)
-  // await new Promise(resolve => setTimeout(resolve, 5000));
+  //await new Promise(resolve => setTimeout(resolve, 5000));
 
   return(
     loans.length > 0 ?
