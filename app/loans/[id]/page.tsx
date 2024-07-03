@@ -90,7 +90,6 @@ export default async function Page({params}:any) {
                   <td>{loan.loan_status}</td>
                 </tr>
               </tbody>
-            
             </Table>
           </div>
         </div>
