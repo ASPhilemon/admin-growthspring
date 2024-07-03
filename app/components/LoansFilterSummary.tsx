@@ -23,7 +23,7 @@ export function LoansFilterSummary({loans_summary}:any){
             <th>Loan Count
               <Button
                   ref = {(el:any)=>overlayRefs.current.loanCount = el}
-                  className="px-1 border-0 rounded-2 py-0" variant="outline-primary"
+                  className="px-1 border-0 rounded-2 py-0" variant="outline-secondary"
                   onClick= {()=>handleOverlays("loanCount")}
                 >
                   <QuestionCircleFill size={15} />
@@ -44,7 +44,7 @@ export function LoansFilterSummary({loans_summary}:any){
             <th> Principal (UGX)
               <Button
                 ref = {(el:any)=>overlayRefs.current.principal = el}
-                className="px-1 border-0 rounded-2 py-0" variant="outline-primary"
+                className="px-1 border-0 rounded-2 py-0" variant="outline-secondary"
                 onClick= {()=>handleOverlays("principal")}
               >
                 <QuestionCircleFill size={15} />
@@ -63,7 +63,7 @@ export function LoansFilterSummary({loans_summary}:any){
             <th>Interest (UGX)
               <Button
                 ref = {(el:any)=>overlayRefs.current.interest = el}
-                className="px-1 border-0 rounded-2 py-0" variant="outline-primary"
+                className="px-1 border-0 rounded-2 py-0" variant="outline-secondary"
                 onClick= {()=>handleOverlays("interest")}
               >
                 <QuestionCircleFill size={15} />
@@ -83,7 +83,7 @@ export function LoansFilterSummary({loans_summary}:any){
             <th>Member Count
               <Button
                 ref = {(el:any)=>overlayRefs.current.memberCount = el}
-                className="px-1 border-0 rounded-2 py-0" variant="outline-primary"
+                className="px-1 border-0 rounded-2 py-0" variant="outline-secondary"
                 onClick= {()=>handleOverlays("memberCount")}
               >
                 <QuestionCircleFill size={15} />

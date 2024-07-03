@@ -1,6 +1,6 @@
 "use client"
 
-import { Placeholder, Card, CardBody, PlaceholderButton } from "react-bootstrap";
+import { Placeholder, Card, CardBody, PlaceholderButton, Table } from "react-bootstrap";
 import Link from "next/link";
 
 export default function Loading(){
@@ -18,6 +18,70 @@ export default function Loading(){
       <LoanCardsSkeleton/>
   </div>
     
+  )
+}
+
+function FilterSummarySkeleton(){
+  return(
+    <div className="bg-white py-2 rounded-2 mb-2">
+      <Placeholder className = "mb-3 ms-1 rounded-pill" animation="glow" >
+        <Placeholder className="py-2  rounded-pill" xs = {3} lg={2} />
+      </Placeholder>
+      <Table className="my-2" size="sm" borderless align="center" responsive  >
+            <thead>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs = {12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs = {12} />
+                  </Placeholder>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs = {12} />
+                  </Placeholder>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs={12} />
+                  </Placeholder>
+                </td>
+                <td>
+                  <Placeholder animation="glow" >
+                    <Placeholder className="rounded-1" xs = {12} />
+                  </Placeholder>
+                </td>
+              </tr>
+            </tbody>
+      </Table>
+    </div>
   )
 }
 
@@ -65,6 +129,7 @@ export function LoanCardSkeleton(){
 export function LoanCardsSkeleton(){
   return(
     <div className="loan-cards p-2 rounded-2">
+      <FilterSummarySkeleton/>
       <LoanCardSkeleton/>  
       <LoanCardSkeleton/> 
       <LoanCardSkeleton/> 
