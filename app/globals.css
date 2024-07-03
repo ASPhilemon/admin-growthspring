@@ -163,13 +163,14 @@ opacity: 30%;
   opacity: 0.4 !important;
 }
 
-.tooltip-inner{
+/* .tooltip-inner{
   background-color: rgb(7, 106, 255) !important;
-}
-
+} */
+/* 
 .tooltip-arrow::before{
   border-left-color: rgb(7, 106, 255)  !important;
-}
+
+} */
 
 
 .modal .btn-close{
@@ -198,4 +199,12 @@ td, th{
 
 .filter-summary td{
   font-weight: 500;
+}
+
+.tooltip{
+  --bs-tooltip-bg: #2c5899 !important;
+}
+
+.border-bottom-none,  .border-bottom-none td, .border-bottom-none th{
+  border-bottom: none !important;
 }
