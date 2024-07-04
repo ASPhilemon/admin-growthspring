@@ -166,14 +166,14 @@ export function LoanFilter({users}:{users:string[]}) {
         
               {/* Sort */}
               <Col  className = " align-items-center" >
-                <FormGroup className ='d-md-flex align-items-center mb-3' controlId='sortby' >
+                <FormGroup className ='d-md-flex align-items-center mb-2' controlId='sortby' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Sort By</FormLabel>
                   <FormSelect defaultValue ={ sortBy && validSort.includes(sortBy)? sortBy: "loan_date" } onChange = {(e)=> handleParamChange('sortBy', e.target.value)}  >
                     <option value = "loan_date" >Date</option>
                     <option value="loan_amount">Amount</option>
                   </FormSelect>
                 </FormGroup>
-                <FormGroup className ='d-md-flex align-items-center mb-3' controlId='order' >
+                <FormGroup className ='d-md-flex align-items-center' controlId='order' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Order</FormLabel>
                   <FormSelect defaultValue = { order && validOrder.includes(order)? order: "-1" }  onChange = {(e)=> handleParamChange('order', e.target.value)}  >
                     <option value = "-1" >
