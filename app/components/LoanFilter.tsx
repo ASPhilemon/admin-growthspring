@@ -14,9 +14,61 @@ export function LoanFilter({users}:{users:string[]}) {
 
   const params = new URLSearchParams(searchParams);
   const keysArray = [...params.keys()];
-  const { year, member, loan_status, sortBy, order, perPage } = Object.fromEntries(keysArray.map(key => [key, params.get(key)]));
+  const { year, member, month, loan_status, sortBy, order, perPage } = Object.fromEntries(keysArray.map(key => [key, params.get(key)]));
 
-  const validYears = ["2022", "2023", "2024"]
+  const months = [
+    {
+      month: "Jan",
+      value: "1"
+    },
+    {
+      month: "Feb",
+      value: "2"
+    },
+    {
+      month: "Mar",
+      value: "3"
+    },
+    {
+      month: "Apr",
+      value: "4"
+    },
+    {
+      month: "May",
+      value: "5"
+    },
+    {
+      month: "Jun",
+      value: "6"
+    },
+    {
+      month: "Jul",
+      value: "7"
+    },
+    {
+      month: "Aug",
+      value: "8"
+    },
+    {
+      month: "Sep",
+      value: "9"
+    },
+    {
+      month: "Oct",
+      value: "10"
+    },
+    {
+      month: "Nov",
+      value: "11"
+    },
+    {
+      month: "Dec",
+      value: "12"
+    }
+  ]
+
+  const validMonths = months.map((month)=>month.value)
+  const validYears = ["2023", "2024"]
   const validMembers = users;
   const validStatus = ["Ended", "Ongoing"]
   const validSort = ['loan_amount', 'loan_date']
@@ -71,7 +123,7 @@ export function LoanFilter({users}:{users:string[]}) {
             <Row className = ' py-1 '>
               {/* Filter */}
               <Col className = " align-items-center" >
-                <FormGroup className ='d-md-flex align-items-center  mb-3' controlId='year-filter' >
+                <FormGroup className ='d-md-flex align-items-center  mb-2' controlId='year-filter' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Year</FormLabel>
                   <FormSelect defaultValue={ year && validYears.includes(year)? year: "" } onChange = {(e)=> handleParamChange('year', e.target.value)}  >
                     <option value = "" >All</option>
@@ -80,7 +132,18 @@ export function LoanFilter({users}:{users:string[]}) {
                     <option value="2022">2022</option>
                   </FormSelect>
                 </FormGroup>
-                <FormGroup className ='d-md-flex align-items-center  mb-3' controlId='status-filter' >
+                <FormGroup className = 'd-md-flex align-items-center mb-2' controlId='month-filter' >
+                  <FormLabel className={`me-md-2 ${styles.formLabel}`} >Month</FormLabel>
+                  <FormSelect defaultValue={ month && validMonths.includes(month)? month: "all" } onChange = {(e)=> handleParamChange('month', e.target.value)}  >
+                    <option value = "" >All</option>
+                    {months.map((month, index) => {
+                      return (
+                        <option key = {index} value = {month.value} >{month.month}</option>
+                      )
+                    })}
+                  </FormSelect>
+                </FormGroup>
+                <FormGroup className ='d-md-flex align-items-center  mb-2' controlId='status-filter' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Status</FormLabel>
                   <FormSelect defaultValue={ loan_status && validStatus.includes(loan_status)? loan_status: "" } onChange = {(e)=> handleParamChange('loan_status', e.target.value)}  >
                     <option value = "" >All</option>

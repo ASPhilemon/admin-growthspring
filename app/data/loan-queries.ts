@@ -29,7 +29,7 @@ export async function loanCount( {member, year, loan_status } : any) {
   return result.length > 0 ? result[0].count : 0;
 }
 
-export async function getLoans( {member, year, loan_status, page, order, perPage, sortBy } : any) {
+export async function getLoans( {member, year, loan_status, page, month, order, perPage, sortBy } : any) {
   noStore()
   await dbConnect() // Connect to the database if not already connected
 
@@ -40,6 +40,7 @@ export async function getLoans( {member, year, loan_status, page, order, perPage
 
   const matchCriteria = [];
   if (year) matchCriteria.push({ $expr: { $eq: [{$year: "$loan_date"}, year] } });
+  if (month) matchCriteria.push({ $expr: { $eq: [{ $month: "$loan_date" }, month] } });
   if (!loan_status) matchCriteria.push({ loan_status: { $in: ["Ended", "Ongoing"] } }); else matchCriteria.push({ loan_status})
   if (member) matchCriteria.push({ borrower_name: member });
 

@@ -12,6 +12,7 @@ export default async function Page({searchParams}: any){
 
   const loanFilter = {
     year: Number(searchParams.year),
+    month: Number(searchParams.month),
     member: searchParams.member,
     loan_status: searchParams.loan_status,
     page: Number(searchParams?.page) || 1,
