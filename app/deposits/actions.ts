@@ -1,8 +1,11 @@
 'use server'
 
+
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import {createDeposit,  updateDeposit } from '../data/dbQueries';
+import { depositEmailConfirmationHTML } from '../components/DepositConfirmation';
+import { sendMail } from '../sendMail';
 
 export async function addDeposit(user:String, prevState: any, formData: FormData) {
   
@@ -16,8 +19,8 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
 
   if (!depositor_name) return {error: "Please select depositor"}
   
-  try{
-    await createDeposit({
+  try {
+    const DepositEmailDetail = await createDeposit({
       depositor_name,
       deposit_amount,
       deposit_date,
@@ -26,6 +29,17 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
       cashLocation: cash_location,
       comment
     })
+    const emailBody = await depositEmailConfirmationHTML(DepositEmailDetail)
+    sendMail({
+      recipient: DepositEmailDetail.email,
+      sender: "treasury",
+      subject: `Deposit Confirmation ${DepositEmailDetail.date}`,
+      body: emailBody,
+      replyAddress: "philemonariko@gmail.com"
+    })
+    //console.log(emailBody)
+
+
   } catch(err : any){
     console.log(err)
     return {error: err.message}
@@ -65,3 +79,4 @@ export async function editDeposit(deposit: any, prevState: any, formData: FormDa
   revalidatePath('/deposits');
   redirect('/deposits');
 }
+
