@@ -35,7 +35,7 @@ export async function addDeposit(user:String, prevState: any, formData: FormData
       sender: "treasury",
       subject: `Deposit Confirmation ${DepositEmailDetail.date}`,
       body: emailBody,
-      replyAddress: "philemonariko@gmail.com"
+      replyAddress: "andykawums@gmail.com"
     })
     //console.log(emailBody)
 
