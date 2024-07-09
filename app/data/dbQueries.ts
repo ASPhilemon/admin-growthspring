@@ -153,7 +153,7 @@ export async function getUsers(){
 }
 
 export async function getUsersWithIds(){
-    noStore()
+    //noStore()
     await dbConnect() //connect to db if not already connected
     const users =  await User.find({}, 'fullName');
     const sortedUsers = users.sort((a, b) => {
