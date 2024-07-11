@@ -35,7 +35,7 @@ export function EditDepositForm({deposit, users}:any){
           Depositor
         </FormLabel>
         <Col xs={9} md={6}>
-          <FormSelect defaultValue = {deposit.depositor_name} name = "depositor_name" id = "depositor_name" >
+          <FormSelect readOnly defaultValue = {deposit.depositor_name} name = "depositor_name" id = "depositor_name" >
             {users.map((user:any, index:any) => {
               return (
                 <option key = {index} value = {user} >{user}</option>
