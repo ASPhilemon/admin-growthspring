@@ -7,7 +7,7 @@ import Link from "next/link"
 import { useState } from "react"
 
 
-export function EditDepositForm({deposit, users}:any){
+export function EditDepositForm({deposit}:any){
   const [amount, setAmount] = useState(formatNumber(String(deposit.deposit_amount)))
 
   // Function to format number with thousands separator
@@ -35,12 +35,8 @@ export function EditDepositForm({deposit, users}:any){
           Depositor
         </FormLabel>
         <Col xs={9} md={6}>
-          <FormSelect readOnly defaultValue = {deposit.depositor_name} name = "depositor_name" id = "depositor_name" >
-            {users.map((user:any, index:any) => {
-              return (
-                <option key = {index} value = {user} >{user}</option>
-              )
-            })}
+          <FormSelect defaultValue = {deposit.depositor_name} name = "depositor_name" id = "depositor_name" >
+              <option value = {deposit.depositor_name} > {deposit.depositor_name} </option>
           </FormSelect> 
         </Col>
     
