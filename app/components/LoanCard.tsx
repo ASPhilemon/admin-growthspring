@@ -28,9 +28,6 @@ export function LoanCard({loan}: any){
      <Card className="mb-2 loan-card border-0   " >
       <CardBody>
         <div className="d-flex mb-5 align-items-center header pb-3"  >
-          {/* avatar */}
-          {/* <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
-          </div> */}
           <img
             width={30} height={30}
             src={imgSrc} alt={loan.borrower_name}
