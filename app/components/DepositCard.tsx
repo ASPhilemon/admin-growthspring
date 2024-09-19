@@ -6,7 +6,7 @@ import Image from "next/image";
 export function DepositCard({deposit}: any){
   const API = "https://api.growthspringers.com"
   let imgSrc = deposit.depositor.photoURL
-  imgSrc = imgSrc? `${API}/${imgSrc}`: "/img/defaultPhoto.jpg"
+  imgSrc = imgSrc? `${API}/${imgSrc}`:"/img/defaultPhoto.jpg"
 
   function getDateString(date:any){
     const options = { month: 'short', day: '2-digit', year: 'numeric' };
