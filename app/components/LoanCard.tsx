@@ -8,6 +8,9 @@ import {Badge} from "react-bootstrap";
 import { useState, useRef } from "react";
 
 export function LoanCard({loan}: any){
+  const API = "https://api.growthspringers.com"
+  let imgSrc = loan.borrower.photoURL
+  imgSrc = imgSrc? `${API}/${imgSrc}`: "/img/defaultPhoto.jpg"
 
   const [status, setStatus] = useState("flat");
   const [loanStatus, setLoanStatus] = useState(loan.loan_status)
@@ -26,8 +29,13 @@ export function LoanCard({loan}: any){
       <CardBody>
         <div className="d-flex mb-5 align-items-center header pb-3"  >
           {/* avatar */}
-          <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
-          </div>
+          {/* <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
+          </div> */}
+          <img
+            width={30} height={30}
+            src={imgSrc} alt={loan.borrower_name}
+            className="rounded-circle shadow-sm  me-3"
+          />
           <h6 className="mb-0 depositor-name me-2" > {loan.borrower_name} </h6>
           { loanStatus == "Ended" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="success">Ended <Check2 className="ms-1" size={16}/> </Badge>}
           {  loanStatus == "Ongoing" && <Badge className="ms-auto me-2 py-1 px-2" pill bg="secondary">Ongoing <Clock className="ms-1" size={16}/> </Badge>}

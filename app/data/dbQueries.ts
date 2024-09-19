@@ -64,6 +64,19 @@ export async function getDepositsByPage({year, month, member, page, order, perPa
     // Skip and Limit stages for pagination
     pipeline.push({ $skip: (page - 1) * perPage });
     pipeline.push({ $limit: perPage });
+    pipeline.push({
+      $lookup: {
+        from: "users",
+        localField: "depositor_name",
+        foreignField: "fullName",
+        as: "depositor"
+      },
+    })
+    pipeline.push({
+      $addFields: {
+        depositor: { $arrayElemAt: ["$depositor", 0] }
+      }
+    })
 
     const deposits = await Deposit.aggregate(pipeline);
     return deposits;
@@ -167,4 +180,10 @@ export async function getUsersWithIds(){
     });
 
     return sortedUsers
+}
+
+async function getOneUser(id:string){
+  //noStore()
+  await dbConnect() //connect to db if not already connected
+  const user =  await User.findById(id);
 }

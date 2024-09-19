@@ -1,8 +1,13 @@
 import { Card, CardBody } from "react-bootstrap";
 import { Trash, Pencil, Info } from "react-bootstrap-icons";
 import Link from "next/link";
+import Image from "next/image";
 
 export function DepositCard({deposit}: any){
+  const API = "https://api.growthspringers.com"
+  let imgSrc = deposit.depositor.photoURL
+  imgSrc = imgSrc? `${API}/${imgSrc}`: "/img/defaultPhoto.jpg"
+  console.log(deposit)
 
   function getDateString(date:any){
     const options = { month: 'short', day: '2-digit', year: 'numeric' };
@@ -15,8 +20,9 @@ export function DepositCard({deposit}: any){
       <CardBody>
         <div className="d-flex mb-5 align-items-center border-bottom pb-3 border-opacity-10"  >
           {/* avatar */}
-          <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
-          </div>
+          {/* <div style = {{width: "30px", height: "30px"}} className="rounded-circle bg-dark-subtle shadow-sm  me-3">
+          </div> */}
+          <img className="rounded-circle me-3 shadow-sm" width={30} height={30} src={imgSrc} alt={deposit.depositor_name} />
           <h6 className="mb-0 depositor-name" > {deposit.depositor_name} </h6>
         </div>
         <div className="d-flex align-items-end justify-content-between">

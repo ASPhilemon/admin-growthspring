@@ -55,9 +55,24 @@ export async function getLoans( {member, year, loan_status, page, month, order, 
   pipeline.push({ $skip: (page - 1) * perPage });
   pipeline.push({ $limit: perPage });
 
+  pipeline.push({
+    $lookup: {
+      from: "users",
+      localField: "borrower_name",
+      foreignField: "fullName",
+      as: "borrower"
+    },
+  })
+  pipeline.push({
+    $addFields: {
+      borrower: { $arrayElemAt: ["$borrower", 0] }
+    }
+  })
+
   const loans = await Loan.aggregate(pipeline);
   return loans;
 }
+
 
 export async function getLoan(id:string){
   noStore()
