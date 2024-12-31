@@ -70,7 +70,7 @@ export function Search({users}:{users:string[]}) {
   const { year, month, member, sortBy, order, perPage } = Object.fromEntries(keysArray.map(key => [key, params.get(key)]));
 
   const validMonths = months.map((month)=>month.value)
-  const validYears = ["2022", "2023", "2024"]
+  const validYears = ["2022", "2023", "2024", "2025"]
   const validMembers = users;
   const validSort = ['deposit_amount', 'deposit_date']
   const validOrder = ['1', '-1']
@@ -128,6 +128,7 @@ export function Search({users}:{users:string[]}) {
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Year</FormLabel>
                   <FormSelect defaultValue={ year && validYears.includes(year)? year: "all" } onChange = {(e)=> handleParamChange('year', e.target.value)}  >
                     <option value = "all" >All</option>
+                    <option value="2025">2024</option>
                     <option value="2024">2024</option>
                     <option value="2023">2023</option>
                     <option value="2022">2022</option>
