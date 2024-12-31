@@ -51,7 +51,7 @@ export function AddDepositForm({user, users}:{user: string, users: any}){
           Amount
         </FormLabel>
         <Col xs={9} md={6}>
-          <Form.Control value ={amount} onChange={(e)=>handleChange(e, setAmount)}  name="deposit_amount" required id="deposit_amount" min={"10000"} type="text"  />
+          <Form.Control value ={amount} onChange={(e)=>handleChange(e, setAmount)}  name="deposit_amount" required id="deposit_amount" min={"1"} type="text"  />
         </Col>
       </Row>
       <Row className="mb-2" >
