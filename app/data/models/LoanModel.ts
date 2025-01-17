@@ -22,6 +22,7 @@ const LoanSchema = new mongoose.Schema({
     interest_amount: Number,
     interest__accrued: Number,
     points__accrued: Number,
+    sources: Array,
     installment_amount: {
         type: Number,
         required: false
@@ -30,6 +31,7 @@ const LoanSchema = new mongoose.Schema({
         payment_date: Date,
         payment_amount: Number,
         updated_by: String,
+        payment_location: String,
     }],
 })
 

@@ -8,6 +8,7 @@ import PaginationWrapper from "@/app/components/PaginationWrapper";
 import Link from "next/link";
 import { Loader } from "@/app/components/Loader";
 import { getUsers } from "@/app/data/dbQueries";
+import ClientDeposits from "./ClientDeposits";
 
 export default async function DepositsPage ({
   searchParams
@@ -32,7 +33,7 @@ export default async function DepositsPage ({
   const member = searchParams?.member || 'all';
   const sortBy = searchParams?.sortBy || 'deposit_date';
   const order = Number(searchParams?.order) || -1;
-  const perPage = Number(searchParams?.perPage) || 20;
+  const perPage = Number(searchParams?.perPage) || 40;
  
   const searchFilter : searchFilterDeposit = {
     year, month, member,
@@ -54,8 +55,8 @@ export default async function DepositsPage ({
       <div>
         
         <Suspense fallback = {<Loader/>} key = {`${currentPage} ${year} ${month} ${member} ${sortBy}${order} ${perPage}`}>
-          <Search users = {users} />
-          <DepositCards searchFilter = {searchFilter} />
+        <Search users = {users} />
+        <DepositCards searchFilter = {searchFilter} />
         </Suspense>     
       </div>
       <div>

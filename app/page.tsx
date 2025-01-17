@@ -1,10 +1,12 @@
-export default function Home() {
+import { getAllFinancialRecords } from "@/app/data/dbQueries";
+import ClientSideFinancials from "./components/ClientSideFinancials";
+
+export default async function Home() {
+  const records = await getAllFinancialRecords();
   
   return (
     <div>
-      <h3 className = " py-3 lead ms-4 " > Dashboard Overview </h3>
+      <ClientSideFinancials records={records} />
     </div>
-      
   );
 }
-

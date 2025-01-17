@@ -3,7 +3,7 @@ declare global {
   var mongoose: any; // This must be a `var` and not a `let / const`
 }
 
-const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_URI = 'mongodb+srv://blaise1:blaise119976@cluster0.nmt34.mongodb.net/GrowthSpringNew?retryWrites=true&w=majority';//process.env.MONGODB_URI!;
 
 if (!MONGODB_URI) {
   throw new Error(

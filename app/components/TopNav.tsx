@@ -12,7 +12,7 @@ import { OffcanvasToggler } from "@/app/components/OffcanvasToggler";
 export function TopNav({handleShow, adminName} : any){
 
   return(
-    <Navbar as = {Col} className='py-2 mb-1 px-3 bg-warning' lg = {{  offset: 3 }} >
+    <Navbar as = {Col} className='py-2 mb-1 px-3 bg-warning top-nav' lg = {{  offset: 3 }}>
       <Container fluid className='justify-content-between px-0 py-0'>
         <OffcanvasToggler handleShow = {handleShow} />
         <NavbarBrand as = {Link} href = '/' className="ms-auto" >

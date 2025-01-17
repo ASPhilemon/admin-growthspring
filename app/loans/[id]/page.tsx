@@ -73,6 +73,18 @@ export default async function Page({params}:any) {
                   <td>UGX {loan.principal_left.toLocaleString()}</td>
                 </tr>
                 <tr>
+                  <th>Total Amount to Pay</th>
+                  <td>
+                    {loan.loan_status === "Ongoing" ? (
+                      `UGX ${Math.ceil(
+                        parseInt(loan.principal_left, 10) + getInterestAndPoints(loan).interest_accrued
+                      ).toLocaleString()}`
+                    ) : (
+                      "All Clear"
+                    )}
+                  </td>
+                </tr>
+                <tr>
                   <th>Last payment date</th>
                   <td> { loan.payments.length > 0?  getDateString(loan.last_payment_date) : "No payment yet"}</td>
                 </tr>
