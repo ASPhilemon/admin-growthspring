@@ -154,15 +154,15 @@ function getInterestAndPoints(loan:any){
   let record = loan
   let interest_accrued = 0;
   let points_accrued =  0;
-  let pending_amount_interest:any;
-  let payment_interest_amount:any;
+  // let pending_amount_interest:any;
+  // let payment_interest_amount:any;
     if (record.loan_status == "Ongoing") {
       let remainder = getDaysDifference(record.loan_date, new Date());
       let current_loan_duration = Math.ceil(remainder / 30);
       let point_days = Math.max(0, Math.min(12, current_loan_duration) - 6) + Math.max(18, current_loan_duration) - 18;
       let running_rate = constants.monthly_lending_rate * (current_loan_duration - point_days);
-      pending_amount_interest = running_rate * record.principal_left / 100;
-      payment_interest_amount = 0;
+      let pending_amount_interest = running_rate * record.principal_left / 100;
+      let payment_interest_amount = 0;
       let points = constants.monthly_lending_rate * point_days * record.principal_left / 100000;
   
       if (record.payments) {

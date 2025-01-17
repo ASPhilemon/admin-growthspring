@@ -46,7 +46,7 @@ export function EditDepositForm({deposit}:any){
           Amount
         </FormLabel>
         <Col xs={9} md={6}>
-          <Form.Control value = {amount} onChange={(e)=>handleChange(e, setAmount)} type = "text"  name="deposit_amount" required id="deposit_amount" min={"10000"} />
+          <Form.Control value = {amount} onChange={(e)=>handleChange(e, setAmount)} type = "text"  name="deposit_amount" required id="deposit_amount" min={"1"} />
         </Col>
       </Row>
       <Row>
