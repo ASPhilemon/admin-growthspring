@@ -8,8 +8,8 @@ export async function middleware(req: NextRequest){
   if (user.isAdmin ==="false") return NextResponse.redirect('https://auth.growthspringers.com/signin?redirectURI=https://growthspringers.com')
 
   let reqHeaders = new Headers(req.headers)
-  reqHeaders.set(user-id, user.id)
-  reqHeaders.set(user-name, user.fullName)
+  reqHeaders.set("user-id", user.id)
+  reqHeaders.set("user-name", user.fullName)
 
   return NextResponse.next({
     request: {
