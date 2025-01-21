@@ -190,66 +190,103 @@ async function getOneUser(id:string){
   const user =  await User.findById(id);
 }
 
-export async function getAllFinancialRecords() {    
-    await dbConnect() //connect to db if not already connected
-    const oneYearAgo = new Date();
-    oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+export async function getAllFinancialRecords(){
+  await dbConnect(); // Connect to DB if not already connected
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-    const deposits = await Deposit.find(); // Implement this to fetch deposits
-    const loans = await Loan.find().lean(); // Implement this to fetch loans
-  
-    const allRecords = [];
-  
-    deposits.forEach(deposit => {
-      allRecords.push({
-        type: 'Deposit',
-        amount: deposit.deposit_amount,
-        date: deposit.deposit_date,
-        name: deposit.depositor_name,
-        destination: deposit.cashLocation ? deposit.cashLocation : 'Not Available',
-      });
+  const deposits = await Deposit.find().lean(); // Fetch deposits
+  const loans = await Loan.find().lean(); // Fetch loans
+
+  interface DepositRecord {
+  type: 'Deposit';
+  amount: number;
+  date: string | Date;
+  name: string;
+  destination: string;
+}
+
+interface LoanRecord {
+  type: 'Loan';
+  amount: number;
+  date: string | Date;
+  name: string;
+  source: string;
+  isOutflow: boolean;
+}
+
+interface LoanPaymentRecord {
+  type: 'Loan Payment';
+  amount: number;
+  date: string | Date;
+  name: string;
+  destination: string;
+}
+
+type FinancialRecord = DepositRecord | LoanRecord | LoanPaymentRecord;
+
+interface MonthlySummary {
+  records: FinancialRecord[];
+  totalInflow: number;
+  totalOutflow: number;
+  totalDeposits: number;
+  totalLoans: number;
+  totalLoanPayments: number;
+}
+
+type MonthlyRecords = {
+  [month: string]: MonthlySummary;
+};
+
+
+  const allRecords: FinancialRecord[] = [];
+
+  deposits.forEach(deposit => {
+    allRecords.push({
+      type: 'Deposit',
+      amount: deposit.deposit_amount,
+      date: deposit.deposit_date,
+      name: deposit.depositor_name,
+      destination: deposit.cashLocation || 'Not Available',
     });
-  
-    loans.forEach(loan => {
-      allRecords.push({
-        type: 'Loan',
-        amount: loan.loan_amount,
-        date: loan.loan_date,
-        name: loan.borrower_name,
-        source: loan.sources && loan.sources.length > 0 ? loan.sources.map(source => source.location).join(', ') : 'Not Available',
-        isOutflow: true,
-      });
-      
-      if (loan.payments) { 
-        loan.payments.forEach(payment => {
-          allRecords.push({
-            type: 'Loan Payment',
-            amount: payment.payment_amount,
-            date: payment.payment_date,
-            name: loan.borrower_name,
-            destination: payment.payment_location || 'Not Available',
-          });
+  });
+
+  loans.forEach(loan => {
+    allRecords.push({
+      type: 'Loan',
+      amount: loan.loan_amount,
+      date: loan.loan_date,
+      name: loan.borrower_name,
+      source: loan.sources && loan.sources.length > 0 ? loan.sources.map((source: { location: any; })  => source.location).join(', ') : 'Not Available',
+      isOutflow: true,
+    });
+
+    if (loan.payments) {
+      loan.payments.forEach((payment: { payment_amount: any; payment_date: any; payment_location: any; }) => {
+        allRecords.push({
+          type: 'Loan Payment',
+          amount: payment.payment_amount,
+          date: payment.payment_date,
+          name: loan.borrower_name,
+          destination: payment.payment_location || 'Not Available',
         });
-        
-       }
-    });
-  
-  
-  
-    // Sort records by date
-    allRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
-  
-    return groupRecordsByMonth(allRecords);
-  }
-  
-  function groupRecordsByMonth(records) {
-    return records.reduce((acc, record) => {
+      });
+    }
+  });
+
+  // Sort records by date
+  allRecords.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  return groupRecordsByMonth(allRecords);
+
+  function groupRecordsByMonth(records: FinancialRecord[]): MonthlyRecords {
+    return records.reduce((acc: MonthlyRecords, record: FinancialRecord) => {
       const month = new Date(record.date).toLocaleString('default', { month: 'long', year: 'numeric' });
       if (!acc[month]) {
         acc[month] = { records: [], totalInflow: 0, totalOutflow: 0, totalDeposits: 0, totalLoans: 0, totalLoanPayments: 0 };
       }
       acc[month].records.push(record);
-      if (record.isOutflow) {
+      if ('isOutflow' in record && record.isOutflow) {
         acc[month].totalOutflow += record.amount;
       } else {
         acc[month].totalInflow += record.amount;
@@ -258,11 +295,15 @@ export async function getAllFinancialRecords() {
         acc[month].totalLoanPayments += record.amount;
       } else if (record.type === 'Loan') {
         acc[month].totalLoans += record.amount;
-      } else { 
+      } else {
         acc[month].totalDeposits += record.amount;
       }
       return acc;
     }, {});
   }
+  
+}
+
+
   
   

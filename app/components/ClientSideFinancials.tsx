@@ -6,14 +6,36 @@ import * as XLSX from 'xlsx';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-export default function ClientSideFinancials({ records }) {
+interface Record {
+  date: string | number | Date;
+  type: string;
+  name: string;
+  amount: number;
+  destination?: string;
+  source?: string;
+}
+
+interface MonthData {
+  totalInflow: number;
+  totalOutflow: number;
+  totalLoanPayments: number;
+  totalDeposits: number;
+  records: Record[];
+}
+
+interface Records {
+  [month: string]: MonthData;
+}
+
+
+export default function ClientSideFinancials({ records }: { records: Records }) {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');  
   const [showFilters, setShowFilters] = useState(false);
 
   const toggleFilters = () => setShowFilters(!showFilters);
 
-  const handleDownload = (format) => {
+  const handleDownload = (format: string) => {
     const filteredRecords = filterRecordsByDate(records, startDate, endDate);
     if (format === 'excel') {
       exportToExcel(filteredRecords);
@@ -22,7 +44,7 @@ export default function ClientSideFinancials({ records }) {
     }
   };
 
-  const filterRecordsByDate = (records, startDate, endDate) => {
+  const filterRecordsByDate = (records: Records, startDate: string, endDate: string) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     return Object.fromEntries(
@@ -34,11 +56,34 @@ export default function ClientSideFinancials({ records }) {
       })
     );
   };
-
-  const exportToExcel = (filteredRecords) => {
+  const exportToExcel = (filteredRecords: Records) => {
     const wb = XLSX.utils.book_new();
     Object.entries(filteredRecords).forEach(([month, data]) => {
+      let totalInflow = 0;
+      let totalOutflow = 0;
+      let totalDeposits = 0;
+      let totalLoans = 0;
+      let totalLoanPayments = 0;
+  
+      data.records.forEach(record => {
+        if ('isOutflow' in record && record.isOutflow) {
+          totalOutflow += record.amount;
+        } else {
+          totalInflow += record.amount;
+        }
+        if (record.type === 'Loan Payment') {
+          totalLoanPayments += record.amount;
+        } else if (record.type === 'Loan') {
+          totalLoans += record.amount;
+        } else if (record.type === 'Deposit') {
+          totalDeposits += record.amount;
+        }
+      });
+  
       const wsData = [
+        [`Total Inflow: ${totalInflow.toLocaleString()}`, `Total Outflow: ${totalOutflow.toLocaleString()}`],
+        [`Total Deposits: ${totalDeposits.toLocaleString()}`, `Total Loans: ${totalLoans.toLocaleString()}`, `Total Loan Payments: ${totalLoanPayments.toLocaleString()}`],
+        [],
         ["Date", "Type", "Amount", "Source/Destination"],
         ...data.records.map(record => [
           new Date(record.date).toLocaleDateString(),
@@ -48,17 +93,54 @@ export default function ClientSideFinancials({ records }) {
         ])
       ];
       const ws = XLSX.utils.aoa_to_sheet(wsData);
+      // Adjust column widths
+      ws['!cols'] = [{ wpx: 100 }, { wpx: 150 }, { wpx: 100 }, { wpx: 200 }];
+
       XLSX.utils.book_append_sheet(wb, ws, month);
     });
     XLSX.writeFile(wb, 'financial_records.xlsx');
   };
-
-  const exportToPDF = (filteredRecords) => {
+  
+  const exportToPDF = (filteredRecords: Records) => {
     const doc = new jsPDF();
     Object.entries(filteredRecords).forEach(([month, data], index) => {
+      let totalInflow = 0;
+      let totalOutflow = 0;
+      let totalDeposits = 0;
+      let totalLoans = 0;
+      let totalLoanPayments = 0;
+  
+      data.records.forEach(record => {
+        if ('isOutflow' in record && record.isOutflow) {
+          totalOutflow += record.amount;
+        } else {
+          totalInflow += record.amount;
+        }
+        if (record.type === 'Loan Payment') {
+          totalLoanPayments += record.amount;
+        } else if (record.type === 'Loan') {
+          totalLoans += record.amount;
+        } else if (record.type === 'Deposit') {
+          totalDeposits += record.amount;
+        }
+      });
+  
       if (index > 0) doc.addPage();
+      // Larger font for the month
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(18);
       doc.text(`Month: ${month}`, 10, 10);
+
+      // Reset font size for the totals
+      doc.setFontSize(14);
+      doc.text(`Total Inflow: ${totalInflow.toLocaleString()}`, 10, 20);
+      doc.text(`Total Outflow: ${totalOutflow.toLocaleString()}`, 10, 30);
+      doc.text(`Total Deposits: ${totalDeposits.toLocaleString()}`, 10, 40);
+      doc.text(`Total Loans: ${totalLoans.toLocaleString()}`, 10, 50);
+      doc.text(`Total Loan Payments: ${totalLoanPayments.toLocaleString()}`, 10, 60);
+  
       doc.autoTable({
+        startY: 70,
         head: [["Date", "Type", "Amount", "Source/Destination"]],
         body: data.records.map(record => [
           new Date(record.date).toLocaleDateString(),
@@ -70,7 +152,7 @@ export default function ClientSideFinancials({ records }) {
     });
     doc.save('financial_records.pdf');
   };
-
+    
   return (
     <div>
       {/* Button to toggle filters */}

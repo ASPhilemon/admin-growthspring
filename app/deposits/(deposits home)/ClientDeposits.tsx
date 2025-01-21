@@ -1,4 +1,4 @@
-"use client";
+/*"use client";
 
 import { useEffect, useState } from "react";
 import { DepositCards } from "@/app/components/DepositCards";
@@ -50,4 +50,4 @@ console.log(searchFilter)
       <PaginationWrapper searchFilter={searchFilter} />
     </>
   );
-}
+}*/

@@ -8,7 +8,7 @@ import PaginationWrapper from "@/app/components/PaginationWrapper";
 import Link from "next/link";
 import { Loader } from "@/app/components/Loader";
 import { getUsers } from "@/app/data/dbQueries";
-import ClientDeposits from "./ClientDeposits";
+//import ClientDeposits from "./ClientDeposits";
 
 export default async function DepositsPage ({
   searchParams
