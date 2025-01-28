@@ -8,7 +8,7 @@ export async function DepositCards({ searchFilter } : any) {
 
   return (
     deposits.length > 0 ? (
-      <div className="deposit-cards">
+      <div className="deposit-cards overflow-auto" style={{ maxHeight: "70vh" }}>
         {deposits.map((deposit, index) => {
           const month = new Date(deposit.deposit_date).toLocaleString('default', { month: 'long', year: 'numeric' });
           const isNewMonth = month !== currentMonth;
@@ -27,7 +27,7 @@ export async function DepositCards({ searchFilter } : any) {
                   {month} - Total: {monthlyTotal.toLocaleString()}
                 </h5>
               )}
-              <DepositCard deposit={deposit} />
+              <DepositCard deposit={deposit} params = {searchFilter} />
             </div>
           );
         })}

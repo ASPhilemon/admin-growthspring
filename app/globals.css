@@ -279,7 +279,7 @@ td, th{
   position: sticky;
   top: 0px; /* Corrected value with px */
   padding: 10px;
-  z-index: 1050; /* Ensure it stays above other elements */
+  z-index: 50; /* Ensure it stays above other elements */
   background-color: #f8f9fa; /* Example color */
 }
 
@@ -291,7 +291,7 @@ td, th{
   border-bottom: 1px solid #ddd;
   display: flex;
   gap: 10px;
-  z-index: 1000;
+  z-index: 10;
   flex-wrap: wrap;
 }
 

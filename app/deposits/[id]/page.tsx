@@ -4,10 +4,11 @@ import { Breadcrumb, BreadcrumbItem } from "react-bootstrap"
 import Link from "next/link"
 import { Suspense } from "react"
 import { Loader } from "@/app/components/Loader"
+import BackButton from "@/app/components/BackButton";
 
 
 export default async function Page({params}: any){
-
+console.log(params)
   return(
     <div className="px-md-5 px-3 py-3 my-2">
       <Breadcrumb>
@@ -32,6 +33,16 @@ async function DepositDetails({id}:any){
     const dateString = date.toLocaleDateString('en-US', options);
     return dateString
   }
+  // Handle back navigation using window.history
+  const handleBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) {
+      window.history.back(); // Mimic browser back button
+    } else {
+      // Optional fallback if there is no previous page in the browser history
+      window.location.href = "/"; // Redirect to a default route
+    }
+  };
+    
   return(
     <div>
       <div className="d-flex  mb-3 align-items-start">
@@ -62,13 +73,12 @@ async function DepositDetails({id}:any){
         <h5 className="deposit-field">Cash Location</h5>
         { deposit.cashLocation? <p> {deposit.cashLocation}</p> : <p className="text-muted">Not Available</p>}
       </div>
-      <div className="d-flex align-items-start">
+      <div className="d-flex align-items-start mb-3">
         <h5 className="deposit-field">Comment</h5>
-        { deposit.comment? <p> {deposit.comment}</p> : <p className="text-muted">Not Available</p>}
+        { deposit.comment? <p> {deposit.comment}</p> : <p className="text-muted mb-3">Not Available</p>}
       </div>
 
-      <Link className="btn btn-back btn-secondary mt-5 px-4" href = "/deposits" > Back </Link>
-    
+      <BackButton/>
     </div>
   )
 }

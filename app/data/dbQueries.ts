@@ -257,7 +257,7 @@ type MonthlyRecords = {
       amount: loan.loan_amount,
       date: loan.loan_date,
       name: loan.borrower_name,
-      source: loan.sources && loan.sources.length > 0 ? loan.sources.map((source: { location: any; })  => source.location).join(', ') : 'Not Available',
+      source: loan.sources && loan.sources.length > 0 ? loan.sources.filter((source: { amount: number }) => source.amount > 0).map((source: { location: any; })  => source.location).join(', ') : 'Not Available',
       isOutflow: true,
     });
 

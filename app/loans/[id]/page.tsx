@@ -1,6 +1,7 @@
 import { Table, Breadcrumb, BreadcrumbItem} from "react-bootstrap"
 import { getLoan } from "@/app/data/loan-queries";
 import Link from "next/link";
+import BackButton from "@/app/components/BackButton";
 
 export default async function Page({params}:any) {
   const loan = await getLoan(params.id)
@@ -12,10 +13,14 @@ export default async function Page({params}:any) {
   
   return (
     <div className="px-3 px-md-5 py-3">
+      <div className="d-flex justify-content-between align-items-center">
       <Breadcrumb>
         <BreadcrumbItem linkAs = {Link} href="/loans"> Loans </BreadcrumbItem>
         <BreadcrumbItem  active>Detail</BreadcrumbItem>
       </Breadcrumb>
+      <BackButton/>
+
+      </div>
       <div className="d-md-flex">
         <div className="col-md-6">
           <h6 className="mb-3 fw-bold">Summary</h6>

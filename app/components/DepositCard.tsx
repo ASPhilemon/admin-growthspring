@@ -3,7 +3,7 @@ import { Trash, Pencil, Info } from "react-bootstrap-icons";
 import Link from "next/link";
 import Image from "next/image";
 
-export function DepositCard({deposit}: any){
+export function DepositCard({deposit, params}: any){
   const API = "https://api.growthspringers.com"
   let imgSrc = deposit.depositor.photoURL
   imgSrc = imgSrc? `${API}/${imgSrc}`:"/img/defaultPhoto.jpg"
@@ -13,7 +13,8 @@ export function DepositCard({deposit}: any){
     const dateString = date.toLocaleDateString('en-US', options);
     return dateString
   }
-
+  const queryString = new URLSearchParams(params).toString(); // Encode filters
+  //console.log(queryString);
   return (
     <Card className="mb-2 rounded-1  shadow-sm  " >
       <CardBody>
@@ -29,7 +30,15 @@ export function DepositCard({deposit}: any){
 
           {/* icons */}
           <div className="d-flex align-items-center" >
-            <Link href={`/deposits/${deposit._id}`} className="btn btn-primary shadow-sm me-2 p-0 rounded-circle me-md-4"><Info size={22}/></Link>
+            <Link
+              href={{
+                pathname: `/deposits/${deposit._id}`,
+                query: params, // Add filters dynamically here
+              }}
+              className="btn btn-primary shadow-sm me-2 p-0 rounded-circle me-md-4"
+            >
+              <Info size={22} />
+            </Link>
             <Link href= {`/deposits/${deposit._id}/edit`} className="btn me-2 me-md-4 rounded-circle p-2"><Pencil size={18}  /></Link>
           </div>
         </div>

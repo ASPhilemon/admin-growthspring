@@ -16,7 +16,6 @@ export function LoansFilterSummary({loans_summary}:any){
 
   return (
     <div className="bg-white filter-summary p-2 rounded-2" >
-      <h6 className="mb-1 filter-summary-heading">Filter Summary</h6>
       <Table className="rounded-table mb-0" size="sm" responsive >
         <thead>
           <tr>

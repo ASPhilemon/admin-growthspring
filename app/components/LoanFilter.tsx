@@ -75,12 +75,18 @@ export function LoanFilter({users}:{users:string[]}) {
   const validOrder = ['1', '-1']
   const validPerPage = ["2", "5", "20", "50", "100", "500"]
 
-  function handleParamChange(paramKey:string, paramValue:string) {
-    const params = new URLSearchParams(searchParams);
-    params.set(paramKey, paramValue);
-    params.set('page', '1');
-    replace(`${pathname}?${params.toString()}`);
-  }
+function handleParamChange(paramKey: string, paramValue: string) {
+  const params = new URLSearchParams(searchParams);
+  params.set(paramKey, paramValue);
+  params.set('page', '1');
+
+  // Capture current scroll position
+  const scrollPos = window?.scrollY || 0;
+  params.set('scrollPos', scrollPos.toString());
+
+  replace(`${pathname}?${params.toString()}`);
+}
+
 
   const accordionRef:any = useRef(null);
 
@@ -135,7 +141,7 @@ export function LoanFilter({users}:{users:string[]}) {
                 </FormGroup>
                 <FormGroup className = 'd-md-flex align-items-center mb-2' controlId='month-filter' >
                   <FormLabel className={`me-md-2 ${styles.formLabel}`} >Month</FormLabel>
-                  <FormSelect defaultValue={ month && validMonths.includes(month)? month: "all" } onChange = {(e)=> handleParamChange('month', e.target.value)}  >
+                  <FormSelect defaultValue={ month && validMonths.includes(month)? month: "" } onChange = {(e)=> handleParamChange('month', e.target.value)}  >
                     <option value = "" >All</option>
                     {months.map((month, index) => {
                       return (
