@@ -70,7 +70,7 @@ export function LoanFilter({users}:{users:string[]}) {
   const validMonths = months.map((month)=>month.value)
   const validYears = ["2023", "2024", "2025"]
   const validMembers = users;
-  const validStatus = ["Ended", "Ongoing"]
+  const validStatus = ["Ended", "Ongoing", "Overdue"]
   const validSort = ['loan_amount', 'loan_date']
   const validOrder = ['1', '-1']
   const validPerPage = ["2", "5", "20", "50", "100", "500"]
@@ -156,6 +156,7 @@ function handleParamChange(paramKey: string, paramValue: string) {
                     <option value = "" >All</option>
                     <option value="Ongoing">Ongoing</option>
                     <option value="Ended">Ended</option>
+                    <option value="Overdue">Overdue</option>
                   </FormSelect>
                 </FormGroup>
                 <FormGroup className='d-md-flex align-items-center' controlId='member-filter'>

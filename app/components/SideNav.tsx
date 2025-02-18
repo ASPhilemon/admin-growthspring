@@ -58,6 +58,18 @@ function  DashboardPageLinks({handleClose}:{handleClose: any}){
       linkText: "Loans",
       linkUrl: "/loans"
     },
+    {
+      linkText: "Cash Locations",
+      linkUrl: "/locations"
+    },
+    {
+      linkText: "Club Fund",
+      linkUrl: "/fund"
+    },
+    {
+      linkText: "Profits Distribution",
+      linkUrl: "/profits"
+    },
   ]
 
   return(
