@@ -44,8 +44,11 @@ export async function getLoans({ member, year, loan_status, page, month, order, 
   if (!loan_status) {
     matchCriteria.push({ loan_status: { $in: ["Ended", "Ongoing", "Overdue"] } });
   } else{
-    if (loan_status == "Overdue") loan_status = "Ongoing"
-    matchCriteria.push({ loan_status });
+    if (loan_status == "Overdue"){
+      matchCriteria.push({ loan_status : "Ongoing" });
+    } else{
+      matchCriteria.push({ loan_status });
+    }
   }
   if (member) matchCriteria.push({ borrower_name: member });
 
