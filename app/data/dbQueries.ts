@@ -10,7 +10,6 @@ import CashTransfers from "./models/CashTransfers"
 import Earnings from "./models/Earnings"
 import FundTransactions from "./models/FundTransactions"
 import ClubData from "./models/ClubData"
-
 import LoanModel from "./models/LoanModel";
 
 export type searchFilterDeposit = {
@@ -35,6 +34,92 @@ export async function addFundTransactions(fundtransactionObject: { transaction_t
   
   return { msg: "Transaction added successfully", data: newTransaction };
 }
+
+
+interface CashTransfer {
+  amount: number;
+  source: string;
+  destination: string;
+  movedBy: string;
+  date?: string;
+}
+
+interface CashTransfer {
+  amount: number;
+  source: string;
+  destination: string;
+  movedBy: string;
+  date?: string;
+}
+
+interface TransferResult {
+  success: boolean;
+  msg: string;
+}
+
+export async function addCashTransfers(data: CashTransfer): Promise<TransferResult> {
+  try {
+    const { amount, source, destination, movedBy, date } = data;
+
+    if (!amount) {
+      return { success: false, msg: 'Amount not entered' };
+    }
+
+    const locations = await CashLocation.find({});
+    const sourceLocation = locations.find(loc => loc.name === source);
+    const destinationLocation = locations.find(loc => loc.name === destination);
+
+    if (!sourceLocation) {
+      return { success: false, msg: `Source location '${source}' not found` };
+    }
+
+    if (!destinationLocation) {
+      return { success: false, msg: `Destination location '${destination}' not found` };
+    }
+
+    if (sourceLocation.amount < amount) {
+      return { success: false, msg: `Not enough money in '${source}'` };
+    }
+
+    await updateLocations(amount, destination, source, movedBy, date || new Date().toISOString());
+
+    return { success: true, msg: 'Transfer Complete' };
+
+  } catch (error) {
+    console.error(error);
+    return { success: false, msg: 'An error occurred' };
+  }
+}
+
+async function updateLocations(amount: number, recipientLocation: string, sourceLocation: string, admin: string, date: string) {
+  try {
+    const locations = await CashLocation.find({});
+    const foundDestination = locations.find(loc => loc.name === recipientLocation);
+    const foundSource = locations.find(loc => loc.name === sourceLocation);
+
+    if (!foundSource || !foundDestination) {
+      console.error(`One of the locations not found.`);
+      return;
+    }
+
+    await CashLocation.updateOne({ name: recipientLocation }, { $inc: { amount } });
+    await CashLocation.updateOne({ name: sourceLocation }, { $inc: { amount: -amount } });
+
+    await CashTransfers.create({
+      recipient_location_name: recipientLocation,
+      transaction_date: date,
+      transaction_amount: amount,
+      recorded_by: admin,
+      other_location_name: sourceLocation,
+      balance_before: foundDestination.amount,
+    });
+
+  } catch (error) {
+    console.error('Error updating locations:', error);
+    throw error;
+  }
+}
+
 
 
 export async function getTotalDepositsCount( {year, month, member} : searchFilterDeposit) {
@@ -413,32 +498,6 @@ export async function getFundRecords() {
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
   let currentAccountBalance = clubdata.clubFundWorth;
 
-  const expenses = [
-    { expense_name: "Food", expense_reason: "Meeting Logistics", expense_amount: 40000, recorded_by: "Mwebe Blaise", expense_date: "2024-01-11" },
-    { expense_name: "Travel", expense_reason: "Site Visit", expense_amount: 50000, recorded_by: "Anne K.", expense_date: "2024-02-15" },
-    { expense_name: "Stationery", expense_reason: "Office Supplies", expense_amount: 15000, recorded_by: "John Doe", expense_date: "2023-05-20" },
-    { expense_name: "Consultation", expense_reason: "External Audit", expense_amount: 60000, recorded_by: "Jane M.", expense_date: "2023-07-01" },
-    { expense_name: "Equipment", expense_reason: "New Laptops", expense_amount: 200000, recorded_by: "Mwebe Blaise", expense_date: "2024-03-10" },
-    { expense_name: "Advertising", expense_reason: "Social Media Campaign", expense_amount: 100000, recorded_by: "Kate P.", expense_date: "2023-06-11" },
-    { expense_name: "Maintenance", expense_reason: "Office Repairs", expense_amount: 80000, recorded_by: "Anne K.", expense_date: "2023-12-30" },
-    { expense_name: "Salaries", expense_reason: "Employee Salaries", expense_amount: 400000, recorded_by: "HR Manager", expense_date: "2023-11-28" },
-    { expense_name: "Software", expense_reason: "Licenses", expense_amount: 70000, recorded_by: "Jane M.", expense_date: "2024-04-14" },
-    { expense_name: "Legal Fees", expense_reason: "Contract Drafting", expense_amount: 120000, recorded_by: "John Doe", expense_date: "2024-05-09" },
-  ];
-
-  const incomes = [
-    { income_name: "Profits Distribution", income_amount: 400000, recorded_by: "Mwebe Blaise", income_destination: "Mobile Money", income_date: "2024-01-11" },
-    { income_name: "Investment Returns", income_amount: 300000, recorded_by: "Anne K.", income_destination: "Standard Chartered", income_date: "2023-03-15" },
-    { income_name: "Membership Fees", income_amount: 50000, recorded_by: "John Doe", income_destination: "UAP", income_date: "2023-04-20" },
-    { income_name: "Donations", income_amount: 100000, recorded_by: "Jane M.", income_destination: "Mobile Money", income_date: "2023-05-01" },
-    { income_name: "Interest Earnings", income_amount: 20000, recorded_by: "Mwebe Blaise", income_destination: "Unit Trusts", income_date: "2023-06-14" },
-    { income_name: "Project Income", income_amount: 450000, recorded_by: "Kate P.", income_destination: "Mobile Money", income_date: "2024-03-12" },
-    { income_name: "Government Grant", income_amount: 600000, recorded_by: "Anne K.", income_destination: "Standard Chartered", income_date: "2023-10-05" },
-    { income_name: "Consultation Fees", income_amount: 300000, recorded_by: "Jane M.", income_destination: "Mobile Money", income_date: "2024-02-28" },
-    { income_name: "Event Proceeds", income_amount: 250000, recorded_by: "John Doe", income_destination: "Mobile Money", income_date: "2023-12-25" },
-    { income_name: "Sale of Assets", income_amount: 500000, recorded_by: "Mwebe Blaise", income_destination: "UAP", income_date: "2024-04-10" },
-  ];
-
   interface IncomeRecord {
     type: 'Income';
     amount: number;
@@ -471,16 +530,6 @@ export async function getFundRecords() {
 
   const allRecords: FinancialRecord[] = [];
 
-  expenses.forEach(expense => {
-    allRecords.push({
-      type: 'Expense',
-      amount: expense.expense_amount,
-      date: expense.expense_date,
-      name: expense.expense_name,
-      destination: expense.expense_reason,
-      isOutflow: true,
-    });
-  });
 
   fundTransactions.forEach(transaction => {
     if (transaction.transaction_type === 'Expense') {
@@ -503,15 +552,6 @@ export async function getFundRecords() {
     }
   });
 
-  incomes.forEach(income => {
-    allRecords.push({
-      type: 'Income',
-      amount: income.income_amount,
-      date: income.income_date,
-      name: income.income_name,
-      destination: income.income_destination,
-    });
-  });
 
   // Sort records by date
   allRecords.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -781,7 +821,7 @@ export async function getProfitRecords() {
     trustIncome: unitIncome,
     totalIncome: Math.round(loanInterest + unitIncome),
     clubEarningsRecords: (clubEarningsRecords ?? []).sort(
-      (a, b) => (a?.[0] ?? 0) - (b?.[0] ?? 0)
+      (a, b) => (b?.[0] ?? 0) - (a?.[0] ?? 0)
     ),    
     totalIncomeWithDeposits: Math.round(loanInterest + depositProjection + unitIncome)
   };

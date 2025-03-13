@@ -76,23 +76,29 @@ export default function CashTransactions({ records }: CashTransactionsProps) {
         source: formData.source,
         destination: formData.destination,
         movedBy: formData.movedBy,
-        date: new Date(formData.date).toISOString() // Ensure date is correctly formatted
+        date: formData.date
     };
 
-    console.log("Payload being sent:", payload);
+    console.log("Payload being sent:", JSON.stringify(payload));
 
     try {
-        const res = await fetch(`${API}/transfer-club-money`, {
-            method: "POST",
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        });
+      const res = await fetch("/api/transfers", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    });
 
-        const data = await res.json();
+        setShowTransferForm(false);
+        const responseText = await res.text(); // Get response as text (not JSON in case of errors)
+    console.log("Server response:", responseText);
 
+    if (!res.ok) {
+        console.error(`Error ${res.status}: ${responseText}`);
+    }
+  
+      setMessage({ type: "success", text: "Transfer successfully recorded!" });
 
         setFormData({
             amount: "",
@@ -500,7 +506,6 @@ const handleMonthChange = (isStart: boolean, value: string) => {
                   <th>Amount</th>
                   <th>From</th>
                   <th>To</th>
-                  <th>Balance in Source</th>
                   <th>Moved By</th>
                 </tr>
               </thead>
@@ -511,7 +516,6 @@ const handleMonthChange = (isStart: boolean, value: string) => {
                     <td>{Math.round(record.amount).toLocaleString()}</td>
                     <td>{record.source}</td>
                     <td>{record.destination}</td>
-                    <td>{Math.round(record.balance).toLocaleString()}</td>
                     <td>{record.recorder}</td>
                   </tr>
                 ))}

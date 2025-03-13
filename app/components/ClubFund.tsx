@@ -219,7 +219,7 @@ const filterRecordsByYearRange = (records: Records, startYear: string, endYear: 
       doc.text(`Total Inflow: ${totalInflow.toLocaleString()}`, 10, 20);
       doc.text(`Total Outflow: ${totalOutflow.toLocaleString()}`, 10, 30);
       doc.text(`ACCOUNT BALANCE: ${data.balance.toLocaleString()}`, 10, 40);
-//console.log(filteredRecords)
+
       doc.autoTable({
         startY: 60,
         head: [["Date", "Type", "Amount", "Source/Destination"]],
