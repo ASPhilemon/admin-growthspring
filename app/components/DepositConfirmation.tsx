@@ -143,3 +143,4 @@ export async function depositEmailConfirmationHTML(deposit:any){
     `
   )
 }
+
