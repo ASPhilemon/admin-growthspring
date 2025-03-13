@@ -598,6 +598,7 @@ export async function getFundRecords() {
 }
 
 export async function getProfitRecords() {
+  await dbConnect(); // Connect to DB if not already connected
   // Data Retrieval
   const members = await User.find();
   const constants = await Constants.findOne();
