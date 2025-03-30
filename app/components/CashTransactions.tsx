@@ -69,7 +69,6 @@ export default function CashTransactions({ records }: CashTransactionsProps) {
       return;
     }
 
-    const API = "https://api.growthspringers.com";
 
     const payload = {
         amount: Number(formData.amount), // Ensure amount is a number
