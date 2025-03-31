@@ -17,9 +17,9 @@ export default async function Page({params} : any){
         <BreadcrumbItem linkAs = { Link } href="/deposits"> Deposits </BreadcrumbItem>
         <BreadcrumbItem  active>Edit</BreadcrumbItem>
       </Breadcrumb>
-      <Suspense fallback = {<Loader/>} >
+      {/* <Suspense fallback = {<Loader/>} > */}
         <EditDeposit id = {params.id}  />
-      </Suspense>
+      {/* </Suspense> */}
     </div>
   )
 }
