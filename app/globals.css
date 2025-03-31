@@ -78,9 +78,10 @@ body{
 .nav-link{
   color: black;
 }
-.nav-link.active, .nav-link:hover{
-  background-color: rgb(248, 235, 202);
-  color: rgb(168, 131, 17);
+.nav-link.active, .nav-link:hover, .nav-link:focus{
+  background-color: rgba(255, 193, 7, 0.2);
+  color: rgb(255, 193, 7);
+  font-weight: bold;
 }
 
 .logo{
@@ -189,7 +190,7 @@ td, th{
 }
 
 .filter-summary-heading{
-  color: rgb(255 193 7);
+  color: rgb(255, 193, 7);
   font-weight: bolder;
 }
 

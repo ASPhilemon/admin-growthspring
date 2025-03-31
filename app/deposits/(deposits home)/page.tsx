@@ -73,9 +73,9 @@ export default async function DepositsPage({
   }).toString();
 
   // If current URL parameters differ from the selected filters, update the URL
-  if (JSON.stringify(filters) !== JSON.stringify(searchParams)) {
-    redirect(`/deposits?${queryString}`);
-  }
+  // if (JSON.stringify(filters) !== JSON.stringify(searchParams)) {
+  //   redirect(`/deposits?${queryString}`);
+  // }
 
   return (
     <div className="px-md-5 px-3">
@@ -87,13 +87,13 @@ export default async function DepositsPage({
         </Link>
       </div>
       <div>
-        <Suspense
+        {/* <Suspense
           fallback={<Loader />}
           key={`${currentPage}-${year}-${month}-${member}-${sortBy}-${order}-${perPage}`}
-        >
+        > */}
           <Search users={users} />
           <DepositCards searchFilter={searchFilter} />
-        </Suspense>
+        {/* </Suspense> */}
       </div>
       <div>
         <PaginationWrapper searchFilter={searchFilter} baseUrl={`/deposits`} />

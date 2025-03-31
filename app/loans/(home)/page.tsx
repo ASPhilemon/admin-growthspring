@@ -5,7 +5,7 @@ import { getLoans } from "@/app/data/loan-queries";
 import { LoanCards } from "@/app/components/LoanCards";
 import { LoanFilter } from "@/app/components/LoanFilter";
 import { getUsers } from "@/app/data/dbQueries";
-import { LoanCardsSkeleton } from "./loading";
+// import { LoanCardsSkeleton } from "./loading1";
 import { redirect } from "next/navigation";
 
 export default async function Page({ searchParams }: any) {
@@ -20,22 +20,22 @@ export default async function Page({ searchParams }: any) {
     perPage: Number(searchParams?.perPage) || 500,
   };
 
-  // Use Object.entries to compare filters in a stable way
-  const queryString = new URLSearchParams(
-    Object.entries(loanFilter).reduce((acc, [key, value]) => {
-      if (value !== undefined && value !== null && value !== "") {
-        acc[key] = value.toString();
-      }
-      return acc;
-    }, {} as Record<string, string>)
-  ).toString();
+  // // Use Object.entries to compare filters in a stable way
+  // const queryString = new URLSearchParams(
+  //   Object.entries(loanFilter).reduce((acc, [key, value]) => {
+  //     if (value !== undefined && value !== null && value !== "") {
+  //       acc[key] = value.toString();
+  //     }
+  //     return acc;
+  //   }, {} as Record<string, string>)
+  // ).toString();
 
-  // Redirect only if the query string differs from current parameters
-  if (
-    decodeURIComponent(queryString) !== decodeURIComponent(new URLSearchParams(searchParams).toString())
-  ) {
-    redirect(`/loans?${queryString}`); // Redirects to `/loans` instead of `/deposits`
-  }
+  // // Redirect only if the query string differs from current parameters
+  // if (
+  //   decodeURIComponent(queryString) !== decodeURIComponent(new URLSearchParams(searchParams).toString())
+  // ) {
+  //   redirect(`/loans?${queryString}`); // Redirects to `/loans` instead of `/deposits`
+  // }
 
   const users = await getUsers();
 
@@ -49,9 +49,9 @@ export default async function Page({ searchParams }: any) {
       </div>
       <LoanFilter users={users} />
       <div>
-        <Suspense fallback={<LoanCardsSkeleton />}>
+        {/* <Suspense fallback={<LoanCardsSkeleton />}> */}
           <LoanCards loanFilter={loanFilter} />
-        </Suspense>
+        {/* </Suspense> */}
       </div>
     </div>
   );
