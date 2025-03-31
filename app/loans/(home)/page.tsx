@@ -37,7 +37,10 @@ export default async function Page({ searchParams }: any) {
   //   redirect(`/loans?${queryString}`); // Redirects to `/loans` instead of `/deposits`
   // }
 
-  const users = await getUsers();
+  const usersPromise =  getUsers();
+  const loansPromise = getLoans(loanFilter)
+
+  const [users, loans] = await Promise.all([usersPromise, loansPromise])
 
   return (
     <div className="px-md-5 px-3">
@@ -50,7 +53,7 @@ export default async function Page({ searchParams }: any) {
       <LoanFilter users={users} />
       <div>
         {/* <Suspense fallback={<LoanCardsSkeleton />}> */}
-          <LoanCards loanFilter={loanFilter} />
+          <LoanCards loans = {loans} />
         {/* </Suspense> */}
       </div>
     </div>

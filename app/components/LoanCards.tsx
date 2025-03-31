@@ -1,9 +1,7 @@
-import { getLoans } from "../data/loan-queries";
 import { LoanCard } from "./LoanCard";
 import { LoansFilterSummary } from "./LoansFilterSummary";
 
-export async function LoanCards({ loanFilter, scrollPos }: any) {
-  const loans = await getLoans(loanFilter);
+export async function LoanCards({ loans, scrollPos }: any) {
   const loansSummary = summarizeLoans(loans);
 //console.log(scrollPos)
   return loans.length > 0 ? (
@@ -20,7 +18,7 @@ export async function LoanCards({ loanFilter, scrollPos }: any) {
         </details>
       </div>
       <div className="overflow-auto" style={{ maxHeight: "90vh" }}>
-        {loans.map((loan) => (
+        {loans.map((loan:any) => (
           <LoanCard key={loan._id} loan={loan} />
         ))}
       </div>
