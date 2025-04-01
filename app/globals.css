@@ -60,7 +60,7 @@ body{
 }
 
 .breadcrumb{
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .deposit-field{
@@ -109,9 +109,7 @@ body{
 .breadcrumb-item a{
   color: rgb(20, 58, 97);
 }
-.breadcrumb{
-  font-size: 16px;
-}
+
 a:active, a:focus, a:hover {
   color: #d8a509 !important;
 }
