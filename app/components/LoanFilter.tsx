@@ -130,7 +130,7 @@ function handleParamChange(paramKey: string, paramValue: string) {
       <Accordion className='position-relative' >
         <Accordion.Item className='position-absolute bg-white z-1 w-100'  eventKey="0">
           <Accordion.Header >
-            <span className="fw-bold text-primary me-5">Filter & Sort Loans</span>
+            <span className="fw-bold text-primary me-3 me-md-5">Filter & Sort Loans</span>
               {
                 loading && 
                 <>
