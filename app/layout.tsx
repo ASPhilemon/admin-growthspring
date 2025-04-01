@@ -32,12 +32,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className = {inter.className}>
-        <div>
-          <ClientNavWrapper adminName = { displayName} />
-          <Col className="" lg = {{  offset: 3 }}  >
-            {children}
-          </Col>
-        </div>
+        <ProgressBar>
+          <div>
+            <ClientNavWrapper adminName = { displayName} />
+            <Col className="" lg = {{  offset: 3 }}  >
+              {children}
+            </Col>
+          </div>
+        </ProgressBar>
       </body>
     </html>
   );
