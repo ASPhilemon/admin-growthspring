@@ -412,3 +412,16 @@ td, th{
   box-shadow: none !important;
   background-color: transparent !important;
 }
+
+.refresh{
+  animation: spin 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  70% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

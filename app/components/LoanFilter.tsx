@@ -1,18 +1,24 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Row, Col,FormSelect, FormGroup, FormLabel } from 'react-bootstrap';
 import styles from './search.module.css'
 import { Accordion } from 'react-bootstrap';
+import { ArrowRepeat } from 'react-bootstrap-icons';
 
 export function LoanFilter({users}:{users:string[]}) {
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const [loading, setLoading] = useState(false)
 
-  const params = new URLSearchParams(searchParams);
+  useEffect(()=>{
+    setLoading(false)
+  }, [searchParams.toString()])
+
+  const params = new URLSearchParams(Array.from(searchParams.entries()));
   const keysArray = [...params.keys()];
   const { year, member, month, loan_status, sortBy, order, perPage } = Object.fromEntries(keysArray.map(key => [key, params.get(key)]));
 
@@ -76,15 +82,14 @@ export function LoanFilter({users}:{users:string[]}) {
   const validPerPage = ["2", "5", "20", "50", "100", "500"]
 
 function handleParamChange(paramKey: string, paramValue: string) {
-  const params = new URLSearchParams(searchParams);
+  const params = new URLSearchParams(Array.from(searchParams.entries()));
   params.set(paramKey, paramValue);
   params.set('page', '1');
-
   // Capture current scroll position
   const scrollPos = window?.scrollY || 0;
   params.set('scrollPos', scrollPos.toString());
-
   replace(`${pathname}?${params.toString()}`);
+  setLoading(true)
 }
 
 
@@ -124,7 +129,16 @@ function handleParamChange(paramKey: string, paramValue: string) {
     <div className='' ref = {accordionRef} >
       <Accordion className='position-relative' >
         <Accordion.Item className='position-absolute bg-white z-1 w-100'  eventKey="0">
-          <Accordion.Header > <span className="fw-bold text-primary">Filter & Sort Loans</span> </Accordion.Header>
+          <Accordion.Header >
+            <span className="fw-bold text-primary me-5">Filter & Sort Loans</span>
+              {
+                loading && 
+                <>
+                <ArrowRepeat stroke='50' className='me-2 text-dark refresh' size={20} />
+                <span className='text-dark fw-light' >refreshing ...</span>
+                </>
+              }
+          </Accordion.Header>
           <Accordion.Body className = 'shadow-sm bg-light' >
             <Row className = ' py-1 '>
               {/* Filter */}
