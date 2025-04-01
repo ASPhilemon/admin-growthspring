@@ -89,7 +89,7 @@ function  DashboardPageLinks({handleClose}:{handleClose: any}){
 function GrowthSpringLogo(){
   return(
     <div className="logo d-flex justify-content-center align-items-center">
-       GROWTHSPRING ADMIN
+       <h6>GROWTHSPRING ADMIN</h6>
     </div>
   )
 }

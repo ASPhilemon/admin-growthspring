@@ -22,7 +22,7 @@ export function TopNav({handleShow, adminName} : any){
             width = {140}
             height = {28}
           /> */}
-          Admin | {adminName}
+          <h6>Admin | {adminName}</h6>
         </NavbarBrand> 
       </Container>
     </Navbar>

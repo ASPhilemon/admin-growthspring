@@ -141,7 +141,7 @@ function RequestPending(){
   return (
     <div className="d-flex align-items-center justify-content-center rounded-1 backdrop pending">
       <div className="d-flex align-items-center py-3 px-5 bg-white shadow-lg rounded-1">
-        <Spinner animation="border" variant="primary" /> <span className="text-dark ms-4">Adding loan request ...</span>
+        <Spinner animation="border" variant="secondary" /> <span className="text-dark ms-4">Adding loan request ...</span>
       </div>
     </div>
     

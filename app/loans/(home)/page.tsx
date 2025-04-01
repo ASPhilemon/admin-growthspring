@@ -45,7 +45,7 @@ export default async function Page({ searchParams }: any) {
   return (
     <div className="px-md-5 px-3">
       <div className="d-flex align-items-center py-3">
-        <h5 className="me-4 mb-0 fw-light">Loans</h5>
+      <Link className="me-3 text-warning fw-bold" href="/deposits"> Loans </Link>
         <Link className="btn btn-primary btn-sm" href="/loans/requests">
           Requests
         </Link>

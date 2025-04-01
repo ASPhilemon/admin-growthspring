@@ -76,20 +76,55 @@ body{
 }
 
 .nav-link{
-  color: black;
+  color: rgb(32, 31, 31);
+  font-size: 14px;
 }
 .nav-link.active, .nav-link:hover{
-  background-color: rgba(255, 193, 7, 0.2);
-  color: rgb(255, 193, 7);
+  background-color: rgba(20, 58, 97, 0.3) !important;
+  color: rgb(20, 58, 97) !important;
   font-weight: bold;
+}
+
+.text-primary{
+  color: rgb(20, 58, 97) !important;
+  border-color:  rgb(20, 58, 97) !important;
+}
+
+
+.btn-primary{
+  background-color:  rgb(20, 58, 97) !important;
+  color: white !important;
+  border-color: rgb(20, 58, 97);
+}
+
+.btn:focus{
+  background-color: #d8a509 !important;
+  border-color: #d8a509 !important;
+  color: white !important;
+}
+
+.breadcrumb-item.active{
+  color: #d8a509;
+}
+.breadcrumb-item a{
+  color: rgb(20, 58, 97);
+}
+.breadcrumb{
+  font-size: 16px;
+}
+a:active, a:focus, a:hover {
+  color: #d8a509 !important;
 }
 
 .logo{
   height: 100px;
-  background-color: #143a61;
+  background-color: rgb(20, 58, 97);
   color: white;
   font-weight: bold;
+}
 
+.logo h6{
+  font-size: 14px !important;
 }
 
 
