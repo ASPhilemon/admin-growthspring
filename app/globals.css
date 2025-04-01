@@ -2,6 +2,12 @@ a{
   text-decoration: none;
 }
 
+.btn:focus{
+  background-color: #d8a509 !important;
+  border-color: #d8a509 !important;
+  color: white !important;
+}
+
 .accordion{
   height: 60px;
 }
@@ -38,10 +44,7 @@ h1, h2, h3, h4, h5, h6, p{
   margin: 0;
 }
 
-.btn:focus, .page-link {
-  box-shadow: none !important;
 
-}
 
 body{
   overflow-y: scroll;
@@ -97,11 +100,7 @@ body{
   border-color: rgb(20, 58, 97);
 }
 
-.btn:focus{
-  background-color: #d8a509 !important;
-  border-color: #d8a509 !important;
-  color: white !important;
-}
+
 
 .breadcrumb-item.active{
   color: #d8a509;
@@ -409,3 +408,7 @@ td, th{
   text-align: right;
 }
 
+.offcanvas-toggler:focus, .offcanvas-toggler, .page-link {
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
