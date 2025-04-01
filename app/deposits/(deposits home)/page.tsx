@@ -30,7 +30,7 @@ export default async function DepositsPage({
     member: "all",
     sortBy: "deposit_date" as 'deposit_amount' | 'deposit_date',
     order: -1,
-    perPage: 50,
+    perPage: 100,
   };
 
   // Step 1: Merge searchParams with defaultFilters
@@ -95,9 +95,9 @@ export default async function DepositsPage({
           <DepositCards searchFilter={searchFilter} />
         {/* </Suspense> */}
       </div>
-      <div>
+      {/* <div>
         <PaginationWrapper searchFilter={searchFilter} baseUrl={`/deposits`} />
-      </div>
+      </div> */}
     </div>
   );
 }
