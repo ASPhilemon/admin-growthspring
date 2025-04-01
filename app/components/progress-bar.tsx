@@ -10,7 +10,7 @@ export default function ProgressBar({
 }) {
   return (
     <ProgressProvider
-      height="3px"
+      height="5px"
       color="#1E90FF"
       options={{ showSpinner: false }}
       shallowRouting
