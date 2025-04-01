@@ -51,8 +51,8 @@ export function Search({users}:{users:string[]}) {
             {
               loading && 
               <>
-              <ArrowRepeat stroke='50' className='me-2 text-dark refresh' size={20} />
-              <span className='text-dark fw-light' >refreshing ...</span>
+              <ArrowRepeat color='dodgerblue' className='me-2 refresh' size={20} />
+              <span style={{color: "dodgerblue"}} className='fw-bold' >refreshing ...</span>
               </>
             }
       
