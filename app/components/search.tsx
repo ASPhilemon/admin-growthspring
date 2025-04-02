@@ -74,8 +74,11 @@ function DepositFilter({users, setLoading}:any){
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
+  const latestFilterId = useRef(0)
+  let currentFilterId = useRef(0)
 
   useEffect(()=>{
+
     setLoading(false)
   }, [searchParams.toString()])
 
@@ -84,6 +87,8 @@ function DepositFilter({users, setLoading}:any){
     params.set(paramKey, paramValue);
     params.set('currentPage', '1');
     replace(`${pathname}?${params.toString()}`);
+    latestFilterId.current += 1;
+    currentFilterId.current = latestFilterId.current;
     setLoading(true)
   }
 

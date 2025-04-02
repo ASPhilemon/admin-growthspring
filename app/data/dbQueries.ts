@@ -58,6 +58,7 @@ interface TransferResult {
 }
 
 export async function addCashTransfers(data: CashTransfer): Promise<TransferResult> {
+  await dbConnect()
   try {
     const { amount, source, destination, movedBy, date } = data;
 
