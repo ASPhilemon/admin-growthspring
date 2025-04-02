@@ -2,10 +2,7 @@ import { PlusLg } from "react-bootstrap-icons";
 import { Search } from "@/app/components/search";
 import { searchFilterDeposit } from "@/app/data/dbQueries";
 import { DepositCards } from "@/app/components/DepositCards";
-import { Suspense } from "react";
-import PaginationWrapper from "@/app/components/PaginationWrapper";
 import Link from "next/link";
-import { Loader } from "@/app/components/Loader";
 import { getUsers } from "@/app/data/dbQueries";
 import { redirect } from "next/navigation";
 
