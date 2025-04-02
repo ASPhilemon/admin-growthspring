@@ -5,6 +5,7 @@ import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
+import { useRouter } from "next/navigation";
 
 interface Record {
   amount: number;
@@ -32,6 +33,9 @@ interface CashTransactionsProps {
 }
 
 export default function CashTransactions({ records }: CashTransactionsProps) {
+
+  const router = useRouter()
+
   const [startMonth, setStartMonth] = useState("");
   const [endMonth, setEndMonth] = useState("");
   const [showMonthFilters, setShowMonthFilters] = useState(false);
@@ -106,6 +110,8 @@ export default function CashTransactions({ records }: CashTransactionsProps) {
             date: "",
             movedBy: "",
         });
+
+        router.refresh()
 
         setTimeout(() => setMessage({ type: "", text: "" }), 3000); // Hide message after 3s
       } catch (err) {
