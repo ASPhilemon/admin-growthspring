@@ -1,23 +1,22 @@
-import { getDepositsByPage } from "../data/dbQueries";
+//import { getDepositsByPage } from "../data/dbQueries";
 import { DepositCard } from "./DepositCard";
 
-export async function DepositCards({ searchFilter } : any) {
-  const deposits = await getDepositsByPage(searchFilter);
+export async function DepositCards({ searchFilter, deposits } : any) {
   let monthlyTotal = 0;
   let currentMonth = '';
 
   return (
     deposits.length > 0 ? (
       <div className="deposit-cards overflow-auto" style={{ maxHeight: "70vh" }}>
-        {deposits.map((deposit, index) => {
+        {deposits.map((deposit:any, index:any) => {
           const month = new Date(deposit.deposit_date).toLocaleString('default', { month: 'long', year: 'numeric' });
           const isNewMonth = month !== currentMonth;
 
           if (isNewMonth) {
             currentMonth = month;
             monthlyTotal = deposits
-              .filter(d => new Date(d.deposit_date).toLocaleString('default', { month: 'long', year: 'numeric' }) === month)
-              .reduce((sum, d) => sum + d.deposit_amount, 0);
+              .filter((d: { deposit_date: string | number | Date; }) => new Date(d.deposit_date).toLocaleString('default', { month: 'long', year: 'numeric' }) === month)
+              .reduce((sum: any, d: { deposit_amount: any; }) => sum + d.deposit_amount, 0);
           }
 
           return (

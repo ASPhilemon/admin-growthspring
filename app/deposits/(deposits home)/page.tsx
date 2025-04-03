@@ -5,6 +5,7 @@ import { DepositCards } from "@/app/components/DepositCards";
 import Link from "next/link";
 import { getUsers } from "@/app/data/dbQueries";
 import { redirect } from "next/navigation";
+import { getDepositsByPage } from "@/app/data/dbQueries";
 
 export default async function DepositsPage({
   searchParams,
@@ -56,7 +57,10 @@ export default async function DepositsPage({
   };
 
   // Step 2: Fetch users
-  const users = await getUsers();
+  const [ users, deposits] = await Promise.all([
+    getUsers(),
+    getDepositsByPage(searchFilter)
+  ])
 
   // Step 3: Sync filters with URL if they are different
   const queryString = new URLSearchParams({
@@ -89,7 +93,7 @@ export default async function DepositsPage({
           key={`${currentPage}-${year}-${month}-${member}-${sortBy}-${order}-${perPage}`}
         > */}
           <Search users={users} />
-          <DepositCards searchFilter={searchFilter} />
+          <DepositCards deposits = {deposits} searchFilter={searchFilter} />
         {/* </Suspense> */}
       </div>
       {/* <div>
