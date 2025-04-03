@@ -1,12 +1,15 @@
-import { getAllFinancialRecords } from "@/app/data/dbQueries";
-import ClientSideFinancials from "./components/ClientSideFinancials";
+//import { getAllFinancialRecords } from "@/app/data/dbQueries";
+//import ClientSideFinancials from "./components/ClientSideFinancials";
+import { ClientSideFinancialsFetcher } from "./components/ClientSideFinancialsFetcher";
+import { Suspense } from "react";
 
-export default async function Home() {
-  const records = await getAllFinancialRecords();
+export default function Home() {
   
   return (
     <div>
-      <ClientSideFinancials records={records} />
+      <Suspense fallback = "loading ..." >
+        <ClientSideFinancialsFetcher />
+      </Suspense>
     </div>
   );
 }
