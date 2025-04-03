@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { PlusLg } from "react-bootstrap-icons";
-import { Suspense } from "react";
+//import { PlusLg } from "react-bootstrap-icons";
+//import { Suspense } from "react";
 import { getLoans } from "@/app/data/loan-queries";
 import { LoanCards } from "@/app/components/LoanCards";
 import { LoanFilter } from "@/app/components/LoanFilter";
 import { getUsers } from "@/app/data/dbQueries";
 // import { LoanCardsSkeleton } from "./loading1";
-import { redirect } from "next/navigation";
+//import { redirect } from "next/navigation";
 
 export default async function Page({ searchParams }: any) {
   const loanFilter = {
@@ -17,7 +17,7 @@ export default async function Page({ searchParams }: any) {
     page: Number(searchParams?.page) || 1,
     sortBy: searchParams.sortBy || "loan_date",
     order: Number(searchParams?.order) || -1,
-    perPage: Number(searchParams?.perPage) || 500,
+    perPage: Number(searchParams?.perPage) || 100,
   };
 
   // // Use Object.entries to compare filters in a stable way

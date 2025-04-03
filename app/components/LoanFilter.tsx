@@ -91,8 +91,6 @@ function handleParamChange(paramKey: string, paramValue: string) {
   replace(`${pathname}?${params.toString()}`);
   setLoading(true)
 }
-
-
   const accordionRef:any = useRef(null);
 
   useEffect(() => {

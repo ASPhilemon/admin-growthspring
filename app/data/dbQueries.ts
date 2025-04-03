@@ -312,17 +312,24 @@ export async function getLocationRecords() {
     [key: string]: { records: TransferRecord[] };
   };
 
-  const ongoingLoans = await Loan.find({ loan_status: "Ongoing" }); 
-  const endedLoans = await Loan.find({ loan_status: "Ended" });
+  const [
+    ongoingLoans,
+    endedLoans,
+    club,
+    cashLocation,
+    cashTransfers
+  ] = await Promise.all([
+    Loan.find({ loan_status: "Ongoing" }),
+    Loan.find({ loan_status: "Ended" }),
+    User.find({}),
+    CashLocation.find({}),
+    CashTransfers.find({})
+  ])
+
   const endedLoansThisYear = endedLoans.filter(loan => {
     const date = new Date(loan.loan_date);
     return date.getUTCFullYear() === 2025;
   });
-  
-  const club = await User.find({});
-  
-  const cashLocation: any = await CashLocation.find({});
-  const cashTransfers: any = await CashTransfers.find({});
 
   const clubWorth = club.reduce((total: number, member: any) => total + member.investmentAmount, 0);
   const moneyInLoans = ongoingLoans.reduce((total: number, loan: any) => total + loan.principal_left, 0);
@@ -380,8 +387,10 @@ export async function getAllFinancialRecords(){
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-  const deposits = await Deposit.find().lean(); // Fetch deposits
-  const loans = await Loan.find().lean(); // Fetch loans
+  const [ deposits, loans] = await Promise.all([
+    Deposit.find().lean(),
+    Loan.find().lean()
+  ])
 
   interface DepositRecord {
   type: 'Deposit';
@@ -493,8 +502,10 @@ type MonthlyRecords = {
 export async function getFundRecords() {
   await dbConnect(); // Connect to DB if not already connected
 
-  const fundTransactions = await FundTransactions.find().lean(); // Fetch fund records
-  const clubdata = await ClubData.findOne();
+  const [ fundTransactions, clubdata] = await Promise.all([
+    FundTransactions.find().lean(),
+    ClubData.findOne()
+  ])
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
   let currentAccountBalance = clubdata.clubFundWorth;
@@ -601,24 +612,35 @@ export async function getFundRecords() {
 export async function getProfitRecords() {
   await dbConnect(); // Connect to DB if not already connected
   // Data Retrieval
-  const members = await User.find();
-  const constants = await Constants.findOne();
-  const clubEarnings =  await Earnings.find({})
-  const thisYear = new Date().getFullYear();
+  const someFutureDate = new Date("2025-01-01T00:00:00Z");
+  const thisYear = new Date().getFullYear()
+
+  const [
+    members,
+    constants,
+    clubEarnings,
+    thisYearLoans,
+    thisYearDeposits
+  ] = await Promise.all([
+    User.find(),
+    Constants.findOne(),
+    Earnings.find({}),
+    Loan.find({
+      $expr: {
+        $gt: ["$loan_date", someFutureDate],
+      },
+    }),
+    Deposit.find({
+      $expr: { $eq: [ { $year: "$dateField" }, thisYear ] }
+    })
+  ])
+
   const clubWorth = members.reduce((total, member) => total + member.investmentAmount, 0);
   let allUnits = 0;
   let people = [];
   const profits = 0.8 * 2418164;
   const allProfits = 0.8 * 5733449;
   const nextProfits = allProfits - profits;
-
-  const someFutureDate = new Date("2025-01-01T00:00:00Z");
-
-  const thisYearLoans = await Loan.find({
-    $expr: {
-      $gt: ["$loan_date", someFutureDate],
-    },
-  });
 
   let loanInterest = 0;
   let loanUnits = 0;
@@ -671,10 +693,9 @@ export async function getProfitRecords() {
     let yearDeposits = 0;
     const investmentDays = getDaysDifference(member.investmentDate);
 
-    // Fetch member's deposits for the current year
-    const allMemberDeposits = await Deposit.find({ depositor_name: member.fullName });
-    const depositRecords = allMemberDeposits.filter(
-      (deposit) => new Date(deposit.deposit_date).getFullYear() === 2025
+    // filter deposits for single member
+    const depositRecords = thisYearDeposits.filter(
+      (deposit) => deposit.depositor_name == member.fullName
     );
 
     for (const deposit of depositRecords) {
