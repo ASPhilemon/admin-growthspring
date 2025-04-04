@@ -8,9 +8,9 @@ export default function Home() {
   
   return (
     <div>
-      <Suspense fallback = "loading ..." >
+      {/* <Suspense fallback = "loading ..." > */}
         <ClientSideFinancialsFetcher />
-      </Suspense>
+      {/* </Suspense> */}
     </div>
   );
 }
