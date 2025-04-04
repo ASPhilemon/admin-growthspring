@@ -1,10 +1,11 @@
 import Link from "next/link";
 //import { PlusLg } from "react-bootstrap-icons";
-//import { Suspense } from "react";
+import { Suspense } from "react";
 import { getLoans } from "@/app/data/loan-queries";
 import { LoanCards } from "@/app/components/LoanCards";
 import { LoanFilter } from "@/app/components/LoanFilter";
 import { getUsers } from "@/app/data/dbQueries";
+import { LoanFilterWrapper } from "@/app/components/LoanFilterWrapper";
 // import { LoanCardsSkeleton } from "./loading1";
 //import { redirect } from "next/navigation";
 
@@ -37,10 +38,7 @@ export default async function Page({ searchParams }: any) {
   //   redirect(`/loans?${queryString}`); // Redirects to `/loans` instead of `/deposits`
   // }
 
-  const usersPromise =  getUsers();
-  const loansPromise = getLoans(loanFilter)
 
-  const [users, loans] = await Promise.all([usersPromise, loansPromise])
 
   return (
     <div className="px-md-5 px-3">
@@ -50,12 +48,9 @@ export default async function Page({ searchParams }: any) {
           Requests
         </Link>
       </div>
-      <LoanFilter users={users} />
-      <div>
-        {/* <Suspense fallback={<LoanCardsSkeleton />}> */}
-          <LoanCards loans = {loans} />
-        {/* </Suspense> */}
-      </div>
+      <Suspense fallback = { <h1 style={{fontSize: "100px"}} >LOADING ...</h1> } >
+        <LoanFilterWrapper loanFilter={ loanFilter} />
+      </Suspense>
     </div>
   );
 }
