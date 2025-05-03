@@ -169,7 +169,7 @@ function getInterestAndPoints(loan:any){
       let current_loan_duration = Math.ceil(remainder / 30);
       let point_days = Math.max(0, Math.min(12, current_loan_duration) - 6) + Math.max(18, current_loan_duration) - 18;
       let running_rate = constants.monthly_lending_rate * (current_loan_duration - point_days);
-      let current_principal_duration = Math.ceil(getDaysDifference(record.last_payment_date, new Date()) / 30);
+      let current_principal_duration = getDaysDifference(record.last_payment_date, new Date()) % 30 < 0.24 ? Math.trunc(getDaysDifference(record.last_payment_date, new Date()) / 30): Math.ceil(getDaysDifference(record.last_payment_date, new Date()) / 30);
         //code below doesn't cater for points usage for latest loans
         let pending_amount_interest = loanYear == thisYear ? constants.monthly_lending_rate * current_principal_duration * record.principal_left / 100: running_rate * record.principal_left / 100;
         let totalPayments = 0;
