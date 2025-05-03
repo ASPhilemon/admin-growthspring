@@ -82,7 +82,7 @@ export default async function Page({params}:any) {
                   <td>
                     {loan.loan_status === "Ongoing" ? (
                       `UGX ${Math.ceil(
-                        parseInt(loan.principal_left, 10) + getInterestAndPoints(loan).interest_accrued
+                        parseInt(loan.principal_left, 10) + getInterestAndPoints(loan).interest_due
                       ).toLocaleString()}`
                     ) : (
                       "All Clear"
@@ -158,15 +158,21 @@ function getInterestAndPoints(loan:any){
   }
   let record = loan
   let interest_accrued = 0;
+  let interest_due = 0;
   let points_accrued =  0;
   // let pending_amount_interest:any;
   // let payment_interest_amount:any;
     if (record.loan_status == "Ongoing") {
+      const loanYear = record.loan_date.getFullYear();
+      const thisYear = new Date().getFullYear();
       let remainder = getDaysDifference(record.loan_date, new Date());
       let current_loan_duration = Math.ceil(remainder / 30);
       let point_days = Math.max(0, Math.min(12, current_loan_duration) - 6) + Math.max(18, current_loan_duration) - 18;
       let running_rate = constants.monthly_lending_rate * (current_loan_duration - point_days);
-      let pending_amount_interest = running_rate * record.principal_left / 100;
+      let current_principal_duration = Math.ceil(getDaysDifference(record.last_payment_date, new Date()) / 30);
+        //code below doesn't cater for points usage for latest loans
+        let pending_amount_interest = loanYear == thisYear ? constants.monthly_lending_rate * current_principal_duration : running_rate * record.principal_left / 100;
+        let totalPayments = 0;
       let payment_interest_amount = 0;
       let points = constants.monthly_lending_rate * point_days * record.principal_left / 100000;
   
@@ -177,12 +183,14 @@ function getInterestAndPoints(loan:any){
         let payment_interest = constants.monthly_lending_rate * (duration - point_day) * payment.payment_amount / 100;
         points += constants.monthly_lending_rate * point_day * payment.payment_amount / 100000;
         payment_interest_amount += payment_interest;
+        totalPayments += payment.payment_amount;
       })
     }
-    interest_accrued = pending_amount_interest + payment_interest_amount;
+    interest_accrued = loanYear == thisYear ? pending_amount_interest + (totalPayments + record.principal_left - record.loan_amount): pending_amount_interest + payment_interest_amount;
+    interest_due = loanYear == thisYear ? pending_amount_interest : pending_amount_interest + payment_interest_amount;
     points_accrued = points;
   }
-  return {interest_accrued, points_accrued}
+  return {interest_accrued, interest_due, points_accrued}
 }
 
 //GET_DIFFERENCE_BETWEEN_DATES
