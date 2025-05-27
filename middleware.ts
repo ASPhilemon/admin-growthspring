@@ -23,7 +23,7 @@ async function getUser(){
   if (!token) return null
   try{
     const {id, fullName, isAdmin} : any = (await jose.jwtVerify(token, new TextEncoder().encode('top_secret_xyz123') )).payload
-    
+
     return {id, fullName, isAdmin}
   } catch(err){
     console.log(err)

@@ -16,7 +16,7 @@ export function sendMail(
     port: 587,
     auth: {
       user: "api",
-      pass: "2d97f505634eaa761005456acaad2c1f"
+      pass: "dfa04f6b252a5436c6afc525de9f22ef"
     }
   });
   
