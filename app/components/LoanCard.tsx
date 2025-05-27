@@ -277,13 +277,17 @@ function getInterestAndPoints(loan:any){
         let points_spent = loan_finding.points_spent;
         let loan_duration = loan_finding.loan_duration;
         let remainder = getDaysDifference(loan_finding.loan_date, new Date()) % 30;
-        let current_loan_duration = remainder / 30 < 0.24 ? Math.trunc(getDaysDifference(loan_finding.loan_date, new Date()) / 30): Math.ceil(getDaysDifference(loan_finding.loan_date, new Date()) / 30);    
+        let current_loan_duration = remainder < 0.24 ? Math.trunc(getDaysDifference(loan_finding.loan_date, new Date()) / 30): Math.ceil(getDaysDifference(loan_finding.loan_date, new Date()) / 30);    
         let point_days = Math.max(0, Math.min(12, current_loan_duration) - 6) + Math.max(18, current_loan_duration) - 18;
         let running_rate = constants.monthly_lending_rate * (current_loan_duration - point_days);
-        let pending_amount_interest = running_rate * loan_finding.principal_left / 100;
+        let last_payment_duration = getDaysDifference(loan_finding.loan_date, loan_finding.last_payment_date) % 30 < 0.24 ? Math.trunc(getDaysDifference(loan_finding.loan_date, loan_finding.last_payment_date) / 30): Math.ceil(getDaysDifference(loan_finding.loan_date, loan_finding.last_payment_date) / 30);
+        let current_principal_duration = current_loan_duration - last_payment_duration;
+        //code below doesn't cater for points usage for latest loans
+        let pending_amount_interest = loanYear == thisYear ? constants.monthly_lending_rate * current_principal_duration * loan_finding.principal_left / 100: running_rate * loan_finding.principal_left / 100;
         points_accrued = constants.monthly_lending_rate * point_days * loan_finding.principal_left / 100000;
         let payment_interest_amount = 0;   
- 
+        let totalPayments = 0;
+
         if (loan_finding.payments) {
             loan_finding.payments.forEach((payment: { payment_date: Date | undefined; payment_amount: number; }) => {
                 let duration = (getDaysDifference(loan_finding.loan_date, payment.payment_date) % 30) / 30 < 0.24 ? Math.trunc(getDaysDifference(loan_finding.loan_date, payment.payment_date) / 30): Math.ceil(getDaysDifference(loan_finding.loan_date, payment.payment_date) / 30);
@@ -291,6 +295,7 @@ function getInterestAndPoints(loan:any){
                 let payment_interest = constants.monthly_lending_rate * (duration - point_day) * payment.payment_amount / 100;
                 points_accrued += constants.monthly_lending_rate * point_day * payment.payment_amount / 100000;
                 payment_interest_amount += payment_interest;
+                totalPayments += payment.payment_amount;
             })
         }
 
